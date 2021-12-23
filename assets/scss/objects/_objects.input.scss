@@ -1,0 +1,26 @@
+.o-input {
+    width: 100%;
+    border: 1px solid theme-color(light-200);
+    background: #fff;
+    min-height: 3em;
+    padding: 0.75em 1em;
+    transition: border-color .2s;
+    color: #000;
+    font-family: $font-family-base;
+
+    &:focus, &:active {
+        border-color: #000;
+    }
+
+    &__label {
+        @include font-size(15px, 1);
+        color: #000;
+        display: block;
+        margin: 1em 0;
+    }
+
+    &--textarea {
+        min-height: 8em;
+        resize: vertical;
+    }
+}

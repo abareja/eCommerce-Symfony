@@ -1,0 +1,59 @@
+<header class="c-site-header js-header">
+    <a href="#" class="o-nav-toggle c-site-header__toggle-nav js-toggle-nav js-anchor-initialized" data-cy="navigation-toggle">
+        <span class="o-nav-toggle__bar o-nav-toggle__bar--first"></span>
+        <span class="o-nav-toggle__bar o-nav-toggle__bar--middle"></span>
+        <span class="o-nav-toggle__bar o-nav-toggle__bar--last"></span>
+    </a>
+    <div class="c-site-header__logo-wrap">
+        <a href="{{ path('index') }}" title="Home">
+            <img class="c-site-header__logo" src="{{ asset('build/images/logo.svg') }}" alt="Logo">
+        </a>
+    </div>
+    <div class="c-site-header__menu">
+        <div class="c-site-header__overlay"></div>
+        <div class="c-site-header__nav">
+            <nav class="c-main-nav">
+                <ul class="c-main-nav__list c-main-nav__list--primary c-main-nav__list--root js-main-nav--primary">
+                    <li class="c-main-nav__item">
+                        <a href="#" class="c-main-nav__link" title="Sale">Sale</a>
+                    </li>
+                    <li class="c-main-nav__item">
+                        <a href="#" class="c-main-nav__link" title="Sale">Shop All</a>
+                    </li>
+                    <li class="c-main-nav__item">
+                        <a href="#" class="c-main-nav__link" title="Sale">Shoecare</a>
+                    </li>
+                </ul>
+
+                <ul class="c-main-nav__list c-main-nav__list--secondary c-main-nav__list--root o-flex@wide o-flex--justify-content-start js-main-nav--secondary">
+                    <li class="c-main-nav__item">
+                        <a href="#" class="c-main-nav__link js-header-search-toggle" title="Search">Search</a>
+                    </li>
+                    <li class="c-main-nav__item">
+                        <a href="{{ path('login') }}" class="c-main-nav__link" title="My account">My account</a>
+                    </li>
+                </ul>
+            </nav>  
+        </div>
+    </div>
+    <div class="c-site-header__cart">
+        <div class="c-header-cart js-header-cart">
+            <a href="#" class="c-header-cart__button js-header-cart__toggle">
+                <span class="c-header-cart__count js-header-cart__count">1</span>
+            </a>
+
+            <div class="c-header-cart__overlay js-header-cart__close"></div>
+            <div class="c-header-cart__contents">
+                <div class="c-header-cart__contents-title">Twój koszyk</div>
+                <div class="c-header-cart__close js-header-cart__close">&times;</div>
+            </div>
+        </div>
+    </div>
+    <div class="c-site-header__search">
+        <div class="c-header-search js-header-search">
+            <form action="">
+                <input class="c-header-search__input" id="" name="" placeholder="Start typing to search"/>
+            </form>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../../fonts/icomoon.eot?gxm3gr');
+    src:  url('../../fonts/icomoon.eot?gxm3gr#iefix') format('embedded-opentype'),
+      url('../../fonts/icomoon.ttf?gxm3gr') format('truetype'),
+      url('../../fonts/icomoon.woff?gxm3gr') format('woff'),
+      url('../../fonts/icomoon.svg?gxm3gr#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+  @include icomoon;
+  }
+  
+  .o-icon {
+  &:before {
+    @include icomoon;
+  }
+  
+  @each $name, $value in $icons {
+    &--#{$name}:before {
+        content: $value;
+    }
+  }  
+  }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="116.86376mm"
+   height="56.026928mm"
+   viewBox="0 0 116.86376 56.026928"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <defs
+     id="defs2">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : -92.473073 : 1"
+       inkscape:vp_y="0 : 999.99994 : 0"
+       inkscape:vp_z="210 : -92.473073 : 1"
+       inkscape:persp3d-origin="105 : -141.97307 : 1"
+       id="perspective854" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="10.458024"
+     inkscape:cy="-67.653894"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1672"
+     inkscape:window-y="378"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="54.776429,9.0713756"
+       orientation="0,-1"
+       id="guide852" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-27.743036,-31.087149)">
+    <g
+       aria-label="A B 
+"
+       id="text844"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583">
+      <path
+         d="m 63.314743,70.829102 h -14.7828 l -2.54,7.2136 h -6.0452 l 12.6492,-35.3568 h 6.7056 l 12.6492,35.3568 h -6.096 z m -1.6256,-4.7244 -5.7404,-16.4084 -5.7912,16.4084 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:50.8px;font-family:Poppins;-inkscape-font-specification:'Poppins Medium';stroke-width:0.264583"
+         id="path907" />
+      <path
+         d="m 109.54258,59.907102 q 2.8448,0.508 4.826,2.9972 1.9812,2.4892 1.9812,5.6388 0,2.6924 -1.4224,4.8768 -1.3716,2.1336 -4.0132,3.4036 -2.6416,1.2192 -6.1468,1.2192 H 90.644984 v -35.306 h 13.461996 q 3.6068,0 6.1976,1.2192 2.5908,1.2192 3.9116,3.302 1.3208,2.032 1.3208,4.572 0,3.048 -1.6256,5.08 -1.6256,2.032 -4.3688,2.9972 z m -13.106396,-2.3368 h 7.162796 q 2.8448,0 4.4196,-1.27 1.6256,-1.3208 1.6256,-3.7592 0,-2.3876 -1.6256,-3.7084 -1.5748,-1.3716 -4.4196,-1.3716 h -7.162796 z m 7.823196,15.748 q 2.9464,0 4.6228,-1.4224 1.6764,-1.4224 1.6764,-3.9624 0,-2.5908 -1.778,-4.1148 -1.778,-1.524 -4.7244,-1.524 h -7.619996 v 11.0236 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:50.8px;font-family:Poppins;-inkscape-font-specification:'Poppins Medium';stroke-width:0.264583"
+         id="path909" />
+    </g>
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:0.35269;stroke-linecap:round"
+       id="path848"
+       cx="138.57182"
+       cy="71.920944"
+       r="5.8586307" />
+    <rect
+       style="fill:#000000;stroke:#000000;stroke-width:0.515858;stroke-linecap:round"
+       id="rect898"
+       width="0.79284102"
+       height="55.51107"
+       x="28.000965"
+       y="31.345078"
+       ry="0.050021105" />
+  </g>
+</svg>

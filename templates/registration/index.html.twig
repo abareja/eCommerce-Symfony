@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block header %}
+    {%  include 'partials/site-header.html.twig' %}
+{% endblock %}
+
+{% block body_id 'register' %}
+
+{% block body %}
+	<section class="c-register u-padding-top-large">
+        <div class="o-wrapper">
+            <h2 class="o-title u-margin-bottom">Register</h2>
+
+            {{ form_start(form, {
+                'attr': {
+                    'novalidate': 'novalidate'
+                }
+            }) }}
+                <div class="o-grid o-grid--small">
+                    <div class="o-grid__item u-1/2@small-desktop">
+                        <div class="o-field" data-validation="firstname">
+                            <label class="o-input__label" for="{{ form.firstname.vars.id }}">First name</label>
+                            {{ form_widget(form.firstname, {
+                                'attr': {'class': 'o-input'}
+                            }) }}
+                            <div class="o-field__error">Please enter a valid first name - only letters allowed!</div>
+                        </div>
+                    </div>
+                    <div class="o-grid__item u-1/2@small-desktop">
+                        <div class="o-field" data-validation="lastname">
+                            <label class="o-input__label" for="{{ form.lastname.vars.id }}">Last name</label>
+                            {{ form_widget(form.lastname, {
+                                'attr': {'class': 'o-input'}
+                            }) }}
+                            <div class="o-field__error">Please enter a valid last name - only letters allowed!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="o-field" data-validation="email">
+                    <label class="o-input__label" for="{{ form.email.vars.id }}">Email address</label>
+                    {{ form_widget(form.email, {
+                        'attr': {'class': 'o-input'}
+                    }) }}
+                    <div class="o-field__error">Please enter a valid email address!</div>
+                </div>
+
+                <div class="o-field" data-validation="password">
+                    <label class="o-input__label" for="{{ form.password.vars.id }}">Password</label>
+                    {{ form_widget(form.password, {
+                        'attr': {'class': 'o-input'}
+                    }) }}
+                    <div class="o-field__error">Password must contain at least 8 characters - 1 lower case letter, 1 upper case letter, 1 digit and 1 special character!</div>
+                </div>
+
+                <div class="o-field" data-validation="required">
+                    <div class="o-checkbox u-margin-vertical-small">
+                        {{ form_widget(form.terms) }}
+                        <label for="{{ form.terms.vars.id }}">Oświadczam, iż zapoznałem się z treścią <a href="{{ path('index') }}">Regulaminu.</a></label>
+                    </div>
+                    <div class="o-field__error">Please accept our terms of use!</div>
+                </div>
+
+                {{ form_row(form._token) }}
+
+                <div class="o-field">
+                    <div class="o-grid o-grid--small u-padding-bottom-small">
+                        <div class="o-grid__item u-1/2@small-desktop o-flex o-flex--align-items-center u-padding-vertical-small">
+                            
+                        </div>
+                        <div class="o-grid__item u-1/2@small-desktop u-text-right">
+                            <button type="submit" class="o-button o-button--primary o-button--full">
+                                Sign up
+                                <span class="o-icon o-icon--chevron-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+            {{ form_end(form) }}       
+    </section>
+{% endblock %}
+

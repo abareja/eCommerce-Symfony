@@ -1,0 +1,89 @@
+///* ========================================================================
+//   #CONFIG
+//   ======================================================================== */
+
+// A map of global config settings. Define any project-level configuration,
+// feature switches, etc. in here.
+
+$inuit-config: (
+  env: dev,
+  healthcheck: false,
+  debug: true,
+);
+
+// You can access data in this map using the following function:
+//
+// inuit-config(<key>)
+//
+// Example usage:
+//
+// @if (inuit-config(debug) == true) { ...  }
+
+@function inuit-config($key) {
+  @return map-get($inuit-config, $key);
+}
+
+// Baseline
+$inuit-global-baseline: 8px;
+
+// Font size settings
+$inuit-global-font-size: 16px;
+$inuit-global-line-height: 28px;
+
+// Wrapper
+$inuit-wrapper-width: 1200px;
+
+// Brakpoints
+$mq-breakpoints: (
+    mobile:  320px,
+    tablet: 576px,
+    small-desktop:  768px,
+    desktop: 992px,
+    wide:    1200px,
+    extra-wide: 1366px
+);
+
+// Theme colors
+$theme-colors: (
+    primary: #000,
+    success: #0e855b,
+    danger: #ed1c24ff,
+    light-100: #eee,
+    light-200: #ccc,
+    light-250: rgb(146, 146, 146),
+    light-300: #333,
+    dark: #231f20ff,
+);
+
+@function theme-color($key) {
+    @return map-get( $theme-colors, $key);
+}
+
+$body-bg: #fff;
+
+// link 
+$link-color: theme-color(primary);
+$link-color-after: lighten( theme-color(primary), 10% );
+$link-decoration: none;
+$link-decoration-after: underline;
+
+// Typography
+$font-family-base: 'Poppins', sans-serif;
+$text-color: #000;
+
+// Icomoon
+$icons: (
+  chevron-up: "\e900",
+  chevron-right: "\e901",
+  chevron-left: "\e902",
+  chevron-down: "\e903",
+);
+
+// Slick
+/*$slick-font-family:             "icomoon";
+$slick-arrow-color:             $text-color;
+$slick-prev-character:          "\e908";
+$slick-next-character:          "\e909";*/
+
+$header-height: 66px;
+$mobile-breakpoint: wide;

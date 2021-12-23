@@ -1,0 +1,35 @@
+$grid_sizes: (
+    xs: 1px,
+    tiny: $spacing-tiny,
+    small: $spacing-small
+) !default;
+
+.o-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -$spacing;
+    margin-left: -$spacing;
+
+    & > &__item {
+        position: relative;
+        // Prevent columns from becoming too narrow when at smaller grid tiers by
+        // always setting `width: 100%;`. This works because we use `flex` values
+        // later on to override this initial width.
+        width: 100%;
+        min-height: 1px; // Prevent collapsing
+        padding-right: $spacing;
+        padding-left: $spacing;
+    }
+
+    @each $size, $value in $grid_sizes {
+        &--#{$size} {
+            margin-left: -$value;
+            margin-right: -$value;
+        }
+
+        &--#{$size} > &__item {
+            padding-left: $value;
+            padding-right: $value;
+        }
+    }
+}

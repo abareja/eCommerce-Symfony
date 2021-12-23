@@ -1,0 +1,26 @@
+$base-font-size: $inuit-global-font-size;
+
+$h1-size: $inuit-font-size-h1;
+$h2-size: $inuit-font-size-h2;
+$h3-size: $inuit-font-size-h3;
+$h4-size: $inuit-font-size-h4;
+$h5-size: $inuit-font-size-h5;
+$h6-size: $inuit-font-size-h6;
+
+$spacing-baseline: $inuit-global-baseline;
+$spacing: $inuit-global-spacing-unit;
+$spacing-tiny: $inuit-global-spacing-unit-tiny;
+$spacing-small: $inuit-global-spacing-unit-small;
+$spacing-large: $inuit-global-spacing-unit-large;
+$spacing-huge: $inuit-global-spacing-unit-huge;
+
+@mixin font-size($args...) {
+    @include inuit-font-size($args...);
+}
+
+@function max($numbers...) {
+    @return m#{a}x(#{$numbers});
+}
+@function min($numbers...) {
+    @return m#{i}n(#{$numbers});
+}

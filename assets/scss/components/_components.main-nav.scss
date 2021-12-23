@@ -1,0 +1,65 @@
+.c-main-nav {
+    @include mq($from: $mobile-breakpoint) {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    
+        @include mq($from: $mobile-breakpoint) {
+            display: flex;
+            justify-content: flex-start;
+        }
+    }
+
+    &__item {
+        position: relative;
+    }
+
+    &__list--root > &__item {
+        text-align: center;
+        padding: 1em;
+
+        @include mq($until: $mobile-breakpoint) {
+            border-bottom: 1px solid theme-color(light-200);
+            text-align: left;
+        }
+    }
+
+    &__list--root > &__item > &__link {
+        display: inline-block;
+        position: relative;
+        text-decoration: none;
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: currentColor;
+            opacity: .6;
+            transition: transform .7s cubic-bezier(.19, 1, .22, 1) .2s;
+
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+    }
+
+    &__list--root > &__item.is-active > &__link,
+    &__list--root > &__item:hover > &__link {
+        &:after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    }
+
+    &__list--level-1 > &__item:hover > &__link,
+    &__list--level-1 > &__item.is-active > &__link {
+        
+    }
+}

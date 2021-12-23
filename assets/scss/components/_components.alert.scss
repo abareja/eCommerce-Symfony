@@ -1,0 +1,51 @@
+.c-alert {
+    position: fixed;
+    bottom: calc(#{$spacing-tiny} + 36px);
+    left: $spacing-tiny;
+    transform: translateY(10%);
+    opacity: 0;
+    animation: alert-show 8s; 
+    animation-delay: .5s;
+    animation-fill-mode: forwards;
+
+    border: 1px solid theme-color(light-200);
+    background: #fff;
+    padding: $spacing-small;
+    padding-right: $spacing-large;
+    background-position: 96% 50%;
+    background-size: 30px;
+    background-repeat: no-repeat;
+
+    @include mq($from: small-desktop) {
+        min-width: 300px;
+    }
+
+    &--danger {
+        border-color: theme-color(danger);
+        background-image: url(../../images/danger.png); 
+    }
+
+    &--success {
+        border-color: theme-color(success);
+        background-image: url(../../images/check.png); 
+    }
+}
+
+@keyframes alert-show {
+    0% {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+    5% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    95% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+}

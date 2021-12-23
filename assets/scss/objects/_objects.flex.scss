@@ -1,0 +1,85 @@
+.o-flex {
+    display: flex;
+
+    &--row              { flex-direction: row; }
+    &--column           { flex-direction: column; }
+    &--row-reverse      { flex-direction: row-reverse; }
+    &--column-reverse   { flex-direction: column-reverse; }
+
+    &--wrap             { flex-wrap: wrap; }
+    &--nowrap           { flex-wrap: nowrap; }
+    &--wrap-reverse     { flex-wrap: wrap-reverse; }
+    &--fill             { /*flex: 1 1 auto;*/
+        flex-basis: 0;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+    &--grow-0           { flex-grow: 0; }
+    &--grow-1           { flex-grow: 1; }
+    &--shrink-0         { flex-shrink: 0; }
+    &--shrink-1         { flex-shrink: 1; }
+
+    &--justify-content-start        { justify-content: flex-start; }
+    &--justify-content-end          { justify-content: flex-end; } 
+    &--justify-content-center       { justify-content: center; }
+    &--justify-content-between      { justify-content: space-between; }
+    &--justify-content-around       { justify-content: space-around; }
+
+    &--align-items-start            { align-items: flex-start; }
+    &--align-items-end              { align-items: flex-end; }
+    &--align-items-center           { align-items: center; }
+    &--align-items-baseline         { align-items: baseline; }
+    &--align-items-stretch          { align-items: stretch; }
+
+    &--align-self-start            { align-self: flex-start; }
+    &--align-self-end              { align-self: flex-end; }
+    &--align-self-center           { align-self: center; }
+    &--align-self-baseline         { align-self: baseline; }
+    &--align-self-stretch          { align-self: stretch; }
+
+    @each $bp-name, $bp-value in $mq-breakpoints {
+        @include mq($from: $bp-name) {
+            &\@#{$bp-name} {
+                display: flex;
+            }
+
+            &--row\@#{$bp-name}              { flex-direction: row; }
+            &--column\@#{$bp-name}           { flex-direction: column; }
+            &--row-reverse\@#{$bp-name}      { flex-direction: row-reverse; }
+            &--column-reverse\@#{$bp-name}   { flex-direction: column-reverse; }
+        
+            &--wrap\@#{$bp-name}             { flex-wrap: wrap; }
+            &--nowrap\@#{$bp-name}           { flex-wrap: nowrap; }
+            &--wrap-reverse\@#{$bp-name}     { flex-wrap: wrap-reverse; }
+            &--fill\@#{$bp-name}             { /*flex: 1 1 auto;*/
+                flex-basis: 0;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                max-width: 100%;            
+            }
+            &--grow-0\@#{$bp-name}           { flex-grow: 0; }
+            &--grow-1\@#{$bp-name}           { flex-grow: 1; }
+            &--shrink-0\@#{$bp-name}         { flex-shrink: 0; }
+            &--shrink-1\@#{$bp-name}         { flex-shrink: 1; }
+        
+            &--justify-content-start\@#{$bp-name}        { justify-content: flex-start; }
+            &--justify-content-end\@#{$bp-name}          { justify-content: flex-end; }
+            &--justify-content-center\@#{$bp-name}       { justify-content: center; }
+            &--justify-content-between\@#{$bp-name}      { justify-content: space-between; }
+            &--justify-content-around\@#{$bp-name}       { justify-content: space-around; }
+        
+            &--align-self-start\@#{$bp-name}            { align-self: flex-start; }
+            &--align-self-end\@#{$bp-name}              { align-self: flex-end; }
+            &--align-self-center\@#{$bp-name}           { align-self: center; }
+            &--align-self-baseline\@#{$bp-name}         { align-self: baseline; }
+            &--align-self-stretch\@#{$bp-name}          { align-self: stretch; }
+        
+            &--align-self-start\@#{$bp-name}            { align-self: flex-start; }
+            &--align-self-end\@#{$bp-name}              { align-self: flex-end; }
+            &--align-self-center\@#{$bp-name}           { align-self: center; }
+            &--align-self-baseline\@#{$bp-name}         { align-self: baseline; }
+            &--align-self-stretch\@#{$bp-name}          { align-self: stretch; }
+        }
+    }
+}

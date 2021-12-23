@@ -1,0 +1,59 @@
+.o-checkbox{
+    label {
+        cursor: pointer;
+        cursor: hand;        
+    }
+    input {
+        display: none;
+    }
+
+    label {
+        position: relative;
+        display: block;
+        padding: .5em 0;
+        padding-left: 1.5em;
+        @include font-size(15px, 1.4);
+
+        & a {
+            text-decoration: underline;
+            color: inherit;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;         
+            width: 13px;
+            height: 13px;
+            outline: 1px solid #000;
+            display: block;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            background: #000;
+            top: 13px;
+            left: 1px;
+            width: 11px;
+            height: 11px;
+            transform: scale(0);
+            transform-origin: center;
+            transition: .4s transform cubic-bezier(.19, 1, .22, 1),opacity .4s cubic-bezier(.19, 1, .22, 1);
+        }
+    }
+
+    input:not(:checked) + label:hover {
+        &:after {
+            background: theme-color(light-200);
+            transform: scale(0.75);
+        }
+    }
+
+    input:checked + label {
+        &:after {
+            transform: scale(1);
+        }
+    }    
+}
