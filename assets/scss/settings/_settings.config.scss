@@ -33,6 +33,8 @@ $inuit-global-line-height: 28px;
 // Wrapper
 $inuit-wrapper-width: 1200px;
 
+$inuit-fractions: 1 2 3 4 5 6 !default;
+
 // Brakpoints
 $mq-breakpoints: (
     mobile:  320px,
@@ -87,3 +89,12 @@ $slick-next-character:          "\e909";*/
 
 $header-height: 66px;
 $mobile-breakpoint: wide;
+
+//AOS
+$aos-distance: 10px;
+
+//SLICK
+$slick-font-family: "icomoon";
+$slick-arrow-color: theme-color(light-300);
+$slick-prev-character: "\e902";
+$slick-next-character: "\e901";

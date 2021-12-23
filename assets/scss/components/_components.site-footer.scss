@@ -1,0 +1,31 @@
+.c-site-footer {
+    position: relative;
+    padding: $spacing 0;
+    padding-top: $spacing-large;
+
+    &:before {
+        content: '';
+        display: block;
+        width: calc(100% - #{$spacing-large});
+        background-color: theme-color(light-200);
+        height: 1px;
+        position: absolute;
+        top: 0;
+        left: $spacing;
+        right: $spacing;
+    }
+
+    &__group {
+
+    }
+
+    &__group-title {
+        font-weight: 600;
+        margin-bottom: $spacing-tiny;
+    }
+
+    &__group a {
+        display: block;
+        @include font-size(15px, 2);
+    }
+}

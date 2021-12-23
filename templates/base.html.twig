@@ -20,13 +20,14 @@
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
 
         {% block header %}
+            {%  include 'partials/site-header.html.twig' %}
         {% endblock %}
 
         {% block body %}
         {% endblock %}
         
         {% block footer %}
-            <footer></footer>
+            {%  include 'partials/site-footer.html.twig' %}
         {% endblock %}
 
         {% block javascripts %}

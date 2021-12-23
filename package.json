@@ -19,10 +19,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "aos": "^2.3.4",
         "compass-mixins": "^0.12.10",
         "cookieconsent": "^3.1.1",
         "gulp": "^4.0.2",
         "inuitcss": "^6.0.0",
+        "jquery": "^3.6.0",
+        "slick-carousel": "^1.8.1",
         "vanilla-lazyload": "^17.5.0"
     }
 }

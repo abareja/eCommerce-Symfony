@@ -1,0 +1,79 @@
+.c-product-tile {
+    position: relative;
+    padding: $spacing-small;
+    border: 1px solid theme-color(light-200);
+    margin-bottom: $spacing-small;
+    height: calc(100% - #{$spacing-small});
+
+    &__images {
+        padding-bottom: 50%;
+        position: relative;
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: opacity .3s ease-out;
+
+        &--1 {
+            z-index: 2;
+        }
+
+        &--2 {
+            z-index: 1;
+        }
+    }
+
+    &:hover &__image--1 {
+        opacity: 0;
+    }
+
+    &__category {
+        color: theme-color(light-250);
+        @include font-size(14px, 1.3);
+        margin-bottom: $spacing-tiny;
+    }
+
+    &__name {
+        @include font-size(16px, 1.3);
+
+        @include mq($until: small-desktop) {
+            @include font-size(15px, 1.3);
+        }
+    }
+
+    &__price-wrap {
+        margin-top: $spacing-small;
+    }
+
+    &__price {
+        @include font-size(18px, 1.4);
+
+        @include mq($until: small-desktop) {
+            @include font-size(16px, 1.3);
+        }
+    }
+
+    &__price.has-discount {
+        text-decoration: line-through;
+        color: theme-color(light-250);
+        @include font-size(15px, 1.4);
+    }
+
+    &__ribbons {
+        position: absolute;
+        top: $spacing-small;
+        left: $spacing-small;
+        pointer-events: none;
+    }
+
+    &__ribbon {
+        @include font-size(14px, 1.3);
+    }
+}

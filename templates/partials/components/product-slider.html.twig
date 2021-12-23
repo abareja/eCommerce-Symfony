@@ -1,0 +1,48 @@
+{% if products|length > 0 %}
+
+{% set settings = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '64px',
+    infinite: true,
+    dots: false,
+    arrows: true,
+    lazyLoad: 'ondemand',
+    autoplay: false,
+    fade: false,
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 2,
+                centerMode: false
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 1,
+                centerMode: false
+            }
+        },
+    ]
+} %}
+
+<section class="c-product-slider o-content">
+    <div class="o-wrapper o-wrapper--full">
+        {% if title %}
+            <h2 class="o-title u-margin-bottom" data-aos="fade-up">{{ title }}</h2>
+        {% endif %}
+
+        <div class="c-product-slider__wrap js-slider" data-slick-settings="{{ settings|json_encode()|escape() }}">
+            {% for product in products %}
+                <div class="c-product-slider__entry" data-aos="fade-up">
+                    {% include 'partials/product/product-tile.html.twig' with product %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endif %}

@@ -1,0 +1,36 @@
+{% if slides|length > 0 %}
+
+<section class="c-hero">
+    {% set settings = {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true,
+        arrows: true,
+        lazyLoad: 'ondemand',
+        autoplay: true,
+        fade: true,
+        autoplaySpeed: 10000
+    } %}
+    <div class="c-hero__slider js-slider" data-slick-settings="{{ settings|json_encode()|escape() }}">
+        {% for slide in slides %}
+            <div class="c-hero__entry">
+                <div class="o-grid o-grid--none">
+                    <div class="o-grid__item u-3/4@desktop" data-aos="fade-in">
+                        <div class="c-hero__banner js-lazyload" data-bg="{{ asset(slide.banner) }}"></div>
+                    </div>
+                    <div class="o-grid__item u-1/4@desktop o-flex o-flex--align-items-center" data-aos="fade-in">
+                        <div class="c-hero__content">
+                            <h6 class="c-hero__entry-subtitle o-title">{{ slide.subtitle }}</h6>
+                            <div class="c-hero__entry-title o-title">{{ slide.title }}</div>
+                            <div class="c-hero__entry-text">{{ slide.text }}</div>
+                            <a class="c-hero__entry-link" href="{{ slide.link }}">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endif %}

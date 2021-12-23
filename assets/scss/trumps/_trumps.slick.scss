@@ -1,0 +1,30 @@
+.slick {
+    &-arrow {
+        z-index: 10;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &-prev {
+        left: $spacing-small;
+    }
+
+    &-next {
+        right: $spacing-small;
+    }
+
+    &-dots {
+        button, li {
+            width: 30px !important;
+            height: 30px !important;
+
+            &:before {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 30px !important;
+                line-height: 30px !important;
+            }
+        }
+    }
+}

@@ -10,9 +10,9 @@
 {% block body_id 'register' %}
 
 {% block body %}
-	<section class="c-register u-padding-top-large">
+	<section class="c-register u-padding-vertical-huge">
         <div class="o-wrapper">
-            <h2 class="o-title u-margin-bottom">Register</h2>
+            <h2 class="o-title u-margin-bottom" data-aos="fade-up">Register</h2>
 
             {{ form_start(form, {
                 'attr': {
@@ -21,7 +21,10 @@
             }) }}
                 <div class="o-grid o-grid--small">
                     <div class="o-grid__item u-1/2@small-desktop">
-                        <div class="o-field" data-validation="firstname">
+                        <div class="o-field{% if form_errors(form.firstname) %} is-invalid{% endif %}" 
+                            data-validation="firstname"
+                            data-aos="fade-up"
+                            data-aos-delay="50">
                             <label class="o-input__label" for="{{ form.firstname.vars.id }}">First name</label>
                             {{ form_widget(form.firstname, {
                                 'attr': {'class': 'o-input'}
@@ -30,7 +33,10 @@
                         </div>
                     </div>
                     <div class="o-grid__item u-1/2@small-desktop">
-                        <div class="o-field" data-validation="lastname">
+                        <div class="o-field{% if form_errors(form.lastname) %} is-invalid{% endif %}" 
+                            data-validation="lastname"
+                            data-aos="fade-up"
+                            data-aos-delay="100">
                             <label class="o-input__label" for="{{ form.lastname.vars.id }}">Last name</label>
                             {{ form_widget(form.lastname, {
                                 'attr': {'class': 'o-input'}
@@ -40,7 +46,10 @@
                     </div>
                 </div>
 
-                <div class="o-field" data-validation="email">
+                <div class="o-field{% if form_errors(form.email) %} is-invalid{% endif %}" 
+                    data-validation="email"
+                    data-aos="fade-up"
+                    data-aos-delay="150">
                     <label class="o-input__label" for="{{ form.email.vars.id }}">Email address</label>
                     {{ form_widget(form.email, {
                         'attr': {'class': 'o-input'}
@@ -48,7 +57,10 @@
                     <div class="o-field__error">Please enter a valid email address!</div>
                 </div>
 
-                <div class="o-field" data-validation="password">
+                <div class="o-field{% if form_errors(form.password) %} is-invalid{% endif %}" 
+                    data-validation="password"
+                    data-aos="fade-up"
+                    data-aos-delay="200">
                     <label class="o-input__label" for="{{ form.password.vars.id }}">Password</label>
                     {{ form_widget(form.password, {
                         'attr': {'class': 'o-input'}
@@ -56,7 +68,10 @@
                     <div class="o-field__error">Password must contain at least 8 characters - 1 lower case letter, 1 upper case letter, 1 digit and 1 special character!</div>
                 </div>
 
-                <div class="o-field" data-validation="required">
+                <div class="o-field{% if form_errors(form.terms) %} is-invalid{% endif %}" 
+                    data-validation="required"
+                    data-aos="fade-up"
+                    data-aos-delay="250">
                     <div class="o-checkbox u-margin-vertical-small">
                         {{ form_widget(form.terms) }}
                         <label for="{{ form.terms.vars.id }}">Oświadczam, iż zapoznałem się z treścią <a href="{{ path('index') }}">Regulaminu.</a></label>
@@ -72,7 +87,7 @@
                             
                         </div>
                         <div class="o-grid__item u-1/2@small-desktop u-text-right">
-                            <button type="submit" class="o-button o-button--primary o-button--full">
+                            <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
                                 Sign up
                                 <span class="o-icon o-icon--chevron-right"></span>
                             </button>
@@ -80,7 +95,7 @@
                     </div>
                 </div>
 
-                <hr />
+                <hr data-aos="fade-in" data-aos-delay="350" />
 
             {{ form_end(form) }}       
     </section>

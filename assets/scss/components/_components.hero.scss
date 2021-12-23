@@ -1,5 +1,93 @@
 .c-hero {
-    &__wrap {
-        min-height: 50vh;
+    &__slider {
+        margin-bottom: 0 !important;
+    }
+
+    &__entry {
+        position: relative;
+    }
+
+    &__entry-title, &__entry-subtitle, &__entry-text, &__entry-link {
+        transition: transform .3s ease-out, opacity .3s ease-out;
+        transform: translateY(10%);
+        opacity: 0;
+    }
+
+    &__entry-title {
+        @include font-size(36px);
+        font-weight: 300;
+        margin-bottom: $spacing-small;
+
+        @include mq($until: wide) {
+            @include font-size(24px);
+        }
+        transition-delay: .5s;
+    }
+
+    &__entry-subtitle {
+        margin-bottom: $spacing-tiny;
+    }
+
+    &__entry-text {
+        transition-delay: 1s;
+    }
+
+    &__entry-link {
+        text-decoration: underline;
+        transition-delay: 1.5s;
+    }
+
+    & .slick-current & {
+        &__entry-title, &__entry-subtitle, &__entry-text, &__entry-link {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    &__banner {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding-bottom: 67%;
+
+        @include mq($until: small-desktop) {
+            padding-bottom: 80%;
+        }
+
+        @include mq($until: tablet) {
+            padding-bottom: 125%;
+        }
+    }
+
+    &__content {
+        padding: $spacing;
+    }
+
+    &__slider .slick {
+        &-arrow {
+            width: 30px;
+            height: 30px;
+
+            &:before {
+                font-size: 30px;
+            }
+
+            @include mq($until: $mobile-breakpoint) {
+                display: none !important;
+            } 
+        }
+
+        &-next {
+            right: calc(25% + #{$spacing-small});
+        }
+
+        &-dots {
+            position: absolute;
+            bottom: $spacing;
+
+            @include mq($until: $mobile-breakpoint) {
+                display: none !important;
+            } 
+        }
     }
 }

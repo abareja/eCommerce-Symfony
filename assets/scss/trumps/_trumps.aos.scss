@@ -1,0 +1,13 @@
+@include mq($until: desktop) {
+    [data-aos-delay] {
+        transition-delay: 0s !important;
+    }
+}
+
+[data-aos="header-fade-in"] {
+    opacity: 0;
+  
+    &.aos-animate {
+      opacity: 1;
+    }
+}

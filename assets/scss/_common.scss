@@ -25,9 +25,7 @@
 @import "objects/objects.card";
 @import "objects/objects.field";
 @import "objects/objects.checkbox";
-
-// @import "~slick-carousel/slick/slick";
-
+@import "objects/objects.title";
 
 // COMPONENTS
 @import "components/components.main-nav";
@@ -35,18 +33,20 @@
 @import "components/components.header-cart";
 @import "components/components.alert";
 @import "components/components.header-search";
+@import "components/components.hero";
+@import "components/components.product-tile";
+@import "components/components.product-slider";
+@import "components/components.site-footer";
 
-
-// @import "~leaflet/dist/leaflet";
-// @import "~slick-carousel/slick/slick-theme"; 
+//NODE MODULES
+@import '~aos/src/sass/aos.scss';
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme"; 
 // @import "~select2/dist/css/select2";
-
-// @import "~leaflet/dist/leaflet";
-// @import "~slick-carousel/slick/slick-theme"; 
-// @import "~select2/dist/css/select2";
-// @import "~video.js/src/css/vjs";
 // @import "~@fancyapps/fancybox/dist/jquery.fancybox";
+// @import "~leaflet/dist/leaflet";
 // @import "~cookieconsent/build/cookieconsent.min";
+// @import "~video.js/src/css/vjs";
 
 // UTILITIES
 @import "~inuitcss/utilities/utilities.clearfix";
@@ -60,5 +60,7 @@
 
 // TRUMPS
 // @import "trumps/trumps.select2";
-// @import "trumps/trump.contact-form";
 @import "trumps/trumps.focus";
+@import "trumps/trumps.slick";
+@import "trumps/trumps.aos";
+

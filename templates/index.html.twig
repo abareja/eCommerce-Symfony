@@ -2,18 +2,65 @@
 
 {% block title %}My Shop{% endblock %}
 
-{% block header %}
-    {%  include 'partials/site-header.html.twig' %}
-{% endblock %}
-
 {% block body_id 'index' %}
 
 {% block body %}
     <!--ALL SECTIONS HERE!-->
-    {% include 'partials/hero.html.twig' %}
+    {% include 'partials/components/hero.html.twig' with {'slides': [
+        {
+            banner: 'uploads/banner1.png', 
+            title: 'The sale just arrived', 
+            subtitle: 'Dont sleep on it', 
+            text: 'Shop your favorite wardrobe essentials now with 30% off.',
+            link: '#1'
+        },
+        {
+            banner: 'uploads/banner2.png', 
+            title: 'The sale just arrived', 
+            subtitle: 'Dont sleep on it', 
+            text: 'Shop your favorite wardrobe essentials now with 30% off.',
+            link: '#2'
+        },
+    ]} %}
 
-    {% if app.user %}
-        <p>Email: {{ app.user.firstname }}</p>
-    {% endif %}
-    
+    {% set newProducts = [
+        {
+            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
+            category: 'Laptopy',
+            price: 5699.00,
+            discountPrice: 5199.00,
+            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
+        },
+        {
+            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
+            category: 'Laptopy',
+            price: 5699.00,
+            discountPrice: '',
+            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
+        },
+        {
+            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
+            category: 'Laptopy',
+            price: 5699.00,
+            discountPrice: '',
+            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
+        },
+        {
+            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
+            category: 'Laptopy',
+            price: 5699.00,
+            discountPrice: '',
+            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
+        },
+        {
+            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
+            category: 'Laptopy',
+            price: 5699.00,
+            discountPrice: '',
+            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
+        }
+    ] %}
+
+    {% include 'partials/components/product-list.html.twig' with {title: 'Newest products', products: newProducts}%}
+    {% include 'partials/components/product-slider.html.twig' with {title: 'Newest products', products: newProducts}%}
 {% endblock %}

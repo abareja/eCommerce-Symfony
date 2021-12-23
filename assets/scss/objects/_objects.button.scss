@@ -2,34 +2,34 @@ $buttonStyles: (
     primary: (
         bg: theme-color(primary),
         color: #fff,
-        border: 2px solid theme-color(primary),
+        border: 1px solid theme-color(primary),
         bg-after: lighten(theme-color(primary), 5%),
         color-after: #fff,
-        border-after: 2px solid lighten(theme-color(primary), 5%)
+        border-after: 1px solid lighten(theme-color(primary), 5%)
     ),
     black: (
         bg: #000,
         color: #fff,
-        border: 2px solid #000,
+        border: 1px solid #000,
         bg-after: lighten(#000, 5%),
         color-after: #fff,
-        border-after: 2px solid lighten(#000, 5%)
+        border-after: 1px solid lighten(#000, 5%)
     ),
-    outline-primary: (
+    outline: (
         bg: transparent,
         color: theme-color(primary),
-        border: 2px solid theme-color(primary),
-        bg-after: theme-color(primary),
+        border: 1px solid theme-color(light-200),
+        bg-after: theme-color(transparent),
         color-after: #fff,
-        border-after: 2px solid lighten(theme-color(primary), 5%)
+        border-after: 1px solid lighten(theme-color(light-200), 5%)
     ),
     outline-white: (
         bg: transparent,
         color: #fff,
-        border: 2px solid #fff,
+        border: 1px solid #fff,
         bg-after: #fff,
         color-after: theme-color(primary),
-        border-after: 2px solid lighten(#fff, 5%)
+        border-after: 1px solid lighten(#fff, 5%)
     )
 ) !default;
 
