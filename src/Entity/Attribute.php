@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductAttributeRepository;
+use App\Repository\AttributeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductAttributeRepository::class)
+ * @ORM\Entity(repositoryClass=AttributeRepository::class)
  */
-class ProductAttribute
+class Attribute
 {
     /**
      * @ORM\Id
@@ -28,7 +28,7 @@ class ProductAttribute
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="productAttributes")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="attributes")
      */
     private $product;
 

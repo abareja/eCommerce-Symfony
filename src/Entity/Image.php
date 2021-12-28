@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductPhotoRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductPhotoRepository::class)
+ * @ORM\Entity(repositoryClass=ImageRepository::class)
  */
-class ProductPhoto
+class Image
 {
     /**
      * @ORM\Id
@@ -23,7 +23,7 @@ class ProductPhoto
     private $filename;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="productPhotos", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="images", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;

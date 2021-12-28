@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\ProductPhoto;
+use App\Entity\Attribute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ProductPhoto|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProductPhoto|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProductPhoto[]    findAll()
- * @method ProductPhoto[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Attribute|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Attribute|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Attribute[]    findAll()
+ * @method Attribute[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductPhotoRepository extends ServiceEntityRepository
+class AttributeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductPhoto::class);
+        parent::__construct($registry, Attribute::class);
     }
 
     // /**
-    //  * @return ProductPhoto[] Returns an array of ProductPhoto objects
+    //  * @return Attribute[] Returns an array of Attribute objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ProductPhotoRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ProductPhoto
+    public function findOneBySomeField($value): ?Attribute
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

@@ -154,3 +154,5 @@ import(/* webpackChunkName: "fancybox" */ "@fancyapps/fancybox").then(() => {
     $.fancybox.defaults.animationEffect = "fade";
     $.fancybox.defaults.backFocus = false;
 });
+
+import(/* webpackChunkName: "collectionWidget" */ "./collectionWidget");

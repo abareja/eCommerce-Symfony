@@ -47,14 +47,14 @@ class Product
     private $supplier;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProductPhoto::class, mappedBy="product", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product", cascade={"persist"})
      */
-    private $productPhotos;
+    private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProductAttribute::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=Attribute::class, mappedBy="product")
      */
-    private $productAttributes;
+    private $attributes;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -63,8 +63,8 @@ class Product
 
     public function __construct()
     {
-        $this->productPhotos = new ArrayCollection();
-        $this->productAttributes = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->attributes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,29 +133,29 @@ class Product
     }
 
     /**
-     * @return Collection|ProductPhoto[]
+     * @return Collection|Image[]
      */
-    public function getProductPhotos(): Collection
+    public function getImages(): Collection
     {
-        return $this->productPhotos;
+        return $this->images;
     }
 
-    public function addProductPhoto(ProductPhoto $productPhoto): self
+    public function addImage(Image $image): self
     {
-        if (!$this->productPhotos->contains($productPhoto)) {
-            $this->productPhotos[] = $productPhoto;
-            $productPhoto->setProduct($this);
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeProductPhoto(ProductPhoto $productPhoto): self
+    public function removeImage(Image $image): self
     {
-        if ($this->productPhotos->removeElement($productPhoto)) {
+        if ($this->image->removeElement($image)) {
             // set the owning side to null (unless already changed)
-            if ($productPhoto->getProduct() === $this) {
-                $productPhoto->setProduct(null);
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
             }
         }
 
@@ -163,29 +163,29 @@ class Product
     }
 
     /**
-     * @return Collection|ProductAttribute[]
+     * @return Collection|Attribute[]
      */
-    public function getProductAttributes(): Collection
+    public function getAttributes(): Collection
     {
-        return $this->productAttributes;
+        return $this->attributes;
     }
 
-    public function addProductAttribute(ProductAttribute $productAttribute): self
+    public function addAttribute(Attribute $attribute): self
     {
-        if (!$this->productAttributes->contains($productAttribute)) {
-            $this->productAttributes[] = $productAttribute;
-            $productAttribute->setProduct($this);
+        if (!$this->attributes->contains($attribute)) {
+            $this->attributes[] = $attribute;
+            $attribute->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeProductAttribute(ProductAttribute $productAttribute): self
+    public function removeAttribute(Attribute $attribute): self
     {
-        if ($this->productAttributes->removeElement($productAttribute)) {
+        if ($this->attributes->removeElement($attribute)) {
             // set the owning side to null (unless already changed)
-            if ($productAttribute->getProduct() === $this) {
-                $productAttribute->setProduct(null);
+            if ($attribute->getProduct() === $this) {
+                $attribute->setProduct(null);
             }
         }
 
