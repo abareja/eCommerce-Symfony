@@ -50,6 +50,7 @@ $theme-colors: (
     primary: #000,
     success: #0e855b,
     danger: #ed1c24ff,
+    light-50: #f3f3f3,
     light-100: #eee,
     light-200: #ccc,
     light-250: rgb(146, 146, 146),
@@ -89,6 +90,7 @@ $slick-next-character:          "\e909";*/
 
 $header-height: 66px;
 $mobile-breakpoint: wide;
+$admin-bar-height: 40px;
 
 //AOS
 $aos-distance: 10px;

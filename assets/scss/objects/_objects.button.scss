@@ -50,7 +50,7 @@ $buttonStyles: (
     }
 
     &:disabled {
-        opacity: .5;
+        opacity: .5 !important;
         cursor: default;
     }
 

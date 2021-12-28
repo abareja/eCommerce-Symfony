@@ -17,7 +17,11 @@
                  <link rel="stylesheet" href="/build/app.css"> -->
         {% endblock %}
     </head>
-    <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+    <body id="{% block body_id %}{% endblock %}" class="{% if is_granted('ROLE_ADMIN') %}admin{% endif %}">
+
+        {% if is_granted('ROLE_ADMIN') %}
+            {%  include 'admin/partials/admin-bar.html.twig' %}
+        {% endif %}
 
         {% block header %}
             {%  include 'partials/site-header.html.twig' %}

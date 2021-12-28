@@ -1,0 +1,15 @@
+<div class="c-admin-bar">
+    <ul class="c-admin-bar__list" >
+        <li class="c-admin-bar__item">
+            {% trans %}Hi{% endtrans %}, {{ app.user.firstname }}
+        </li>
+        <li class="c-admin-bar__item">
+            <a href="{{ path('admin') }}" title="Admin Panel">{% trans %}Admin panel{% endtrans %}</a>
+        </li>
+    </ul>
+    <ul class="c-admin-bar__list">
+        <li class="c-admin-bar__item">
+            <a href="{{ path('logout') }}" title="Logout">{% trans %}Logout{% endtrans %}</a>
+        </li>
+    </ul>
+</div>

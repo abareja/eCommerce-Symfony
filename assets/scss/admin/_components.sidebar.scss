@@ -1,0 +1,18 @@
+.c-sidebar {
+    margin: $spacing-tiny;
+    padding: $spacing-small;
+    border: 1px solid theme-color(light-200);
+
+    body.admin & {
+        top: $admin-bar-height + $spacing-tiny;        
+    }
+
+    &__logo {
+        max-height: 80px;
+        width: auto;
+    }
+
+    &__logo-wrap {
+        margin-bottom: $spacing;
+    }
+}

@@ -18,16 +18,20 @@
         right: $spacing-tiny;
         bottom: $spacing-tiny;
         background: #fff;
+        border: 1px solid theme-color(light-200);
         color: $text-color;
         width: 304px;
         padding: $spacing-small;
         z-index: 200;
-        box-shadow: 0px 0px 5px rgba(#000, .15);
         opacity: 0;
         transform: translate(10%, 0);
         transition: all .3s;
         will-change: transform;
         pointer-events: none;
+
+        body.admin & {
+            top: $admin-bar-height + $spacing-tiny;
+        }
     }
 
     &.is-open &__contents {

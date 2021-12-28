@@ -1,5 +1,5 @@
 import "slick-carousel";
-import $ from "jquery";
+import "./import-jquery";
 
 //LAZYLOAD
 const initLazyload = () => {
@@ -23,7 +23,7 @@ const initPlaceholders = () => {
 
     window.addEventListener('load', () => {
         elements.forEach(el => {
-        el.classList.remove('placeholder');
+          el.classList.remove('placeholder');
         });
     });
 }
@@ -70,3 +70,87 @@ const initSliders = () => {
   });
 }
 initSliders();
+
+//ADMIN
+const initAdmin = () => {
+  if( !document.body.classList.contains('admin-dashboard') ) return;
+  import(/* webpackChunkName: "admin" */ "./admin").then((admin) => {
+    
+  });
+}
+initAdmin();
+
+//SELECT2
+const initSelect2 = async () => {
+  const select2 = document.querySelectorAll('.js-select2');
+
+  if( select2.length !== 0 ) {
+      import(/* webpackChunkName: "select2" */ 'select2').then(() => {
+          select2.forEach(el => {
+              $(el).on("select2:select", (e) => {
+                  triggerEvent(e.target, 'change');
+              }).select2({
+                  width: "100%",
+                  theme: "shop",
+                  minimumResultsForSearch: 5,
+                  language: {
+                      inputTooShort: function() {
+                          return 'Wpisz co najmniej 3 znaki';
+                      },
+                      noResults: function() {
+                          return 'Brak wyników';
+                      },
+                      searching: function() {
+                          return 'Szukam...';
+                      },
+                      errorLoading: function() {
+                          return 'Błąd wyszukiwania';
+                      }
+                  }
+              });
+              el.addEventListener("change", (e) => {
+                  const select = e.target
+                  const el = select.options[select.selectedIndex]
+                  if(el.dataset.href) {
+                      window.location.replace(el.dataset.href)
+                  }
+              });
+          });
+      });
+  }
+}
+initSelect2();    
+
+//QUANTITY
+const initQuantity = async () => {
+  const quantityInputs = document.querySelectorAll('.js-quantity');
+
+  if( quantityInputs.length !== 0 ) {
+      import(/* webpackChunkName: "quantity" */ './quantity').then(quantity => {
+          quantityInputs.forEach(el => {
+              quantity.initQuantity(el);
+          });
+      });
+  }
+}
+initQuantity();
+
+//FILE INPUTS
+const initFileInput = async () => {
+    const fileInputs = document.querySelectorAll('.js-file-input');
+  
+    if( fileInputs.length !== 0 ) {
+        import(/* webpackChunkName: "fileInput" */ './fileInput').then(fileInput => {
+            fileInputs.forEach(el => {
+                fileInput.initFileInput(el);
+            });
+        });
+    }
+  }
+initFileInput();
+
+//FANCYBOX
+import(/* webpackChunkName: "fancybox" */ "@fancyapps/fancybox").then(() => {
+    $.fancybox.defaults.animationEffect = "fade";
+    $.fancybox.defaults.backFocus = false;
+});

@@ -10,4 +10,8 @@ body {
     hr {
         border-top: 1px solid theme-color(light-200);
     }
+
+    &.admin {
+        padding-top: $admin-bar-height;
+    }
 }

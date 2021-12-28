@@ -1,7 +1,7 @@
 <div class="c-product-tile">
     <div class="c-product-tile__ribbons">
         {% if product.discountPrice %}
-            <span class="c-product-tile__ribbon">Sale</span>
+            <span class="c-product-tile__ribbon">{% trans %}Sale{% endtrans %}</span>
         {% endif %}
     </div>
     {% if product.images|length > 0 %}

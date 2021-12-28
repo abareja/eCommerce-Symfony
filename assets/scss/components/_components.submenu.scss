@@ -1,0 +1,38 @@
+.c-submenu {
+    position: fixed;
+    top: $spacing-tiny;
+    left: $spacing-tiny;
+    right: $spacing-tiny;
+    transform: translateY(-10%);
+    opacity: 0;
+    transition: all .3s;
+    background: #fff;
+    border: 1px solid theme-color(light-200);
+    padding: $spacing-large $spacing-small;
+    padding-top: $header-height + $spacing;
+    z-index: -1;
+    pointer-events: none;
+    overflow: auto;
+    max-height: 80vh;
+
+    body.admin & {
+        top: $admin-bar-height + $spacing-tiny;
+    }
+
+    &.is-open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+
+    @include mq($until: $mobile-breakpoint) {
+        padding-top: $spacing-small;
+        max-height: calc(100% - #{$spacing} - #{$header-height});
+        top: $header-height + $spacing-small;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-top-color: transparent;
+        z-index: 1;
+    }
+}

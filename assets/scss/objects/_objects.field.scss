@@ -5,16 +5,8 @@
 
     & .o-input {
         background-repeat: no-repeat;
-        background-position: 99% 50%;
+        background-position: calc(100% - 10px) 50%;
         background-size: 20px;
-
-        @include mq($until: small-desktop) {
-            background-position: 98% 50%;
-        }
-
-        @include mq($until: tablet) {
-            background-position: 96% 50%;
-        }
     }
 
     &.is-valid .o-input {
@@ -81,5 +73,33 @@
         opacity: 1;
         transform: translateY(120%);
         transition-delay: 0s;
+    }
+
+    & .select2-selection {
+        background-repeat: no-repeat !important;
+        background-position: calc(100% - 10px) 50% !important;
+        background-size: 20px !important;
+    }
+
+    &.is-valid .select2-selection {
+        border-color: theme-color(success);
+        background-image: url(../../images/check.png) !important;
+    }
+
+    &.is-invalid .select2-selection {
+        border-color: theme-color(danger);
+        background-image: url(../../images/danger.png) !important;
+    }
+
+    &.is-valid .select2-selection__rendered:after, &.is-invalid .select2-selection__rendered:after {
+        opacity: 0;
+    }
+
+    &.is-valid .o-file {
+        border-color: theme-color(success);
+    }
+
+    &.is-invalid .o-file {
+        border-color: theme-color(danger);
     }
 }

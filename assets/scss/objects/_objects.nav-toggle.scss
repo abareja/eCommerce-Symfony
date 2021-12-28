@@ -18,9 +18,9 @@
         transition: all .2s ease-in-out;
         margin-top: -1px;
 
-        &--first { top: 22%; }
-        &--middle { top: 48%; }
-        &--last { top: 75%; }        
+        &--first { top: 20%; }
+        &--middle { top: 50%; }
+        &--last { top: 78%; }        
     }
 
     &.is-open {
@@ -34,6 +34,26 @@
             }
             &--last { 
                 top: 50%;
+                transform: rotate(45deg);
+            }  
+        }
+    }
+
+    &.is-submenu {
+        .o-nav-toggle__bar {
+            &--first {
+                width: 50%;
+                top: 33%;
+                transform: rotate(-45deg);
+            }
+            &--middle { 
+                width: 90%;
+                right: 0;
+                left: unset;
+            }
+            &--last { 
+                width: 50%;
+                top: 67%;
                 transform: rotate(45deg);
             }  
         }

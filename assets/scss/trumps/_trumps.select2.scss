@@ -1,169 +1,96 @@
 $select2-theme: 'shop' !default;
 
-body:not(.wp-admin) {
-    .select2 {
-        &-container {
-            margin-bottom: 2px;
-            margin-bottom: $spacing-small;
-            @include font-size(16px);
-            height: auto;
-            padding: 8px 13px;
-            line-height: 1.5;
+.select2 {
+    &-container--#{$select2-theme} {
+        .select2-selection {
             width: 100%;
-            &.select2 {
-                border-bottom: 1px solid theme-color(neutral-med);
-    
-                &:hover {
-                    border-bottom: 1px solid theme-color(primary);
+            border: 1px solid theme-color(light-200);
+            background: #fff;
+            min-height: 3em;
+            padding: 0.5em 1em;
+            transition: border-color .2s;
+            color: #000;
+            font-family: $font-family-base;
+
+            &--single {
+                height: 48px !important;
+                position: relative;
+                background-color: transparent;
+                text-align: left;
+                color: $text-color;
+            }
+
+            &__rendered {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+
+                &:after {
+                    @include icomoon;
+                    content: icon(chevron-right);
+                    font-size: 1.25em;
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translate(0,-50%);
+                    color: theme-color(primary);
+                    display: block;
+                    transition: 0.2s transform ease-out, opacity 0.2s ease-out;
                 }
             }
-            .select2-selection {
-                &--single {
-                    position: relative;
-                    background-color: transparent;
-                    text-align: left;
-                    color: $text-color;
-                }
+
+            &__placeholder {
+                display: none;
+            }
+
+            &__arrow {
+                display: none;
+            }
+        }
+
+        .select2-dropdown {
+            border-radius: 0 !important;
+            border: 1px solid theme-color(primary);
+            z-index: 5000;
+
+            &--above {
+                border-bottom: 0;
+            }
+
+            &--below {
+                border-top: 0;
+            }
+        }
+
+        .select2-results {
+            &__options {
+                max-height: 40vh;
+                overflow: auto;
+            }
+            &__option {
+                padding: 0.5em 1em;
+                transition: all .2s ease-in-out;
     
-                &__rendered {
-                    &:after {
-                        @include icomoon;
-                        content: icon(chevron-down);
-                        // content: "\e906";
-                        font-size: 1.5em;
-                        position: absolute;
-                        right: 1.25em;
-                        top: 50%;
-                        transform: translate(0,-50%);
-                        color: theme-color(primary);
-                    }
-                }
-    
-                &__placeholder {
-                    color: rgba(theme-color(black), .5);
-                    display: none;
-                }
-    
-                &__arrow {
-                    display: none;
-                }
-    
-                &__rendered {
-                    padding: 0 !important;
-                    overflow: visible !important;
+                &:hover,
+                &[aria-selected=true] {
+                    background-color: #000;
+                    color: #fff;
                 }
             }
-    
-            &--is-filled.select2.select2-container {
-                border-color: theme-color(neutral-dk);
-            }
-    
-            &--open .select2-selection__placeholder {
-                display: block;
-            }
+        }
+        &.select2-container {
             &--open .select2-selection {
-                border-color: theme-color(primary);
+                border-color: #000;
             }
     
-            &--open.select2-container--below .select2-selection {
-                border-bottom-color: transparent;
-            }
-    
-            &--open.select2-container--above .select2-selection {
-                border-top-color: transparent;
+            &--open .select2-selection__rendered:after {
+                transform: translate(0,-50%) rotate(90deg);
             }
     
             &--disabled .select2-selection {
-                background-color: theme-color(neutral-lt);
                 opacity: .5;
             }
-    
-            .select2-dropdown {
-                border-radius: 0 !important;
-                border: 1px solid theme-color(primary);
-                z-index: 5000;
-    
-                &--above {
-                    border-bottom: 0;
-                }
-    
-                &--below {
-                    border-top: 0;
-                }
-    
-                body.admin-bar & {
-                    margin-top: 24px;
-                }
-            }
-    
-            .select2-search {
-                &--dropdown {
-                    padding: 12px 20px;
-                    .select2-search__field {
-                        border: 1px solid theme-color(gray);
-                        padding: 5px 12px;
-                    }
-                }
-            }
-    
-            .select2-results {
-                &__options {
-                    max-height: 40vh;
-                    overflow: auto;
-                }
-                &__option {
-                    padding: .7865em 1em;
-                    line-height: 1.625;
-                    transition: all .2s ease-in-out;
-    
-                    &:hover,
-                    &[aria-selected=true] {
-                        background-color: theme-color(primary-lt);
-                        color: $text-color;
-                    }
-                }
-            }
-        }
-    }
-    
-    .wpcf7-not-valid + .select2 {
-        &-container {
-            .select2-selection {
-                background-color: theme-color(error-lt);
-                border-color: theme-color(error-lt);   
-            }
-        }
-    }
-    
-    .o-select2 {
-        position: relative;
-        display: block;
-    
-        .select2 {
-            width: 100%;
-        }
-        &__label {
-            position: absolute;
-            width: 100%;
-            max-height: 100%;
-            display: flex;
-            pointer-events: none;
-            color: theme-color(neutral-med);
-            font-weight: 300;
-            @include font-size(16px);
-            top: 8px;
-            left: 15px;
-            transition: 0.2s;
-        }
-    
-        .select2-container--open + &__label,
-        .select2-container--is-filled + &__label {
-            line-height: 0;
-            font-weight: 400;
-            font-size: 75%;
-            color: theme-color(primary);
-            top: 0;
-            pointer-events: none;
         }
     }
 }

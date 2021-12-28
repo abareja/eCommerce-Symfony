@@ -18,26 +18,26 @@
 
 	<section class="c-login u-padding-vertical-huge">
         <div class="o-wrapper">
-            <h2 class="o-title u-margin-bottom" data-aos="fade-up">Login</h2>
+            <h2 class="o-title u-margin-bottom" data-aos="fade-up">{% trans %}Login{% endtrans %}</h2>
 
             <form action="{{ path('login') }}" method="post" novalidate>
                 <div class="o-field" data-validation="email" data-aos="fade-up">
-                    <label class="o-input__label" for="email">Email address</label>
+                    <label class="o-input__label" for="email">{% trans %}Email address{% endtrans %}</label>
                     <input type="email" id="email" name="_email" class="o-input" value="{{ last_username }}" required />
-                    <div class="o-field__error">Please enter a valid email address!</div>
+                    <div class="o-field__error">{% trans %}Please enter a valid email address!{% endtrans %}</div>
                 </div>
 
                 <div class="o-field" 
                     data-validation="required" data-aos="fade-up" data-aos-delay="50">
-                    <label class="o-input__label" for="password">Password</label>
+                    <label class="o-input__label" for="password">{% trans %}Password{% endtrans %}</label>
                     <input type="password" id="password" name="_password" class="o-input" required />
-                    <div class="o-field__error">Please enter a password!</div>
+                    <div class="o-field__error">{% trans %}Please enter a password!{% endtrans %}</div>
                 </div>
 
                 <div class="o-field" data-aos="fade-up" data-aos-delay="100">
                     <div class="o-checkbox u-margin-vertical-small">
                         <input  type="checkbox" id="remember_me" name="_remember_me" checked />
-                        <label for="remember_me">Remember me</label>
+                        <label for="remember_me">{% trans %}Remember me{% endtrans %}</label>
                     </div>
                 </div>
 
@@ -46,11 +46,11 @@
                 <div class="o-field">
                     <div class="o-grid o-grid--small u-padding-bottom-small">
                         <div class="o-grid__item u-1/2@small-desktop o-flex o-flex--align-items-center u-padding-vertical-small">
-                            <a href="#!" data-aos="fade-up" data-aos-delay="150">Forgot password?</a>
+                            <a href="#!" data-aos="fade-up" data-aos-delay="150">{% trans %}Forgot password?{% endtrans %}</a>
                         </div>
                         <div class="o-grid__item u-1/2@small-desktop u-text-right">
                             <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="200">
-                                Sign in
+                                {% trans %}Sign in{% endtrans %}
                                 <span class="o-icon o-icon--chevron-right"></span>
                             </button>
                         </div>
@@ -59,7 +59,7 @@
 
                 <hr data-aos="fade-in" data-aos-delay="250" />
 
-                <p data-aos="fade-up" data-aos-delay="300">Not a member? <a href="{{ path('register') }}">Register</a></p>
+                <p data-aos="fade-up" data-aos-delay="300">{% trans %}Not a member?{% endtrans %} <a href="{{ path('register') }}">{% trans %}Register{% endtrans %}</a></p>
             </form>
         </div>
     </section>

@@ -1,3 +1,5 @@
+import { isIntFromRange } from "./helpers";
+
 export const init = () => {
     const forms = document.querySelectorAll('form');
 
@@ -10,13 +12,14 @@ export const init = () => {
         if( fields.length === 0 ) return;
 
         fields.forEach(field => {
-            const input = field.querySelector('input');
+            const input = field.querySelector('input, select');
 
             if( !input ) return;
 
             input.addEventListener('change', (e) => {
                 switch( input.type ) {
                     case "checkbox": validateCheckbox(field, input); break;
+                    case "file": validateFileInput(field, input); break;
                     default: validateInputField(field, input); break;
                 }
         
@@ -42,13 +45,14 @@ export const init = () => {
 
 const validateInputField = (field, input) => {
     const validationType = field.dataset.validation;
-    const value = input.value;
+    let value = input.value;
     let valid = false;
 
     const firstNameReg = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
     const lastNameReg = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
     const emailReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    const priceReg = /^\d+(?:\,\d{0,2})$/;
 
     if( !validationType ) return;
 
@@ -67,6 +71,15 @@ const validateInputField = (field, input) => {
             break;
         case "password": 
             if( value.match(passwordReg) ) valid = true; else valid = false;
+            break;
+        case "integer":
+            const minVal = field.dataset.validationMin;
+            const maxVal = field.dataset.validationMax;
+
+            if( isIntFromRange(value, minVal, maxVal) ) valid = true; else valid = false;
+            break;
+        case "price":
+            if( value.match(priceReg) ) valid = true; else valid = false;
             break;
     }
 
@@ -91,18 +104,31 @@ const validateCheckbox = (field, input) => {
     }
 }
 
+const validateFileInput = (field, input) => {
+    if( field.dataset.validation == "required" ) {
+        if( input.files.length == 0 ) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+        } else {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        }
+    }
+}
+
 const validateAllFields = (form) => {
     const fields = form.querySelectorAll('.o-field');
 
     if( fields.length === 0 ) return;
 
     fields.forEach(field => {
-        const input = field.querySelector('input');
+        const input = field.querySelector('input, select');
 
         if( !input ) return;
 
         switch( input.type ) {
             case "checkbox": validateCheckbox(field, input); break;
+            case "file": validateFileInput(field, input); break;
             default: validateInputField(field, input); break;
         }
     });

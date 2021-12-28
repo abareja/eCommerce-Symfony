@@ -21,6 +21,29 @@
 
     &--textarea {
         min-height: 8em;
-        resize: vertical;
+        resize: none;
     }
+
+    &__wrap {
+        position: relative;
+        display: flex;
+    }
+
+    &__suffix {
+        line-height: 3em;
+        padding: 0 1em;
+        border: 1px solid theme-color(light-200);
+        border-left: 0;
+        background: #fff;
+        z-index: 1;
+    }
+
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

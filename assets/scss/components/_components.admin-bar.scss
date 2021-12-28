@@ -1,0 +1,35 @@
+.c-admin-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    height: $admin-bar-height;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $spacing-small;
+
+    &__list {
+        list-style: none;
+        margin: 0;
+        display: flex;
+    }
+
+    &__item {
+        color: #fff;
+
+        &:not(:last-child) {
+            margin-right: 1em;
+        }
+    }
+
+    &__item a { 
+        color: #fff;
+
+        &:hover, &:focus {
+            color: rgba(#fff, 0.8);
+        }
+    }
+}

@@ -58,22 +58,22 @@
         }
     }
 
+    &__item.has-children {
+        @include mq($until: $mobile-breakpoint) {
+            &:after {
+                content: icon(chevron-right);
+                font-family: 'icomoon';
+                position: absolute;
+                top: 50%;
+                right: 1em;
+                transform: translateY(-50%);
+                display: block;
+            }
+        }
+    }
+
     &__list--level-1 {
-        position: fixed;
-        top: $spacing-tiny;
-        left: $spacing-tiny;
-        right: $spacing-tiny;
-        transform: translateY(-10%);
-        opacity: 0;
-        transition: all .3s;
-        background: #fff;
-        border: 1px solid theme-color(light-200);
-        padding: $spacing-large $spacing-small;
-        padding-top: $header-height + $spacing;
-        z-index: -1;
-        pointer-events: none;
-        overflow: auto;
-        max-height: 80vh;
+        
     }
 
     &__list--categories .o-grid {
@@ -105,19 +105,56 @@
         padding-bottom: 56%;
     }
 
-    &__list--root > &__item:hover &__list--level-1, &__list--level-1:hover {
-        pointer-events: all;
-        transform: translateY(0);
-        opacity: 1;
+    @include mq($from: $mobile-breakpoint) {
+        &__list--root > &__item:hover .c-submenu, .c-submenu:hover {
+            pointer-events: all;
+            transform: translateY(0);
+            opacity: 1;
+        }
+    
+        &__list--root > &__item:hover .c-submenu .o-grid__item, .c-submenu:hover .o-grid__item {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 
-    &__list--root > &__item:hover &__list--level-1 .o-grid__item, &__list--level-1:hover .o-grid__item {
-        transform: translateY(0);
-        opacity: 1;
+    @include mq($until: $mobile-breakpoint) {
+        &__list--root > &__item.is-open .c-submenu {
+            pointer-events: all;
+            transform: translateY(0);
+            opacity: 1;
+        }
+    
+        &__list--root > &__item.is-open .c-submenu .o-grid__item {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    &__list--level-1 > &__item {
+        min-width: 200px;
+        text-align: left;
+    }
+
+    &__list--level-1 > &__item > &__link {
+        
     }
 
     &__list--level-1 > &__item:hover > &__link,
     &__list--level-1 > &__item.is-active > &__link {
         
+    }
+
+    &__list--level-2 {
+        flex-direction: column;
+        margin-bottom: $spacing;
+    }
+
+    &__list--level-2 &__item {
+        @include mq($until: $mobile-breakpoint) {
+            padding: 1em;
+            border-bottom: 1px solid theme-color(light-200);
+            text-align: left;
+        }
     }
 }

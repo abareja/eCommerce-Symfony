@@ -7,13 +7,40 @@ const el = {
     search: document.querySelector('.js-header-search'),
 };
 
+const closeAllSubmenus = () => {
+    const links = el.header.querySelectorAll('a');
+    const header = el.header;
+    const search = el.search;
+
+    if( !header ) return;
+
+    links.forEach(link => {
+        const parent = link.parentElement;
+
+        if( parent !== header ) {
+            parent.classList.remove('is-open');
+        }
+
+        if( search ) {
+            search.classList.remove('is-open');
+        }
+    });   
+}
+
 const initToggleNav = async () => {
     const { header, toggleNav } = el;
     if( header && toggleNav ) {
         toggleNav.addEventListener("click", (e) => {
             e.preventDefault();
-            header.classList.toggle('is-open');
-            toggleNav.classList.toggle('is-open');
+
+            if( header.classList.contains('is-submenu') ) {
+                closeAllSubmenus();
+                header.classList.remove('is-submenu');
+                toggleNav.classList.remove('is-submenu');
+            } else {
+                header.classList.toggle('is-open');
+                toggleNav.classList.toggle('is-open');
+            }
         });
     }
 }
@@ -47,3 +74,30 @@ initSearch();
         triggerEvent(window, 'scroll');
     }
 })();
+
+(async () => {
+    if( !el.header ) return;
+    const links = el.header.querySelectorAll('a');
+    const header = el.header;
+
+    links.forEach(link => {
+        const parent = link.parentElement;
+        if( parent.classList.contains('has-children')) {
+            parent.addEventListener( "click", event => {
+                if( !parent.classList.contains('is-open') ) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    const activeSiblings = parent.parentElement.querySelectorAll('li.is-open');
+                    activeSiblings.forEach(sibling => { sibling.classList.remove('is-open')});
+                    parent.classList.add('is-open');
+                    header.classList.add('is-submenu');
+
+                    if( el.toggleNav ) {
+                        el.toggleNav.classList.add('is-submenu');
+                    }
+                }
+            });
+        }
+    });   
+})();
+
