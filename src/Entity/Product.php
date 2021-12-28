@@ -47,7 +47,7 @@ class Product
     private $supplier;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProductPhoto::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=ProductPhoto::class, mappedBy="product", cascade={"persist"})
      */
     private $productPhotos;
 

@@ -40,14 +40,14 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $photos = $form->get('photos')->getData();
+            // $photos = $form->get('productPhotos')->getData();
 
             // if ( count($photos) > 0 ) {
             //     foreach( $photos as $photo ) {
-            //         $photoFileName = $fileUploader->upload($photo);
-            //         $photoOb = new ProductPhoto();
-            //         $photoOb->setPath($photoFileName);
-            //         $product->addProductPhoto($photoOb);
+            //         //$photoFileName = $fileUploader->upload($photo);
+            //         $tmp = new ProductPhoto();
+            //         $tmp->setFilename("test");
+            //         $product->addProductPhoto($tmp);
             //     }
             // }
 
