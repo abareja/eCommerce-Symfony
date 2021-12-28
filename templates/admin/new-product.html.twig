@@ -87,18 +87,18 @@
                     }) }}
                 </div>
 
-                <div class="o-field{% if form_errors(form.photos) %} is-invalid{% endif %}"
+                <div class="o-field{% if form_errors(form.images) %} is-invalid{% endif %}"
                     data-validation="required"
                     data-aos="fade-up"
                     data-aos-delay="50">
-                    <label class="o-input__label" for="{{ form.photos.vars.id }}">{% trans %}Photos{% endtrans %}</label>
+                    <label class="o-input__label" for="{{ form.images.vars.id }}">{% trans %}Photos{% endtrans %}</label>
                     
                     <div class="o-file js-file-input">
-                        {{ form_widget(form.photos, {
+                        {{ form_widget(form.images, {
                             'attr': {'class': 'o-file__input'}
                         }) }}
                         <div class="o-file__item">
-                            <label class="o-file__label" for="{{ form.photos.vars.id }}">
+                            <label class="o-file__label" for="{{ form.images.vars.id }}">
                                 {% trans %}Choose photos{% endtrans %}
                             </label>
                         </div>

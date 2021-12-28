@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\ProductCategory;
-use App\Entity\ProductPhoto;
+use App\Entity\Image;
 use App\Entity\ProductSupplier;
 use App\Service\ProductFileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,16 +40,16 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $photos = $form->get('productPhotos')->getData();
+            $images = $form->get('images')->getData();
 
-            // if ( count($photos) > 0 ) {
-            //     foreach( $photos as $photo ) {
-            //         //$photoFileName = $fileUploader->upload($photo);
-            //         $tmp = new ProductPhoto();
-            //         $tmp->setFilename("test");
-            //         $product->addProductPhoto($tmp);
-            //     }
-            // }
+            if ( count($images) > 0 ) {
+                foreach( $images as $image ) {
+                    $imageFileName = $fileUploader->upload($image);
+                    $imageObj = new Image();
+                    $imageObj->setFilename($imageFileName);
+                    $product->addImage($imageObj);
+                }
+            }
 
             $entityManager->persist($product);
             $entityManager->flush();

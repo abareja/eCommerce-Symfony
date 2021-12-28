@@ -12,13 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Validator\Constraints\GreaterThan;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
 
 class ProductType extends AbstractType
 {
@@ -52,18 +51,22 @@ class ProductType extends AbstractType
                 'class' => ProductSupplier::class,
             ])
             ->add('description', TextareaType::class)
-            ->add('photos', FileType::class, [
+            ->add('images', FileType::class, [
                 'mapped' => false,
                 'required' => false,
                 'multiple' => true,
                 'constraints' => [
-                    new File([
-                        'maxSize' => '100M',
-                        'mimeTypes' => [
-                            'image/png',
-                            'image/jpeg',
-                        ]
-                    ]),
+                    new All([
+                        'constraints' => [
+                            new File([
+                                'maxSize' => '100M',
+                                'mimeTypes' => [
+                                    'image/png',
+                                    'image/jpeg',
+                                ]
+                            ]),
+                        ],
+                    ])
                 ],
             ]);
     }
