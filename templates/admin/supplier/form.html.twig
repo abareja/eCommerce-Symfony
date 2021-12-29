@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="c-admin-page">
-        <h2 class="c-admin-page__title o-title u-margin-bottom" data-aos="fade-up">{% trans %}Add supplier{% endtrans %}</h2>
+        <h2 class="c-admin-page__title o-title u-margin-bottom" data-aos="fade-up">{{ title }}</h2>
 
             {{ form_start(form, {
                 'attr': {
@@ -21,6 +21,29 @@
                     <div class="o-field__error">{% trans %}Please enter a valid product name!{% endtrans %}</div>
                 </div>
 
+                <div class="o-field{% if form_errors(form.image) %} is-invalid{% endif %}"
+                    data-aos="fade-up"
+                    data-aos-delay="50">
+                    <label class="o-input__label" for="{{ form.image.vars.id }}">{% trans %}Featured image{% endtrans %}</label>
+                    
+                    <div class="o-file js-file-input">
+                        {{ form_widget(form.image, {
+                            'attr': {'class': 'o-file__input'}
+                        }) }}
+                        {% if featuredImage %}
+                            <div class="o-file__item o-file--image" style="background-image: url({{ asset(featuredImage) }})">
+                                <a href="{{ asset(featuredImage) }}" data-fancybox="featured-image"></a>
+                            </div>
+                        {% endif %}
+                        <div class="o-file__item">
+                            <label class="o-file__label" for="{{ form.image.vars.id }}">
+                                {% trans %}Choose image{% endtrans %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="o-field__error">{% trans %}Please choose image!{% endtrans %}</div>
+                </div>
+
                 <div class="o-field u-margin-top-small">
                     <div class="o-grid o-grid--small u-padding-bottom-small">
                         <div class="o-grid__item u-1/2@small-desktop o-flex o-flex--align-items-center u-padding-vertical-small">
@@ -28,7 +51,7 @@
                         </div>
                         <div class="o-grid__item u-1/2@small-desktop u-text-right">
                             <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
-                                {% trans %}Add supplier{% endtrans %}
+                                {{ buttonText }}
                                 <span class="o-icon o-icon--chevron-right"></span>
                             </button>
                         </div>

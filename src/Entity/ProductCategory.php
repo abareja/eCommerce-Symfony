@@ -32,7 +32,7 @@ class ProductCategory
     private $products;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -95,7 +95,7 @@ class ProductCategory
 
     public function getImage(): ?string
     {
-        return 'categories/'.$this->image;
+        return $this->image ? "categories/".$this->image : "categories/placeholder.jpg";
     }
 
     public function setImage(string $image): self

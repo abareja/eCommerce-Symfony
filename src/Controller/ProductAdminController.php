@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 use App\Entity\Product;
 use App\Entity\Image;
@@ -25,7 +26,7 @@ class ProductAdminController extends AbstractController
     }
 
     #[Route('/admin/products/new', name: 'admin-new-product')]
-    public function newProduct(Request $request, EntityManagerInterface $entityManager, ProductFileUploader $fileUploader): Response
+    public function newProduct(Request $request, EntityManagerInterface $entityManager, ProductFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -58,15 +59,15 @@ class ProductAdminController extends AbstractController
 
         return $this->render('admin/product/form.html.twig', [
             'form' => $form->createView(),
-            'title' => 'Add product',
-            'buttonText' => 'Add product',
+            'title' => $translator->trans('Add product'),
+            'buttonText' => $translator->trans('Add product'),
             'featuredImage' => '',
             'images' => []
         ]);
     }
 
     #[Route('/admin/products/edit/{id}', name: 'admin-edit-product')]
-    public function editProduct(Product $product, Request $request, EntityManagerInterface $entityManager, ProductFileUploader $fileUploader): Response
+    public function editProduct(Product $product, Request $request, EntityManagerInterface $entityManager, ProductFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
         $prevFeaturedImage = $product->getFeaturedImage();
         $prevImages = $product->getImages();
@@ -78,6 +79,14 @@ class ProductAdminController extends AbstractController
             $featuredImage = $form->get('featuredImage')->getData();
 
             if ( count($images) > 0 ) {
+                if( count($prevImages) > 0) {
+                    foreach( $prevImages as $prevImage ) {
+                        $fileUploader->remove($prevImage);
+                        $entityManager->remove($prevImage);
+                        $entityManager->flush();
+                    }
+                }
+
                 foreach( $images as $image ) {
                     $imageFileName = $fileUploader->upload($image);
                     $imageObj = new Image();
@@ -87,6 +96,9 @@ class ProductAdminController extends AbstractController
             }
 
             if( $featuredImage ) {
+                if( $prevFeaturedImage ) {
+                    $fileUploader->remove($prevFeaturedImage);
+                }
                 $featuredImageFileName = $fileUploader->upload($featuredImage);
                 $product->setFeaturedImage($featuredImageFileName);
             }
@@ -100,8 +112,8 @@ class ProductAdminController extends AbstractController
 
         return $this->render('admin/product/form.html.twig', [
             'form' => $form->createView(),
-            'title' => 'Edit product',
-            'buttonText' => 'Edit product',
+            'title' => $translator->trans('Edit product'),
+            'buttonText' => $translator->trans('Edit product'),
             'id' => $product->getId(),
             'featuredImage' => $prevFeaturedImage,
             'images' => $prevImages

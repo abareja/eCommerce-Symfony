@@ -29,6 +29,11 @@ class ProductSupplier
      */
     private $products;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -82,6 +87,18 @@ class ProductSupplier
                 $product->setSupplier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image ? "suppliers/".$this->image : "suppliers/placeholder.jpg";
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

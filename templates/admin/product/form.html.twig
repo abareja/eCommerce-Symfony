@@ -98,8 +98,8 @@
                             'attr': {'class': 'o-file__input'}
                         }) }}
                         {% if featuredImage %}
-                            <div class="o-file__item o-file--image" style="background-image: url({{ asset("products/" ~ featuredImage) }})">
-                                <a href="{{ asset("products/" ~ featuredImage) }}" data-fancybox="featured-image"></a>
+                            <div class="o-file__item o-file--image" style="background-image: url({{ asset(featuredImage) }})">
+                                <a href="{{ asset(featuredImage) }}" data-fancybox="featured-image"></a>
                             </div>
                         {% endif %}
                         <div class="o-file__item">

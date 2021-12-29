@@ -5,28 +5,36 @@
         <h2 class="c-admin-page__title o-page-title">{% trans %}All products{% endtrans %}</h2>
 
         {% if products|length > 0 %}
-            <table class="o-table">
-                <thead class="o-table__head">
-                    <tr class="o-table__row">
-                        <th class="o-table__cell o-table__cell--image"></th>
-                        <th class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</th>
-                        <th class="o-table__cell o-table__cell--category">{% trans %}Category{% endtrans %}</th>
-                        <th class="o-table__cell o-table__cell--price">{% trans %}Price{% endtrans %}</th>
-                        <th class="o-table__cell o-table__cell--quantity">{% trans %}Quantity{% endtrans %}</th>
-                    </tr>
-                </thead>
-                <tbody class="o-table__body">
+            <div class="o-table">
+                <div class="o-table__head">
+                    <div class="o-table__row">
+                        <div class="o-table__cell o-table__cell--image"></div>
+                        <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--category">{% trans %}Category{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--supplier">{% trans %}Supplier{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--price">{% trans %}Price{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--quantity">{% trans %}Quantity{% endtrans %}</div>
+                    </div>
+                </div>
+                <div class="o-table__body">
                     {% for product in products %}
-                        <tr class="o-table__row">
-                            <td class="o-table__cell"><img data-src="{{ asset("products/" ~ product.featuredImage) }}" class="js-lazyload" /></td>
-                            <td class="o-table__cell"><a href="{{ path('admin-edit-product', {id: product.id}) }}">{{ product.name }}</a></td>
-                            <td class="o-table__cell">{{ product.category }}</td>
-                            <td class="o-table__cell">{{ product.price }}</td>
-                            <td class="o-table__cell">{{ product.quantityInStock }}</td>
-                        </tr>
+                        <div class="o-table__row">
+                            <div class="o-table__cell o-table__cell--image">
+                                {% if product.featuredImage() %}
+                                    <a href="{{ path('admin-edit-product', {id: product.id}) }}">
+                                        <img data-src="{{ asset(product.featuredImage()) }}" class="js-lazyload" />
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-edit-product', {id: product.id}) }}">{{ product.name }}</a></div>
+                            <div class="o-table__cell o-table__cell--category"><a href="{{ path('admin-edit-category', {id: product.category.id}) }}">{{ product.category }}</a></div>
+                            <div class="o-table__cell o-table__cell--supplier"><a href="{{ path('admin-edit-supplier', {id: product.supplier.id}) }}">{{ product.supplier }}</a></div>                            
+                            <div class="o-table__cell o-table__cell--price">{{ product.price|format_currency('PLN', locale='pl') }}</div>
+                            <div class="o-table__cell o-table__cell--quantity">{{ product.quantityInStock }}</div>
+                        </div>
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

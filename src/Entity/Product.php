@@ -211,7 +211,7 @@ class Product
 
     public function getFeaturedImage(): ?string
     {
-        return $this->featuredImage;
+        return $this->featuredImage ? "products/".$this->featuredImage : "products/placeholder.jpg";
     }
 
     public function setFeaturedImage(string $featuredImage): self

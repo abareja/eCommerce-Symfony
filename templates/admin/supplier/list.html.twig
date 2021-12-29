@@ -1,0 +1,32 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block body %}
+    <div class="c-admin-page">
+        <h2 class="c-admin-page__title o-page-title">{% trans %}All suppliers{% endtrans %}</h2>
+
+        {% if suppliers|length > 0 %}
+            <div class="o-table">
+                <div class="o-table__head">
+                    <div class="o-table__row">
+                        <div class="o-table__cell o-table__cell--image"></div>
+                        <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
+                    </div>
+                </div>
+                <div class="o-table__body">
+                    {% for supplier in suppliers %}
+                        <div class="o-table__row">
+                            <div class="o-table__cell o-table__cell--image">
+                                {% if supplier.image() %}
+                                    <a href="{{ path('admin-edit-supplier', {id: supplier.id}) }}">
+                                        <img data-src="{{ asset(supplier.image()) }}" class="js-lazyload" />
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-edit-supplier', {id: supplier.id}) }}">{{ supplier.name }}</a></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
