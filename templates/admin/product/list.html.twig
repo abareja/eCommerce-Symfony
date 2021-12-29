@@ -20,9 +20,9 @@
                     {% for product in products %}
                         <div class="o-table__row">
                             <div class="o-table__cell o-table__cell--image">
-                                {% if product.featuredImage() %}
+                                {% if product.featuredImagePath() %}
                                     <a href="{{ path('admin-edit-product', {id: product.id}) }}">
-                                        <img data-src="{{ asset(product.featuredImage()) }}" class="js-lazyload" />
+                                        <img data-src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
                                     </a>
                                 {% endif %}
                             </div>

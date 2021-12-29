@@ -16,9 +16,9 @@
                     {% for category in categories %}
                         <div class="o-table__row">
                             <div class="o-table__cell o-table__cell--image">
-                                {% if category.image() %}
+                                {% if category.imagePath() %}
                                     <a href="{{ path('admin-edit-category', {id: category.id}) }}">
-                                        <img data-src="{{ asset(category.image()) }}" class="js-lazyload" />
+                                        <img data-src="{{ asset(category.imagePath()) }}" class="js-lazyload" />
                                     </a>
                                 {% endif %}
                             </div>

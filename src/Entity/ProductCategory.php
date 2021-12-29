@@ -93,9 +93,14 @@ class ProductCategory
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImagePath(): ?string
     {
         return $this->image ? "categories/".$this->image : "categories/placeholder.jpg";
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
     }
 
     public function setImage(string $image): self

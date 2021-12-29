@@ -8,11 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 use App\Entity\ProductCategory;
-use App\Service\CategoryFileUploader;
 use App\Form\ProductCategoryType;
 use App\Repository\ProductCategoryRepository;
+use App\Service\CategoryFileUploader;
 
 class CategoryAdminController extends AbstractController
 {
@@ -41,16 +42,17 @@ class CategoryAdminController extends AbstractController
             
             $entityManager->persist($category);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            
+            $this->addFlash('success', $translator->trans("Category added"));
 
             return $this->redirectToRoute('admin-categories');
         }
 
         return $this->render('admin/category/form.html.twig', [
             'form' => $form->createView(),
+            'category' => null,
             'title' => $translator->trans('Add category'),
             'buttonText' => $translator->trans('Add category'),
-            'featuredImage' => '',
         ]);
     }
 
@@ -74,16 +76,40 @@ class CategoryAdminController extends AbstractController
             
             $entityManager->persist($category);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            
+            $this->addFlash('success', $translator->trans("Category edited"));
 
             return $this->redirectToRoute('admin-categories');
         }
 
         return $this->render('admin/category/form.html.twig', [
             'form' => $form->createView(),
+            'category' => $category,
             'title' => $translator->trans('Edit category'),
             'buttonText' => $translator->trans('Edit category'),
-            'featuredImage' => $prevFeaturedImage,
         ]);
+    }
+
+    #[Route('/admin/categories/delete/{id}', name: 'admin-delete-category')]
+    public function deleteCategory(ProductCategory $category, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
+    {
+        try {
+            $image = $category->getImage();
+            
+            $entityManager->remove($category);
+            $entityManager->flush();
+
+            if( $image ) {
+                $fileUploader->remove($image);
+            }
+
+            $this->addFlash('success', $translator->trans("Category removed"));
+
+            return $this->redirectToRoute('admin-categories');
+        } catch (ForeignKeyConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("This category has connected products, so it can't be removed"));
+
+            return $this->redirectToRoute('admin-edit-category', ['id' => $category->getId()]);
+        }
     }
 }

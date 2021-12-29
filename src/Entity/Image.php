@@ -43,6 +43,11 @@ class Image
         return $this->filename;
     }
 
+    public function getPath(): ?string
+    {
+        return $this->filename ? "products/".$this->filename : "products/placeholder.jpg";
+    }
+
     public function setFilename(string $filename): self
     {
         $this->filename = $filename;

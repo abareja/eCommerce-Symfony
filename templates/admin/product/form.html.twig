@@ -97,9 +97,9 @@
                         {{ form_widget(form.featuredImage, {
                             'attr': {'class': 'o-file__input'}
                         }) }}
-                        {% if featuredImage %}
-                            <div class="o-file__item o-file--image" style="background-image: url({{ asset(featuredImage) }})">
-                                <a href="{{ asset(featuredImage) }}" data-fancybox="featured-image"></a>
+                        {% if product %}
+                            <div class="o-file__item o-file--image" style="background-image: url({{ asset(product.featuredImagePath()) }})">
+                                <a href="{{ asset(product.featuredImagePath()) }}" data-fancybox="featured-image"></a>
                             </div>
                         {% endif %}
                         <div class="o-file__item">
@@ -120,10 +120,10 @@
                         {{ form_widget(form.images, {
                             'attr': {'class': 'o-file__input'}
                         }) }}
-                        {% if images|length > 0 %}
-                            {% for image in images %}
-                                <div class="o-file__item o-file--image" style="background-image: url({{ asset("products/" ~ image) }})">
-                                    <a href="{{ asset("products/" ~ image) }}" data-fancybox="image"></a>
+                        {% if product and product.images()|length > 0 %}
+                            {% for image in product.images() %}
+                                <div class="o-file__item o-file--image" style="background-image: url({{ asset(image.path()) }})">
+                                    <a href="{{ asset(image.path()) }}" data-fancybox="image"></a>
                                 </div>
                             {% endfor %}
                         {% endif %}
@@ -138,8 +138,12 @@
 
                 <div class="o-field u-margin-top-small">
                     <div class="o-grid o-grid--small u-padding-bottom-small">
-                        <div class="o-grid__item u-1/2@small-desktop o-flex o-flex--align-items-center u-padding-vertical-small">
-                            
+                        <div class="o-grid__item u-1/2@small-desktop">
+                            {% if product %}
+                                <a class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300" href="{{ path('admin-delete-product', {id: product.id}) }}">
+                                    {% trans %}Remove{% endtrans %}
+                                </a>
+                            {% endif %}
                         </div>
                         <div class="o-grid__item u-1/2@small-desktop u-text-right">
                             <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">

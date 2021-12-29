@@ -47,7 +47,7 @@ class Product
     private $supplier;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product", cascade={"persist", "remove"})
      */
     private $images;
 
@@ -209,9 +209,14 @@ class Product
         return $this;
     }
 
-    public function getFeaturedImage(): ?string
+    public function getFeaturedImagePath(): ?string
     {
         return $this->featuredImage ? "products/".$this->featuredImage : "products/placeholder.jpg";
+    }
+
+    public function getFeaturedImage(): ?string
+    {
+        return $this->featuredImage;
     }
 
     public function setFeaturedImage(string $featuredImage): self

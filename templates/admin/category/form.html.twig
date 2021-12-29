@@ -6,7 +6,8 @@
 
             {{ form_start(form, {
                 'attr': {
-                    'novalidate': 'novalidate'
+                    'novalidate': 'novalidate',
+                    'enctype': 'multipart/form-data'
                 }
             }) }}
 
@@ -30,9 +31,9 @@
                         {{ form_widget(form.image, {
                             'attr': {'class': 'o-file__input'}
                         }) }}
-                        {% if featuredImage %}
-                            <div class="o-file__item o-file--image" style="background-image: url({{ asset(featuredImage) }})">
-                                <a href="{{ asset(featuredImage) }}" data-fancybox="featured-image"></a>
+                        {% if category %}
+                            <div class="o-file__item o-file--image" style="background-image: url({{ asset(category.imagePath()) }})">
+                                <a href="{{ asset(category.imagePath()) }}" data-fancybox="featured-image"></a>
                             </div>
                         {% endif %}
                         <div class="o-file__item">
@@ -46,8 +47,12 @@
 
                 <div class="o-field u-margin-top-small">
                     <div class="o-grid o-grid--small u-padding-bottom-small">
-                        <div class="o-grid__item u-1/2@small-desktop o-flex o-flex--align-items-center u-padding-vertical-small">
-                            
+                        <div class="o-grid__item u-1/2@small-desktop">
+                            {% if category %}
+                                <a class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300" href="{{ path('admin-delete-category', {id: category.id}) }}">
+                                    {% trans %}Remove{% endtrans %}
+                                </a>
+                            {% endif %}
                         </div>
                         <div class="o-grid__item u-1/2@small-desktop u-text-right">
                             <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">

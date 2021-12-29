@@ -60,7 +60,18 @@ Choose image: Choose image
 Please choose image!: Please choose image!
 Edit product: Edit product
 Edit category: Edit category
-
-
-
+Remove: Remove
+Edit supplier: Edit supplier
+Supplier added: Supplier added
+Supplier edited: Supplier edited 
+Supplier removed: Supplier removed
+This supplier has connected products, so it can't be removed: This supplier has connected products, so it can't be removed
+Category added: Category added
+Category edited: Category edited
+Category removed: Category removed
+This category has connected products, so it can't be removed: This category has connected products, so it can't be removed
+Product added: Product added
+Product edited: Product edited
+Product removed: Product removed
+This product can't be removed: This product can't be removed
 

@@ -91,9 +91,14 @@ class ProductSupplier
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImagePath(): ?string
     {
         return $this->image ? "suppliers/".$this->image : "suppliers/placeholder.jpg";
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
     }
 
     public function setImage(?string $image): self

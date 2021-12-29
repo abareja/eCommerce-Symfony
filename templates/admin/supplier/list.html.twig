@@ -16,9 +16,9 @@
                     {% for supplier in suppliers %}
                         <div class="o-table__row">
                             <div class="o-table__cell o-table__cell--image">
-                                {% if supplier.image() %}
+                                {% if supplier.imagePath() %}
                                     <a href="{{ path('admin-edit-supplier', {id: supplier.id}) }}">
-                                        <img data-src="{{ asset(supplier.image()) }}" class="js-lazyload" />
+                                        <img data-src="{{ asset(supplier.imagePath()) }}" class="js-lazyload" />
                                     </a>
                                 {% endif %}
                             </div>

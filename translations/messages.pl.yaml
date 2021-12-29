@@ -60,3 +60,17 @@ Choose image: Wybierz zdjęcie
 Please choose image!: Wybierz zdjęcie!
 Edit product: Edytuj produkt
 Edit category: Edytuj kategorię
+Remove: Usuń
+Edit supplier: Edytuj producenta
+Supplier added: Producent został dodany
+Supplier edited: Producent został zmodyfikowany
+Supplier removed: Producent został usunięty
+This supplier has connected products, so it can't be removed: Producent nie może zostać usunięty, ponieważ zawiera powiązane produkty
+Category added: Kategoria została dodana
+Category edited: Kategoria została zmodyfikowana
+Category removed: Kategoria została usunięta
+This category has connected products, so it can't be removed: Kategoria nie może zostać usunięta, ponieważ zawiera powiązane produkty
+Product added: Produkt został dodany
+Product edited: Produkt został zmodyfikowany
+Product removed: Produkt został usunięty
+This product can't be removed: Produkt nie może zostać usunięty

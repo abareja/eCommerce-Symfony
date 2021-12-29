@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 use App\Entity\Product;
 use App\Entity\Image;
@@ -52,17 +53,17 @@ class ProductAdminController extends AbstractController
 
             $entityManager->persist($product);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+
+            $this->addFlash('success', $translator->trans("Product added"));
 
             return $this->redirectToRoute('admin-products');
         }
 
         return $this->render('admin/product/form.html.twig', [
             'form' => $form->createView(),
+            'product' => null,
             'title' => $translator->trans('Add product'),
             'buttonText' => $translator->trans('Add product'),
-            'featuredImage' => '',
-            'images' => []
         ]);
     }
 
@@ -105,18 +106,47 @@ class ProductAdminController extends AbstractController
 
             $entityManager->persist($product);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+
+            $this->addFlash('success', $translator->trans("Product edited"));
 
             return $this->redirectToRoute('admin-products');
         }
 
         return $this->render('admin/product/form.html.twig', [
             'form' => $form->createView(),
+            'product' => $product,
             'title' => $translator->trans('Edit product'),
             'buttonText' => $translator->trans('Edit product'),
-            'id' => $product->getId(),
-            'featuredImage' => $prevFeaturedImage,
-            'images' => $prevImages
         ]);
+    }
+
+    #[Route('/admin/products/delete/{id}', name: 'admin-delete-product')]
+    public function deleteSupplier(Product $product, EntityManagerInterface $entityManager, ProductFileUploader $fileUploader, TranslatorInterface $translator): Response
+    {
+        try {
+            $featuredImage = $product->getFeaturedImage();
+            $images = $product->getImages();
+            
+            $entityManager->remove($product);
+            $entityManager->flush();
+
+            if( $featuredImage ) {
+                $fileUploader->remove($featuredImage);
+            }
+
+            if( count($images) > 0 ) {
+                foreach( $images as $image ) {
+                    $fileUploader->remove($image);
+                }
+            }
+            
+            $this->addFlash('success', $translator->trans("Product removed"));
+
+            return $this->redirectToRoute('admin-products');
+        } catch (ForeignKeyConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("This product can't be removed"));
+
+            return $this->redirectToRoute('admin-edit-product', ['id' => $product->getId()]);
+        }
     }
 }

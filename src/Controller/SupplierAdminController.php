@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 use App\Entity\ProductSupplier;
 use App\Form\ProductSupplierType;
@@ -41,16 +42,17 @@ class SupplierAdminController extends AbstractController
 
             $entityManager->persist($supplier);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+
+            $this->addFlash('success', $translator->trans("Supplier added"));
 
             return $this->redirectToRoute('admin-suppliers');
         }
 
         return $this->render('admin/supplier/form.html.twig', [
             'form' => $form->createView(),
+            'supplier' => null,
             'title' => $translator->trans('Add supplier'),
             'buttonText' => $translator->trans('Add supplier'),
-            'featuredImage' => ''
         ]);
     }
 
@@ -74,16 +76,40 @@ class SupplierAdminController extends AbstractController
 
             $entityManager->persist($supplier);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            
+            $this->addFlash('success', $translator->trans("Supplier edited"));
 
             return $this->redirectToRoute('admin-suppliers');
         }
 
         return $this->render('admin/supplier/form.html.twig', [
             'form' => $form->createView(),
+            'supplier' => $supplier,
             'title' => $translator->trans('Edit supplier'),
             'buttonText' => $translator->trans('Edit supplier'),
-            'featuredImage' => $prevFeaturedImage
         ]);
+    }
+
+    #[Route('/admin/suppliers/delete/{id}', name: 'admin-delete-supplier')]
+    public function deleteSupplier(ProductSupplier $supplier, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
+    {
+        try {
+            $image = $supplier->getImage();
+            
+            $entityManager->remove($supplier);
+            $entityManager->flush();
+
+            if( $image ) {
+                $fileUploader->remove($image);
+            }
+            
+            $this->addFlash('success', $translator->trans("Supplier removed"));
+
+            return $this->redirectToRoute('admin-suppliers');
+        } catch (ForeignKeyConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("This supplier has connected products, so it can't be removed"));
+
+            return $this->redirectToRoute('admin-edit-supplier', ['id' => $supplier->getId()]);
+        }
     }
 }
