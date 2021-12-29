@@ -61,6 +61,11 @@ class Product
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $featuredImage;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -200,6 +205,18 @@ class Product
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getFeaturedImage(): ?string
+    {
+        return $this->featuredImage;
+    }
+
+    public function setFeaturedImage(string $featuredImage): self
+    {
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }
