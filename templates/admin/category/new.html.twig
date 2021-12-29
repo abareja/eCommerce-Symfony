@@ -21,6 +21,25 @@
                     <div class="o-field__error">{% trans %}Please enter a valid product name!{% endtrans %}</div>
                 </div>
 
+                <div class="o-field{% if form_errors(form.image) %} is-invalid{% endif %}"
+                    data-validation="required"
+                    data-aos="fade-up"
+                    data-aos-delay="50">
+                    <label class="o-input__label" for="{{ form.image.vars.id }}">{% trans %}Featured image{% endtrans %}</label>
+                    
+                    <div class="o-file js-file-input">
+                        {{ form_widget(form.image, {
+                            'attr': {'class': 'o-file__input'}
+                        }) }}
+                        <div class="o-file__item">
+                            <label class="o-file__label" for="{{ form.image.vars.id }}">
+                                {% trans %}Choose image{% endtrans %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="o-field__error">{% trans %}Please choose image!{% endtrans %}</div>
+                </div>
+
                 <div class="o-field u-margin-top-small">
                     <div class="o-grid o-grid--small u-padding-bottom-small">
                         <div class="o-grid__item u-1/2@small-desktop o-flex o-flex--align-items-center u-padding-vertical-small">

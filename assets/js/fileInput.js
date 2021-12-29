@@ -16,8 +16,11 @@ class FileInput {
             input: element.querySelector('input[type="file"]'),
         };
 
+        console.log(this.el.input.files);
+
         this.el.input.addEventListener('change', event => {
             this.changeEvent(event);
+            console.log(this.el.input.files);
         });
     }
 

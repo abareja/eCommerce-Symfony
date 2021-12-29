@@ -1,0 +1,128 @@
+.o-table {
+    @include font-size(15px, 1.3);
+    &__row {
+        display: flex;
+    } 
+    &__row--accent {
+        color: theme-color(secondary);
+    }
+    &__head &__cell {
+        @include font-size(13px, 1.3);
+        white-space: nowrap;
+    }
+    &__cell {
+        flex-basis: 0;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .5em 1em;
+        text-align: center;
+
+        &--head {
+            text-transform: uppercase;
+        }
+
+        &--name {
+            width: 250px;
+            flex-basis: auto;
+            flex-grow: initial;
+            text-align: left;
+        }
+
+        &--action {
+            width: 175px;
+            flex-basis: auto;
+            flex-grow: initial;
+        }
+    }
+    &__body &__row:nth-child(2n) &__cell {
+        background-color: theme-color(light);
+    }
+
+    &__body &__row:nth-child(2n+1) &__cell {
+        background-color: theme-color(g600);
+    }
+    &__cell--action .o-button {
+        position: relative;
+    }
+    &__cell--action .o-button.added .o-icon:before {
+        content: '\2713';
+    }
+    &__cell--action .o-button.loading  {
+        opacity: .5;
+        pointer-events: none;
+    }
+    .added_to_cart {
+        display: none;
+    }
+    
+    &__cell-wrap {
+        width: 100%;
+    }
+    
+    @include mq($until: desktop) {
+        &__head {
+            display: none;
+        }
+        &__row {
+            flex-wrap: wrap;
+            margin-bottom: $spacing-tiny;
+        }
+        &__cell {
+            justify-items: center;
+            text-align: center;
+            align-items: flex-start;
+
+            &--name,  &--action {
+                width: 100%;
+            }
+
+            &--name {
+                padding-top: 1em;
+                padding-bottom: 1em;
+                font-weight: bold;
+                font-size: 1.25em;
+            }
+        }
+
+        &__cell-wrap {
+            &:before {
+                content: attr(data-title);
+                display: block;
+                font-weight: 700;
+                @include font-size(10px);
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    @include mq($until: small-desktop) {
+        &__cell {
+            &--size, &--color, &--quantity, &--price-net, &--price-gross, &--action {
+                width: 33.33333%;
+                flex-basis: auto;
+                flex-grow: initial;
+            }
+
+            &--action {
+                padding-left: .5em;
+                padding-right: .5em;
+            }
+        }
+    }
+
+    @include mq($until: tablet) {
+        &__cell {
+            &--size, &--color, &--price-net, &--price-gross {
+                width: 50%;
+            }
+
+            &--quantity, &--action {
+                width: 100%;
+            }
+        }
+    }
+}

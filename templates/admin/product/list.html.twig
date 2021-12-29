@@ -1,0 +1,32 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block body %}
+    <div class="c-admin-page">
+        <h2 class="c-admin-page__title o-page-title">{% trans %}All products{% endtrans %}</h2>
+
+        {% if products|length > 0 %}
+            <table class="o-table">
+                <thead class="o-table__head">
+                    <tr class="o-table__row">
+                        <th class="o-table__cell o-table__cell--image"></th>
+                        <th class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</th>
+                        <th class="o-table__cell o-table__cell--category">{% trans %}Category{% endtrans %}</th>
+                        <th class="o-table__cell o-table__cell--price">{% trans %}Price{% endtrans %}</th>
+                        <th class="o-table__cell o-table__cell--quantity">{% trans %}Quantity{% endtrans %}</th>
+                    </tr>
+                </thead>
+                <tbody class="o-table__body">
+                    {% for product in products %}
+                        <tr class="o-table__row">
+                            <td class="o-table__cell"><img data-src="{{ asset("products/" ~ product.featuredImage) }}" class="js-lazyload" /></td>
+                            <td class="o-table__cell"><a href="{{ path('admin-edit-product', {id: product.id}) }}">{{ product.name }}</a></td>
+                            <td class="o-table__cell">{{ product.category }}</td>
+                            <td class="o-table__cell">{{ product.price }}</td>
+                            <td class="o-table__cell">{{ product.quantityInStock }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

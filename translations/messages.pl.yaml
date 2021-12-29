@@ -48,11 +48,14 @@ Price: Cena
 Quantity: Ilość
 Please enter a valid product name!: Wprowadź prawidłową nazwę produktu!
 Description: Opis
-Choose photos: Wybierz zdjęcia
-Photos: Zdjęcia
-Please choose photos!: Wybierz zdjęcia!
+Choose images: Wybierz zdjęcia
+Images: Zdjęcia
+Please choose images!: Wybierz zdjęcia!
 Please enter a valid price!: Wprowadź prawidłową cenę!
 Please enter a valid quantity!: Wprowadź prawidłową ilość!
 Please enter a valid category!: Wybierz kategorię!
 Please enter a valid supplier!: Wybierz producenta!
-
+Featured image: Zdjęcie główne
+Choose image: Wybierz zdjęcie
+Please choose image!: Wybierz zdjęcie!
+Edit product: Edytuj produkt

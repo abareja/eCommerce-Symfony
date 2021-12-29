@@ -50,6 +50,20 @@ class ProductType extends AbstractType
                 'class' => ProductSupplier::class,
             ])
             ->add('description', TextareaType::class)
+            ->add('featuredImage', FileType::class, [
+                'mapped' => false,
+                'required' => true,
+                'multiple' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '100M',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                        ]
+                    ]),
+                ],
+            ])
             ->add('images', FileType::class, [
                 'mapped' => false,
                 'required' => false,

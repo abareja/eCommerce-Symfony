@@ -2,11 +2,12 @@
 
 {% block body %}
     <div class="c-admin-page">
-        <h2 class="c-admin-page__title o-title u-margin-bottom" data-aos="fade-up">{% trans %}Add product{% endtrans %}</h2>
+        <h2 class="c-admin-page__title o-title u-margin-bottom" data-aos="fade-up">{{ title }}</h2>
 
             {{ form_start(form, {
                 'attr': {
-                    'novalidate': 'novalidate'
+                    'novalidate': 'novalidate',
+                    'enctype': 'multipart/form-data'
                 }
             }) }}
 
@@ -87,23 +88,52 @@
                     }) }}
                 </div>
 
-                <div class="o-field{% if form_errors(form.images) %} is-invalid{% endif %}"
-                    data-validation="required"
+                <div class="o-field{% if form_errors(form.featuredImage) %} is-invalid{% endif %}"
                     data-aos="fade-up"
                     data-aos-delay="50">
-                    <label class="o-input__label" for="{{ form.images.vars.id }}">{% trans %}Photos{% endtrans %}</label>
+                    <label class="o-input__label" for="{{ form.featuredImage.vars.id }}">{% trans %}Featured image{% endtrans %}</label>
+                    
+                    <div class="o-file js-file-input">
+                        {{ form_widget(form.featuredImage, {
+                            'attr': {'class': 'o-file__input'}
+                        }) }}
+                        {% if featuredImage %}
+                            <div class="o-file__item o-file--image" style="background-image: url({{ asset("products/" ~ featuredImage) }})">
+                                <a href="{{ asset("products/" ~ featuredImage) }}" data-fancybox="featured-image"></a>
+                            </div>
+                        {% endif %}
+                        <div class="o-file__item">
+                            <label class="o-file__label" for="{{ form.featuredImage.vars.id }}">
+                                {% trans %}Choose image{% endtrans %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="o-field__error">{% trans %}Please choose image!{% endtrans %}</div>
+                </div>
+
+                <div class="o-field{% if form_errors(form.images) %} is-invalid{% endif %}"
+                    data-aos="fade-up"
+                    data-aos-delay="50">
+                    <label class="o-input__label" for="{{ form.images.vars.id }}">{% trans %}Images{% endtrans %}</label>
                     
                     <div class="o-file js-file-input">
                         {{ form_widget(form.images, {
                             'attr': {'class': 'o-file__input'}
                         }) }}
+                        {% if images|length > 0 %}
+                            {% for image in images %}
+                                <div class="o-file__item o-file--image" style="background-image: url({{ asset("products/" ~ image) }})">
+                                    <a href="{{ asset("products/" ~ image) }}" data-fancybox="image"></a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="o-file__item">
                             <label class="o-file__label" for="{{ form.images.vars.id }}">
-                                {% trans %}Choose photos{% endtrans %}
+                                {% trans %}Choose images{% endtrans %}
                             </label>
                         </div>
                     </div>
-                    <div class="o-field__error">{% trans %}Please choose photos!{% endtrans %}</div>
+                    <div class="o-field__error">{% trans %}Please choose images!{% endtrans %}</div>
                 </div>
 
                 <div class="o-field u-margin-top-small">
@@ -113,7 +143,7 @@
                         </div>
                         <div class="o-grid__item u-1/2@small-desktop u-text-right">
                             <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
-                                {% trans %}Add product{% endtrans %}
+                                {{ buttonText }}
                                 <span class="o-icon o-icon--chevron-right"></span>
                             </button>
                         </div>

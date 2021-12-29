@@ -1,46 +1,23 @@
 <nav class="c-main-nav">
     <ul class="c-main-nav__list c-main-nav__list--primary c-main-nav__list--root js-main-nav--primary">
         <li class="c-main-nav__item has-children">
-            <a href="#" class="c-main-nav__link" title="Shop">{% trans %}Shop{% endtrans %}</a>
-            <div class="c-main-nav__list c-main-nav__list--level-1 c-main-nav__list--categories c-submenu">
-                <div class="o-grid o-grid--tiny">
-                    <div class="o-grid__item u-1/6@desktop u-1/3@small-desktop">
-                        <div class="c-main-nav__item">
-                            <a href="#" title="">
-                                <div class="c-main-nav__item-image js-lazyload" data-bg="{{ asset('products/macbook1.jpg') }}"></div>
-                                <div class="c-main-nav__item-title">Kategoria 1</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="o-grid__item u-1/6@desktop u-1/3@small-desktop">
-                        <div class="c-main-nav__item">
-                            <a href="#" title="">
-                                <div class="c-main-nav__item-image js-lazyload" data-bg="{{ asset('products/macbook1.jpg') }}"></div>
-                                <div class="c-main-nav__item-title">Kategoria 1</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="o-grid__item u-1/6@desktop u-1/3@small-desktop">
-                        <div class="c-main-nav__item">
-                            <a href="#" title="">
-                                <div class="c-main-nav__item-image js-lazyload" data-bg="{{ asset('products/macbook1.jpg') }}"></div>
-                                <div class="c-main-nav__item-title">Kategoria 1</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="o-grid__item u-1/6@desktop u-1/3@small-desktop">
-                        <div class="c-main-nav__item">
-                            <a href="#" title="">
-                                <div class="c-main-nav__item-image js-lazyload" data-bg="{{ asset('products/macbook1.jpg') }}"></div>
-                                <div class="c-main-nav__item-title">Kategoria 1</div>
-                            </a>
-                        </div>
+            {% if categories|length > 0 %}
+                <a href="#" class="c-main-nav__link" title="Shop">{% trans %}Shop{% endtrans %}</a>
+                <div class="c-main-nav__list c-main-nav__list--level-1 c-main-nav__list--categories c-submenu">
+                    <div class="o-grid o-grid--tiny">
+                        {% for category in categories %}
+                            <div class="o-grid__item u-1/6@desktop u-1/3@small-desktop">
+                                <div class="c-main-nav__item">
+                                    <a href="#" title="">
+                                        <div class="c-main-nav__item-image js-lazyload" data-bg="{{ asset(category.image) }}"></div>
+                                        <div class="c-main-nav__item-title">{{ category.name }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </li>
         <li class="c-main-nav__item has-children">
             <a href="#" class="c-main-nav__link" title="{% trans %}Sale{% endtrans %}">{% trans %}Sale{% endtrans %}</a>

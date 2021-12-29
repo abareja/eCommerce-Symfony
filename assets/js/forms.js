@@ -52,7 +52,7 @@ const validateInputField = (field, input) => {
     const lastNameReg = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
     const emailReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    const priceReg = /^\d+(?:\.\d{0,2})$/;
+    const priceReg = /^\d+(?:[.,]\d{0,2})$/;
 
     if( !validationType ) return;
 
