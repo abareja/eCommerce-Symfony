@@ -93,7 +93,7 @@ class ProductSupplier
 
     public function getImagePath(): ?string
     {
-        return $this->image ? "suppliers/".$this->image : "suppliers/placeholder.jpg";
+        return $this->image ? "suppliers/".$this->image : "placeholder/placeholder.jpg";
     }
 
     public function getImage(): ?string

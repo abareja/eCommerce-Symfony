@@ -211,7 +211,7 @@ class Product
 
     public function getFeaturedImagePath(): ?string
     {
-        return $this->featuredImage ? "products/".$this->featuredImage : "products/placeholder.jpg";
+        return $this->featuredImage ? "products/".$this->featuredImage : "placeholder/placeholder.jpg";
     }
 
     public function getFeaturedImage(): ?string
