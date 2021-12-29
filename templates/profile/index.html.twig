@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My acoount
+{% endblock %}
+
+{% block header %}
+    {%  include 'partials/site-header.html.twig' %}
+{% endblock %}
+
+{% block body_id 'profile' %}
+
+{% block body %}
+    <div class="o-page">
+        {% for message in app.flashes('success') %}
+            <div class="c-alert c-alert--success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        {% for message in app.flashes('error') %}
+            <div class="c-alert c-alert--danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="o-wrapper o-wrapper--full">
+            <div class="o-grid">
+                <div class="o-grid__item u-1/4@desktop">
+                    {%  include 'admin/partials/sidebar.html.twig' %}
+                </div>
+                <div class="o-grid__item u-3/4@desktop">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

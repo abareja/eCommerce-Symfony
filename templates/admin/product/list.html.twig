@@ -2,12 +2,12 @@
 
 {% block body %}
     <div class="c-admin-page">
-        <h2 class="c-admin-page__title o-page-title">{% trans %}All products{% endtrans %}</h2>
+        <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}All products{% endtrans %}</h2>
 
         {% if products|length > 0 %}
             <div class="o-table">
                 <div class="o-table__head">
-                    <div class="o-table__row">
+                    <div class="o-table__row" data-aos="fade-up">
                         <div class="o-table__cell o-table__cell--image"></div>
                         <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
                         <div class="o-table__cell o-table__cell--category">{% trans %}Category{% endtrans %}</div>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="o-table__body">
                     {% for product in products %}
-                        <div class="o-table__row">
+                        <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
                             <div class="o-table__cell o-table__cell--image">
                                 {% if product.featuredImagePath() %}
                                     <a href="{{ path('admin-edit-product', {id: product.id}) }}">

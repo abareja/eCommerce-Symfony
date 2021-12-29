@@ -1,7 +1,7 @@
 <nav class="c-main-nav">
     <ul class="c-main-nav__list c-main-nav__list--primary c-main-nav__list--root js-main-nav--primary">
-        <li class="c-main-nav__item has-children">
-            {% if categories|length > 0 %}
+        {% if categories and categories|length > 0 %}
+            <li class="c-main-nav__item has-children">
                 <a href="#" class="c-main-nav__link" title="Shop">{% trans %}Shop{% endtrans %}</a>
                 <div class="c-main-nav__list c-main-nav__list--level-1 c-main-nav__list--categories c-submenu">
                     <div class="o-grid o-grid--tiny">
@@ -9,7 +9,7 @@
                             <div class="o-grid__item u-1/6@desktop u-1/3@small-desktop">
                                 <div class="c-main-nav__item">
                                     <a href="#" title="">
-                                        <div class="c-main-nav__item-image js-lazyload" data-bg="{{ asset(category.image) }}"></div>
+                                        <div class="c-main-nav__item-image js-lazyload" data-bg="{{ asset(category.imagePath()) }}"></div>
                                         <div class="c-main-nav__item-title">{{ category.name }}</div>
                                     </a>
                                 </div>
@@ -17,8 +17,8 @@
                         {% endfor %}
                     </div>
                 </div>
-            {% endif %}
-        </li>
+            </li>
+        {% endif %}
         <li class="c-main-nav__item has-children">
             <a href="#" class="c-main-nav__link" title="{% trans %}Sale{% endtrans %}">{% trans %}Sale{% endtrans %}</a>
             <ul class="c-main-nav__list c-main-nav__list--level-1 c-submenu">
@@ -90,8 +90,14 @@
         <li class="c-main-nav__item has-children">
             <a href="#" class="c-main-nav__link js-header-search-toggle" title="{% trans %}Search{% endtrans %}">{% trans %}Search{% endtrans %}</a>
         </li>
-        <li class="c-main-nav__item">
-            <a href="{{ path('login') }}" class="c-main-nav__link" title="{% trans %}My account{% endtrans %}">{% trans %}My account{% endtrans %}</a>
-        </li>
+        {% if app.user %}
+            <li class="c-main-nav__item">
+                <a href="{{ path('profile') }}" class="c-main-nav__link" title="{% trans %}My account{% endtrans %}">{% trans %}My account{% endtrans %}</a>
+            </li>
+        {% else %}
+            <li class="c-main-nav__item">
+                <a href="{{ path('login') }}" class="c-main-nav__link" title="{% trans %}Login{% endtrans %}">{% trans %}Login{% endtrans %}</a>
+            </li>
+        {% endif %}
     </ul>
 </nav>  

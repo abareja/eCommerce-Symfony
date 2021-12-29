@@ -2,19 +2,19 @@
 
 {% block body %}
     <div class="c-admin-page">
-        <h2 class="c-admin-page__title o-page-title">{% trans %}All suppliers{% endtrans %}</h2>
+        <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}All suppliers{% endtrans %}</h2>
 
         {% if suppliers|length > 0 %}
             <div class="o-table">
                 <div class="o-table__head">
-                    <div class="o-table__row">
+                    <div class="o-table__row" data-aos="fade-up">
                         <div class="o-table__cell o-table__cell--image"></div>
                         <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
                     </div>
                 </div>
                 <div class="o-table__body">
                     {% for supplier in suppliers %}
-                        <div class="o-table__row">
+                        <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
                             <div class="o-table__cell o-table__cell--image">
                                 {% if supplier.imagePath() %}
                                     <a href="{{ path('admin-edit-supplier', {id: supplier.id}) }}">
