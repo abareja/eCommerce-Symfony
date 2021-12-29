@@ -32,7 +32,6 @@ class ProductType extends AbstractType
             ])
             ->add('price', MoneyType::class, [
                 'required' => true,
-                'divisor' => 100,
                 'currency' => ''
             ])
             ->add('quantityInStock', IntegerType::class, [
