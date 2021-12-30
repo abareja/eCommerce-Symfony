@@ -1,18 +1,21 @@
 <div class="c-product-tile">
     <div class="c-product-tile__ribbons">
-        {% if product.discountPrice %}
+        {# {% if product.discountPrice %}
             <span class="c-product-tile__ribbon">{% trans %}Sale{% endtrans %}</span>
-        {% endif %}
+        {% endif %} #}
     </div>
-    {% if product.images|length > 0 %}
-        <a href="#">
-            <div class="c-product-tile__images">
+    <a href="{{ path('product', {id: product.id}) }}">
+        <div class="c-product-tile__images">
+            {% if product.featuredImagePath() %}
+                <div class="c-product-tile__image c-product-tile__image--1 js-lazyload" data-bg="{{ asset(product.featuredImagePath()) }}"></div>
+            {% endif %}
+            {% if product.images|length > 0 %}
                 {% for image in product.images %}
-                    <div class="c-product-tile__image c-product-tile__image--{{ loop.index }} js-lazyload" data-bg="{{ asset(image) }}"></div>
+                    <div class="c-product-tile__image c-product-tile__image--{{ loop.index + 1 }} js-lazyload" data-bg="{{ asset(image.path()) }}"></div>
                 {% endfor %}
-            </div>
-        </a>
-    {% endif %}
+            {% endif %}
+        </div>
+    </a>
     {% if product.category %}
         <div class="c-product-tile__category">{{ product.category }}</div>
     {% endif %}
@@ -23,11 +26,11 @@
     {% endif %}
     {% if product.price %}
         <div class="c-product-tile__price-wrap">
-            <div class="c-product-tile__price{% if product.discountPrice %} has-discount {% endif %}">{{ product.price|format_currency('PLN', locale='pl') }}</div>
+            {# <div class="c-product-tile__price{% if product.discountPrice %} has-discount {% endif %}">{{ product.price|format_currency('PLN', locale='pl') }}</div>
 
             {% if product.discountPrice %}
                 <div class="c-product-tile__price c-product-tile__price--discount">{{ product.discountPrice|format_currency('PLN', locale='pl') }}</div>
-            {% endif %}
+            {% endif %} #}
         </div>
     {% endif %}
 </div>

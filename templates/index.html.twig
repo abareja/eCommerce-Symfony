@@ -23,44 +23,6 @@
         },
     ]} %}
 
-    {% set newProducts = [
-        {
-            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
-            category: 'Laptopy',
-            price: 5699.00,
-            discountPrice: 5199.00,
-            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
-        },
-        {
-            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
-            category: 'Laptopy',
-            price: 5699.00,
-            discountPrice: '',
-            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
-        },
-        {
-            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
-            category: 'Laptopy',
-            price: 5699.00,
-            discountPrice: '',
-            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
-        },
-        {
-            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
-            category: 'Laptopy',
-            price: 5699.00,
-            discountPrice: '',
-            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
-        },
-        {
-            name: 'Apple MacBook Air M1/16GB/256/Mac OS Space Gray',
-            category: 'Laptopy',
-            price: 5699.00,
-            discountPrice: '',
-            images: ['products/macbook1.jpg', 'products/macbook2.jpg']
-        }
-    ] %}
-
-    {% include 'partials/components/product-list.html.twig' with {title: 'Newest products', products: newProducts}%}
-    {% include 'partials/components/product-slider.html.twig' with {title: 'Newest products', products: newProducts}%}
+    {% include 'partials/components/product-list.html.twig' with { title: 'Newest products', products: [] }%}
+    {% include 'partials/components/product-slider.html.twig' with { title: 'Newest products', products: [] }%}
 {% endblock %}
