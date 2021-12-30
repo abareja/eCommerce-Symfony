@@ -20,18 +20,22 @@
     <body id="{% block body_id %}{% endblock %}" class="{% if is_granted('ROLE_ADMIN') %}admin{% endif %}">
 
         {% if is_granted('ROLE_ADMIN') %}
-            {%  include 'admin/partials/admin-bar.html.twig' %}
+            {%  include 'admin/admin-bar.html.twig' %}
         {% endif %}
 
         {% block header %}
-            {%  include 'partials/site-header.html.twig' %}
+            {%  include 'header/site-header.html.twig' %}
         {% endblock %}
 
-        {% block body %}
-        {% endblock %}
-        
+        <div class="o-page">
+            {% include 'components/flashes.html.twig' %}
+
+            {% block body %}
+            {% endblock %}
+        </div>
+
         {% block footer %}
-            {%  include 'partials/site-footer.html.twig' %}
+            {%  include 'footer/site-footer.html.twig' %}
         {% endblock %}
 
         {% block javascripts %}

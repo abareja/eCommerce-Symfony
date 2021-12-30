@@ -3,10 +3,6 @@
 {% block title %}{{ category.name }}
 {% endblock %}
 
-{% block header %}
-    {%  include 'partials/site-header.html.twig' %}
-{% endblock %}
-
 {% block body_id 'category' %}
 
 {% block body %}
@@ -16,7 +12,7 @@
                 <div class="o-grid o-grid--tiny">
                     {% for product in products %}
                         <div class="o-grid__item u-1/3@wide u-1/2@small-desktop" data-aos="fade-up" data-aos-delay="{{ ((loop.index - 1) % 3) * 100 }}">
-                            {% include 'partials/product/product-tile.html.twig' with {product} %}
+                            {% include 'product/product-tile.html.twig' with {product} %}
                         </div>
                     {% endfor %}
                 </div>

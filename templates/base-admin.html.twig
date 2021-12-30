@@ -20,34 +20,14 @@
     <body id="{% block body_id %}{% endblock %}" class="admin admin-dashboard">
 
         {% if is_granted('ROLE_ADMIN') %}
-            {%  include 'admin/partials/admin-bar.html.twig' %}
+            {%  include 'admin/admin-bar.html.twig' %}
         {% endif %}
 
         <div class="o-page">
+            {% include 'components/flashes.html.twig' %}
 
-            {% for message in app.flashes('success') %}
-                <div class="c-alert c-alert--success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            
-            {% for message in app.flashes('error') %}
-                <div class="c-alert c-alert--danger" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-
-            <div class="o-wrapper o-wrapper--full">
-                <div class="o-grid">
-                    <div class="o-grid__item u-1/4@desktop">
-                        {%  include 'admin/partials/sidebar.html.twig' %}
-                    </div>
-                    <div class="o-grid__item u-3/4@desktop">
-                        {% block body %}
-                        {% endblock %}
-                    </div>
-                </div>
-            </div>
+            {% block body %}
+            {% endblock %}
         </div>
 
         {% block javascripts %}

@@ -1,0 +1,15 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block body %}
+    <div class="o-wrapper o-wrapper--full">
+        <div class="o-grid">
+            <div class="o-grid__item u-1/4@desktop">
+                {%  include 'admin/sidebar.html.twig' %}
+            </div>
+            <div class="o-grid__item u-3/4@desktop">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

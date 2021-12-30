@@ -6,7 +6,7 @@
 
 {% block body %}
     <!--ALL SECTIONS HERE!-->
-    {% include 'partials/components/hero.html.twig' with {'slides': [
+    {% include 'components/hero.html.twig' with {'slides': [
         {
             banner: 'uploads/banner1.png', 
             title: 'The sale just arrived', 
@@ -23,6 +23,6 @@
         },
     ]} %}
 
-    {% include 'partials/components/product-list.html.twig' with { title: 'Newest products', products: [] }%}
-    {% include 'partials/components/product-slider.html.twig' with { title: 'Newest products', products: [] }%}
+    {% include 'components/product-list.html.twig' with { title: 'Newest products', products: [] }%}
+    {% include 'components/product-slider.html.twig' with { title: 'Newest products', products: [] }%}
 {% endblock %}
