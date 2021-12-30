@@ -37,13 +37,14 @@ class CategoryAdminController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $image = $form->get('image')->getData();
 
+                $entityManager->persist($category);
+                $entityManager->flush();
+
                 if( $image ) {
                     $imageFileName = $fileUploader->upload($image);
                     $category->setImage($imageFileName);
+                    $entityManager->flush();
                 }
-                
-                $entityManager->persist($category);
-                $entityManager->flush();
                 
                 $this->addFlash('success', $translator->trans("Category added"));
 
@@ -74,16 +75,17 @@ class CategoryAdminController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $image = $form->get('image')->getData();
 
+                $entityManager->persist($category);
+                $entityManager->flush();
+
                 if( $image ) {
                     if( $prevFeaturedImage ) {
                         $fileUploader->remove($prevFeaturedImage);
                     }
                     $imageFileName = $fileUploader->upload($image);
                     $category->setImage($imageFileName);
+                    $entityManager->flush();
                 }
-                
-                $entityManager->persist($category);
-                $entityManager->flush();
                 
                 $this->addFlash('success', $translator->trans("Category edited"));
 

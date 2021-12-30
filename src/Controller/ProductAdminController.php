@@ -39,6 +39,9 @@ class ProductAdminController extends AbstractController
                 $images = $form->get('images')->getData();
                 $featuredImage = $form->get('featuredImage')->getData();
     
+                $entityManager->persist($product);
+                $entityManager->flush();
+
                 if ( count($images) > 0 ) {
                     foreach( $images as $image ) {
                         $imageFileName = $fileUploader->upload($image);
@@ -46,15 +49,14 @@ class ProductAdminController extends AbstractController
                         $imageObj->setFilename($imageFileName);
                         $product->addImage($imageObj);
                     }
+                    $entityManager->flush();
                 }
     
                 if( $featuredImage ) {
                     $featuredImageFileName = $fileUploader->upload($featuredImage);
                     $product->setFeaturedImage($featuredImageFileName);
+                    $entityManager->flush();
                 }
-    
-                $entityManager->persist($product);
-                $entityManager->flush();
     
                 $this->addFlash('success', $translator->trans("Product added"));
     
@@ -87,6 +89,9 @@ class ProductAdminController extends AbstractController
                 $images = $form->get('images')->getData();
                 $featuredImage = $form->get('featuredImage')->getData();
     
+                $entityManager->persist($product);
+                $entityManager->flush();
+
                 if ( count($images) > 0 ) {
                     if( count($prevImages) > 0) {
                         foreach( $prevImages as $prevImage ) {
@@ -102,6 +107,7 @@ class ProductAdminController extends AbstractController
                         $imageObj->setFilename($imageFileName);
                         $product->addImage($imageObj);
                     }
+                    $entityManager->flush();
                 }
     
                 if( $featuredImage ) {
@@ -110,10 +116,8 @@ class ProductAdminController extends AbstractController
                     }
                     $featuredImageFileName = $fileUploader->upload($featuredImage);
                     $product->setFeaturedImage($featuredImageFileName);
+                    $entityManager->flush();
                 }
-    
-                $entityManager->persist($product);
-                $entityManager->flush();
     
                 $this->addFlash('success', $translator->trans("Product edited"));
     

@@ -37,13 +37,14 @@ class SupplierAdminController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $image = $form->get('image')->getData();
     
+                $entityManager->persist($supplier);
+                $entityManager->flush();
+
                 if( $image ) {
                     $imageFileName = $fileUploader->upload($image);
                     $supplier->setImage($imageFileName);
+                    $entityManager->flush();
                 }
-    
-                $entityManager->persist($supplier);
-                $entityManager->flush();
     
                 $this->addFlash('success', $translator->trans("Supplier added"));
     
@@ -74,16 +75,17 @@ class SupplierAdminController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $image = $form->get('image')->getData();
     
+                $entityManager->persist($supplier);
+                $entityManager->flush();
+
                 if( $image ) {
                     if( $prevFeaturedImage ) {
                         $fileUploader->remove($prevFeaturedImage);
                     }
                     $imageFileName = $fileUploader->upload($image);
                     $supplier->setImage($imageFileName);
+                    $entityManager->flush();
                 }
-    
-                $entityManager->persist($supplier);
-                $entityManager->flush();
                 
                 $this->addFlash('success', $translator->trans("Supplier edited"));
     
