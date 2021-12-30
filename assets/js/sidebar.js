@@ -1,5 +1,3 @@
-import { triggerEvent, isScrolledIntoView } from "./helpers";
-
 const el = {
     sidebar: document.querySelector('.js-sidebar')
 };

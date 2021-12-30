@@ -1,8 +1,8 @@
 <div class="c-product-tile">
     <div class="c-product-tile__ribbons">
-        {# {% if product.discountPrice %}
+        {% if product.discountPrice %}
             <span class="c-product-tile__ribbon">{% trans %}Sale{% endtrans %}</span>
-        {% endif %} #}
+        {% endif %}
     </div>
     <a href="{{ path('product', {id: product.id}) }}">
         <div class="c-product-tile__images">
@@ -20,17 +20,17 @@
         <div class="c-product-tile__category">{{ product.category }}</div>
     {% endif %}
     {% if product.name %}
-        <div class="c-product-tile__name">
+        <div class="c-product-tile__name" data-equalizer-watch="name">
             <a href="#">{{ product.name }}</a>
         </div>
     {% endif %}
     {% if product.price %}
-        <div class="c-product-tile__price-wrap">
-            {# <div class="c-product-tile__price{% if product.discountPrice %} has-discount {% endif %}">{{ product.price|format_currency('PLN', locale='pl') }}</div>
+        <div class="c-product-tile__price-wrap" data-equalizer-watch="price">
+            <div class="c-product-tile__price{% if product.discountPrice %} has-discount {% endif %}">{{ product.price|format_currency('PLN', locale='pl') }}</div>
 
             {% if product.discountPrice %}
                 <div class="c-product-tile__price c-product-tile__price--discount">{{ product.discountPrice|format_currency('PLN', locale='pl') }}</div>
-            {% endif %} #}
+            {% endif %}
         </div>
     {% endif %}
 </div>

@@ -12,12 +12,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-use App\Repository\ProductCategoryRepository;
+use App\Repository\CategoryRepository;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ProductCategoryRepository $productCategoryRepository, TranslatorInterface $translator): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryRepository $CategoryRepository, TranslatorInterface $translator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -41,7 +41,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/index.html.twig', [
             'form' => $form->createView(),
-            'categories' => $productCategoryRepository->findAll()
+            'categories' => $CategoryRepository->findAll()
         ]);
     }
 }

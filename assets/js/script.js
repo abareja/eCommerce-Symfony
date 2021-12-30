@@ -1,5 +1,6 @@
 import "slick-carousel";
 import "./import-jquery";
+import(/* webpackChunkName: "sidebar" */ "./sidebar");
 
 //LAZYLOAD
 const initLazyload = () => {
@@ -70,15 +71,6 @@ const initSliders = () => {
   });
 }
 initSliders();
-
-//ADMIN
-const initAdmin = () => {
-  if( !document.body.classList.contains('admin-dashboard') ) return;
-  import(/* webpackChunkName: "admin" */ "./admin").then((admin) => {
-    
-  });
-}
-initAdmin();
 
 //SELECT2
 const initSelect2 = async () => {
@@ -154,3 +146,40 @@ import(/* webpackChunkName: "fancybox" */ "@fancyapps/fancybox").then(() => {
     $.fancybox.defaults.animationEffect = "fade";
     $.fancybox.defaults.backFocus = false;
 });
+
+//EQUALIZER
+const initEqualizer = async () => {
+    const equalize = document.querySelectorAll('.js-equalize');
+
+    if( equalize.length !== 0 ) {
+        import(/* webpackChunkName: "equalizer" */ "./equalizer").then(() => {
+            setTimeout(() => { 
+                $(equalize).equalizer({use_tallest: true}); 
+            }, 500);
+        });
+    }
+}
+initEqualizer();
+
+//SCROLL TO TOP
+const initScrollTop = () => {
+    const button = document.querySelector(".js-to-top");
+    if(button) {
+        button.addEventListener("click", event => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+            });
+        });
+    
+        window.addEventListener("scroll", event => {
+            if(window.pageYOffset > 300){
+                button.classList.add('is-visible');
+            } else {
+                button.classList.remove('is-visible');
+            }
+        });
+    }
+};
+initScrollTop();

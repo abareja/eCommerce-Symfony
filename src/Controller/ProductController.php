@@ -7,16 +7,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Product;
-use App\Repository\ProductCategoryRepository;
+use App\Repository\CategoryRepository;
 
 class ProductController extends AbstractController
 {
     #[Route('/product/{id}', name: 'product')]
-    public function index(Product $product, ProductCategoryRepository $productCategoryRepository): Response
+    public function index(Product $product, CategoryRepository $CategoryRepository): Response
     {
         return $this->render('product/index.html.twig', [
             'product' => $product,
-            'categories' => $productCategoryRepository->findAll()
+            'categories' => $CategoryRepository->findAll()
         ]);
     }
 }

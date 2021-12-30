@@ -10,26 +10,26 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
-use App\Entity\ProductSupplier;
-use App\Form\ProductSupplierType;
-use App\Repository\ProductSupplierRepository;
+use App\Entity\Supplier;
+use App\Form\SupplierType;
+use App\Repository\SupplierRepository;
 use App\Service\SupplierFileUploader;
 
 class SupplierAdminController extends AbstractController
 {
     #[Route('/admin/suppliers', name: 'admin-suppliers')]
-    public function suppliers(ProductSupplierRepository $productSupplierRepository): Response
+    public function suppliers(SupplierRepository $SupplierRepository): Response
     {
         return $this->render('admin/supplier/list.html.twig', [
-            'suppliers' => $productSupplierRepository->findAll()
+            'suppliers' => $SupplierRepository->findAll()
         ]);
     }
 
     #[Route('/admin/suppliers/new', name: 'admin-new-supplier')]
     public function newSupplier(Request $request, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $supplier = new ProductSupplier();
-        $form = $this->createForm(ProductSupplierType::class, $supplier);
+        $supplier = new Supplier();
+        $form = $this->createForm(SupplierType::class, $supplier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,10 +57,10 @@ class SupplierAdminController extends AbstractController
     }
 
     #[Route('/admin/suppliers/edit/{id}', name: 'admin-edit-supplier')]
-    public function editSupplier(ProductSupplier $supplier, Request $request, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
+    public function editSupplier(Supplier $supplier, Request $request, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
         $prevFeaturedImage = $supplier->getImage();
-        $form = $this->createForm(ProductSupplierType::class, $supplier);
+        $form = $this->createForm(SupplierType::class, $supplier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,7 +91,7 @@ class SupplierAdminController extends AbstractController
     }
 
     #[Route('/admin/suppliers/delete/{id}', name: 'admin-delete-supplier')]
-    public function deleteSupplier(ProductSupplier $supplier, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
+    public function deleteSupplier(Supplier $supplier, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
         try {
             $image = $supplier->getImage();

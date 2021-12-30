@@ -84,6 +84,7 @@ initSearch();
         const parent = link.parentElement;
         if( parent.classList.contains('has-children')) {
             parent.addEventListener( "click", event => {
+                if( window.innerWidth >= 1200 ) return;
                 if( !parent.classList.contains('is-open') ) {
                     event.preventDefault();
                     event.stopImmediatePropagation();

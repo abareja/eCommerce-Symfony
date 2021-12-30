@@ -10,26 +10,26 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
-use App\Entity\ProductCategory;
-use App\Form\ProductCategoryType;
-use App\Repository\ProductCategoryRepository;
+use App\Entity\Category;
+use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
 use App\Service\CategoryFileUploader;
 
 class CategoryAdminController extends AbstractController
 {
     #[Route('/admin/categories', name: 'admin-categories')]
-    public function categories(ProductCategoryRepository $productCategoryRepository): Response
+    public function categories(CategoryRepository $CategoryRepository): Response
     {
         return $this->render('admin/category/list.html.twig', [
-            'categories' => $productCategoryRepository->findAll()
+            'categories' => $CategoryRepository->findAll()
         ]);
     }
 
     #[Route('/admin/categories/new', name: 'admin-new-category')]
     public function newCategory(Request $request, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $category = new ProductCategory();
-        $form = $this->createForm(ProductCategoryType::class, $category);
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,10 +57,10 @@ class CategoryAdminController extends AbstractController
     }
 
     #[Route('/admin/categories/edit/{id}', name: 'admin-edit-category')]
-    public function editCategory(ProductCategory $category, Request $request, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
+    public function editCategory(Category $category, Request $request, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
         $prevFeaturedImage = $category->getImage();
-        $form = $this->createForm(ProductCategoryType::class, $category);
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,7 +91,7 @@ class CategoryAdminController extends AbstractController
     }
 
     #[Route('/admin/categories/delete/{id}', name: 'admin-delete-category')]
-    public function deleteCategory(ProductCategory $category, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
+    public function deleteCategory(Category $category, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
         try {
             $image = $category->getImage();

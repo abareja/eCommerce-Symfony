@@ -6,15 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Repository\ProductCategoryRepository;
+use App\Repository\CategoryRepository;
 
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'profile')]
-    public function index(ProductCategoryRepository $productCategoryRepository): Response
+    public function index(CategoryRepository $CategoryRepository): Response
     {
         return $this->render('profile/index.html.twig', [
-            'categories' => $productCategoryRepository->findAll()
+            'categories' => $CategoryRepository->findAll()
         ]);
     }
 }

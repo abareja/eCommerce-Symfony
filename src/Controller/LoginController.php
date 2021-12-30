@@ -7,12 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-use App\Repository\ProductCategoryRepository;
+use App\Repository\CategoryRepository;
 
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function index(AuthenticationUtils $authenticationUtils, ProductCategoryRepository $productCategoryRepository): Response
+    public function index(AuthenticationUtils $authenticationUtils, CategoryRepository $CategoryRepository): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -21,7 +21,7 @@ class LoginController extends AbstractController
         return $this->render('login/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'categories' => $productCategoryRepository->findAll()
+            'categories' => $CategoryRepository->findAll()
         ]);
     }
 

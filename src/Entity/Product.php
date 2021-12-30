@@ -20,7 +20,7 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -35,13 +35,13 @@ class Product
     private $quantityInStock;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ProductCategory::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ProductSupplier::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Supplier::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $supplier;
@@ -113,24 +113,24 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?ProductCategory
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?ProductCategory $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
         return $this;
     }
 
-    public function getSupplier(): ?ProductSupplier
+    public function getSupplier(): ?Supplier
     {
         return $this->supplier;
     }
 
-    public function setSupplier(?ProductSupplier $supplier): self
+    public function setSupplier(?Supplier $supplier): self
     {
         $this->supplier = $supplier;
 

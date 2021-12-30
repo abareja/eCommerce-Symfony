@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Product;
-use App\Entity\ProductSupplier;
-use App\Entity\ProductCategory;
+use App\Entity\Supplier;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -43,11 +43,11 @@ class ProductType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'required' => true,
-                'class' => ProductCategory::class,
+                'class' => Category::class,
             ])
             ->add('supplier', EntityType::class, [
                 'required' => true,
-                'class' => ProductSupplier::class,
+                'class' => Supplier::class,
             ])
             ->add('description', TextareaType::class)
             ->add('featuredImage', FileType::class, [
