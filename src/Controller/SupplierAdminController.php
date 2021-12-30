@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 use App\Entity\Supplier;
 use App\Form\SupplierType;
@@ -28,24 +29,30 @@ class SupplierAdminController extends AbstractController
     #[Route('/admin/suppliers/new', name: 'admin-new-supplier')]
     public function newSupplier(Request $request, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $supplier = new Supplier();
-        $form = $this->createForm(SupplierType::class, $supplier);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
-
-            if( $image ) {
-                $imageFileName = $fileUploader->upload($image);
-                $supplier->setImage($imageFileName);
+        try {
+            $supplier = new Supplier();
+            $form = $this->createForm(SupplierType::class, $supplier);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $image = $form->get('image')->getData();
+    
+                if( $image ) {
+                    $imageFileName = $fileUploader->upload($image);
+                    $supplier->setImage($imageFileName);
+                }
+    
+                $entityManager->persist($supplier);
+                $entityManager->flush();
+    
+                $this->addFlash('success', $translator->trans("Supplier added"));
+    
+                return $this->redirectToRoute('admin-suppliers');
             }
+        } catch(UniqueConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("Supplier already exists!"));
 
-            $entityManager->persist($supplier);
-            $entityManager->flush();
-
-            $this->addFlash('success', $translator->trans("Supplier added"));
-
-            return $this->redirectToRoute('admin-suppliers');
+            return $this->redirectToRoute('admin-new-supplier');
         }
 
         return $this->render('admin/supplier/form.html.twig', [
@@ -59,29 +66,35 @@ class SupplierAdminController extends AbstractController
     #[Route('/admin/suppliers/edit/{id}', name: 'admin-edit-supplier')]
     public function editSupplier(Supplier $supplier, Request $request, EntityManagerInterface $entityManager, SupplierFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $prevFeaturedImage = $supplier->getImage();
-        $form = $this->createForm(SupplierType::class, $supplier);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
-
-            if( $image ) {
-                if( $prevFeaturedImage ) {
-                    $fileUploader->remove($prevFeaturedImage);
+        try {
+            $prevFeaturedImage = $supplier->getImage();
+            $form = $this->createForm(SupplierType::class, $supplier);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $image = $form->get('image')->getData();
+    
+                if( $image ) {
+                    if( $prevFeaturedImage ) {
+                        $fileUploader->remove($prevFeaturedImage);
+                    }
+                    $imageFileName = $fileUploader->upload($image);
+                    $supplier->setImage($imageFileName);
                 }
-                $imageFileName = $fileUploader->upload($image);
-                $supplier->setImage($imageFileName);
+    
+                $entityManager->persist($supplier);
+                $entityManager->flush();
+                
+                $this->addFlash('success', $translator->trans("Supplier edited"));
+    
+                return $this->redirectToRoute('admin-suppliers');
             }
+        } catch(UniqueConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("Supplier already exists!"));
 
-            $entityManager->persist($supplier);
-            $entityManager->flush();
-            
-            $this->addFlash('success', $translator->trans("Supplier edited"));
-
-            return $this->redirectToRoute('admin-suppliers');
+            return $this->redirectToRoute('admin-edit-supplier', ['id' => $supplier->getId()]);
         }
-
+        
         return $this->render('admin/supplier/form.html.twig', [
             'form' => $form->createView(),
             'supplier' => $supplier,

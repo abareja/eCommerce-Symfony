@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -28,26 +29,32 @@ class CategoryAdminController extends AbstractController
     #[Route('/admin/categories/new', name: 'admin-new-category')]
     public function newCategory(Request $request, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
+        try {
+            $category = new Category();
+            $form = $this->createForm(CategoryType::class, $category);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $image = $form->get('image')->getData();
 
-            if( $image ) {
-                $imageFileName = $fileUploader->upload($image);
-                $category->setImage($imageFileName);
+                if( $image ) {
+                    $imageFileName = $fileUploader->upload($image);
+                    $category->setImage($imageFileName);
+                }
+                
+                $entityManager->persist($category);
+                $entityManager->flush();
+                
+                $this->addFlash('success', $translator->trans("Category added"));
+
+                return $this->redirectToRoute('admin-categories');
             }
-            
-            $entityManager->persist($category);
-            $entityManager->flush();
-            
-            $this->addFlash('success', $translator->trans("Category added"));
+        } catch(UniqueConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("Category already exists!"));
 
-            return $this->redirectToRoute('admin-categories');
+            return $this->redirectToRoute('admin-new-category');
         }
-
+        
         return $this->render('admin/category/form.html.twig', [
             'form' => $form->createView(),
             'category' => null,
@@ -59,29 +66,35 @@ class CategoryAdminController extends AbstractController
     #[Route('/admin/categories/edit/{id}', name: 'admin-edit-category')]
     public function editCategory(Category $category, Request $request, EntityManagerInterface $entityManager, CategoryFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $prevFeaturedImage = $category->getImage();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
+        try {
+            $prevFeaturedImage = $category->getImage();
+            $form = $this->createForm(CategoryType::class, $category);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $image = $form->get('image')->getData();
 
-            if( $image ) {
-                if( $prevFeaturedImage ) {
-                    $fileUploader->remove($prevFeaturedImage);
+                if( $image ) {
+                    if( $prevFeaturedImage ) {
+                        $fileUploader->remove($prevFeaturedImage);
+                    }
+                    $imageFileName = $fileUploader->upload($image);
+                    $category->setImage($imageFileName);
                 }
-                $imageFileName = $fileUploader->upload($image);
-                $category->setImage($imageFileName);
+                
+                $entityManager->persist($category);
+                $entityManager->flush();
+                
+                $this->addFlash('success', $translator->trans("Category edited"));
+
+                return $this->redirectToRoute('admin-categories');
             }
-            
-            $entityManager->persist($category);
-            $entityManager->flush();
-            
-            $this->addFlash('success', $translator->trans("Category edited"));
+        } catch(UniqueConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("Category already exists!"));
 
-            return $this->redirectToRoute('admin-categories');
+            return $this->redirectToRoute('admin-edit-category', ['id' => $category->getId()]);
         }
-
+        
         return $this->render('admin/category/form.html.twig', [
             'form' => $form->createView(),
             'category' => $category,

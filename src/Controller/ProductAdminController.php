@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 use App\Entity\Product;
 use App\Entity\Image;
@@ -29,34 +30,40 @@ class ProductAdminController extends AbstractController
     #[Route('/admin/products/new', name: 'admin-new-product')]
     public function newProduct(Request $request, EntityManagerInterface $entityManager, ProductFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $images = $form->get('images')->getData();
-            $featuredImage = $form->get('featuredImage')->getData();
-
-            if ( count($images) > 0 ) {
-                foreach( $images as $image ) {
-                    $imageFileName = $fileUploader->upload($image);
-                    $imageObj = new Image();
-                    $imageObj->setFilename($imageFileName);
-                    $product->addImage($imageObj);
+        try {
+            $product = new Product();
+            $form = $this->createForm(ProductType::class, $product);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $images = $form->get('images')->getData();
+                $featuredImage = $form->get('featuredImage')->getData();
+    
+                if ( count($images) > 0 ) {
+                    foreach( $images as $image ) {
+                        $imageFileName = $fileUploader->upload($image);
+                        $imageObj = new Image();
+                        $imageObj->setFilename($imageFileName);
+                        $product->addImage($imageObj);
+                    }
                 }
+    
+                if( $featuredImage ) {
+                    $featuredImageFileName = $fileUploader->upload($featuredImage);
+                    $product->setFeaturedImage($featuredImageFileName);
+                }
+    
+                $entityManager->persist($product);
+                $entityManager->flush();
+    
+                $this->addFlash('success', $translator->trans("Product added"));
+    
+                return $this->redirectToRoute('admin-products');
             }
-
-            if( $featuredImage ) {
-                $featuredImageFileName = $fileUploader->upload($featuredImage);
-                $product->setFeaturedImage($featuredImageFileName);
-            }
-
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            $this->addFlash('success', $translator->trans("Product added"));
-
-            return $this->redirectToRoute('admin-products');
+        } catch(UniqueConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("Product already exists!"));
+    
+            return $this->redirectToRoute('admin-new-product');
         }
 
         return $this->render('admin/product/form.html.twig', [
@@ -70,48 +77,54 @@ class ProductAdminController extends AbstractController
     #[Route('/admin/products/edit/{id}', name: 'admin-edit-product')]
     public function editProduct(Product $product, Request $request, EntityManagerInterface $entityManager, ProductFileUploader $fileUploader, TranslatorInterface $translator): Response
     {
-        $prevFeaturedImage = $product->getFeaturedImage();
-        $prevImages = $product->getImages();
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $images = $form->get('images')->getData();
-            $featuredImage = $form->get('featuredImage')->getData();
-
-            if ( count($images) > 0 ) {
-                if( count($prevImages) > 0) {
-                    foreach( $prevImages as $prevImage ) {
-                        $fileUploader->remove($prevImage);
-                        $entityManager->remove($prevImage);
-                        $entityManager->flush();
+        try {
+            $prevFeaturedImage = $product->getFeaturedImage();
+            $prevImages = $product->getImages();
+            $form = $this->createForm(ProductType::class, $product);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $images = $form->get('images')->getData();
+                $featuredImage = $form->get('featuredImage')->getData();
+    
+                if ( count($images) > 0 ) {
+                    if( count($prevImages) > 0) {
+                        foreach( $prevImages as $prevImage ) {
+                            $fileUploader->remove($prevImage);
+                            $entityManager->remove($prevImage);
+                            $entityManager->flush();
+                        }
+                    }
+    
+                    foreach( $images as $image ) {
+                        $imageFileName = $fileUploader->upload($image);
+                        $imageObj = new Image();
+                        $imageObj->setFilename($imageFileName);
+                        $product->addImage($imageObj);
                     }
                 }
-
-                foreach( $images as $image ) {
-                    $imageFileName = $fileUploader->upload($image);
-                    $imageObj = new Image();
-                    $imageObj->setFilename($imageFileName);
-                    $product->addImage($imageObj);
+    
+                if( $featuredImage ) {
+                    if( $prevFeaturedImage ) {
+                        $fileUploader->remove($prevFeaturedImage);
+                    }
+                    $featuredImageFileName = $fileUploader->upload($featuredImage);
+                    $product->setFeaturedImage($featuredImageFileName);
                 }
+    
+                $entityManager->persist($product);
+                $entityManager->flush();
+    
+                $this->addFlash('success', $translator->trans("Product edited"));
+    
+                return $this->redirectToRoute('admin-products');
             }
-
-            if( $featuredImage ) {
-                if( $prevFeaturedImage ) {
-                    $fileUploader->remove($prevFeaturedImage);
-                }
-                $featuredImageFileName = $fileUploader->upload($featuredImage);
-                $product->setFeaturedImage($featuredImageFileName);
-            }
-
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            $this->addFlash('success', $translator->trans("Product edited"));
-
-            return $this->redirectToRoute('admin-products');
+        } catch(UniqueConstraintViolationException $e) {
+            $this->addFlash('error', $translator->trans("Product already exists!"));
+    
+            return $this->redirectToRoute('admin-edit-product', ['id' => $product->getId()]);
         }
-
+        
         return $this->render('admin/product/form.html.twig', [
             'form' => $form->createView(),
             'product' => $product,
