@@ -5,7 +5,7 @@
         {% endif %}
     </div>
     <a href="{{ path('product', {id: product.id}) }}">
-        <div class="c-product-tile__images">
+        <div class="c-product-tile__images" data-aos="fade-in" data-aos-delay="100">
             {% if product.featuredImagePath() %}
                 <div class="c-product-tile__image c-product-tile__image--1 js-lazyload" data-bg="{{ asset(product.featuredImagePath()) }}"></div>
             {% endif %}
@@ -17,20 +17,16 @@
         </div>
     </a>
     {% if product.category %}
-        <div class="c-product-tile__category">{{ product.category }}</div>
+        <div class="c-product-tile__category"><a href="{{ path('category', {id: product.category.id}) }}">{{ product.category }}</a></div>
     {% endif %}
     {% if product.name %}
         <div class="c-product-tile__name" data-equalizer-watch="name">
-            <a href="#">{{ product.name }}</a>
+            <a href="{{ path('product', {id: product.id}) }}">{{ product.name }}</a>
         </div>
     {% endif %}
     {% if product.price %}
-        <div class="c-product-tile__price-wrap" data-equalizer-watch="price">
-            <div class="c-product-tile__price{% if product.discountPrice %} has-discount {% endif %}">{{ product.price|format_currency('PLN', locale='pl') }}</div>
-
-            {% if product.discountPrice %}
-                <div class="c-product-tile__price c-product-tile__price--discount">{{ product.discountPrice|format_currency('PLN', locale='pl') }}</div>
-            {% endif %}
+        <div class="c-product-tile__price u-text-right" data-equalizer-watch="price">
+            {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}
         </div>
     {% endif %}
 </div>

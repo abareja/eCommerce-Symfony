@@ -28,6 +28,9 @@
 @import "objects/objects.title";
 @import "objects/objects.file";
 @import "objects/objects.table";
+@import "objects/objects.price";
+@import "objects/objects.quantity";
+@import "objects/objects.zoom";
 
 // COMPONENTS
 @import "components/components.main-nav";
@@ -40,8 +43,13 @@
 @import "components/components.product-slider";
 @import "components/components.site-footer";
 @import "components/components.submenu";
-
 @import "components/components.admin-bar";
+@import "components/components.sidebar";
+@import "components/components.sidebar-nav";
+@import "components/components.admin-page";
+@import "components/components.filters";
+@import "components/components.product";
+@import "components/components.profile";
 
 //NODE MODULES
 @import '~aos/src/sass/aos.scss';
@@ -71,9 +79,5 @@
 @import "trumps/trumps.aos";
 @import "trumps/trumps.fancybox";
 
-//ADMIN
-@import "admin/components.sidebar";
-@import "admin/components.sidebar-nav";
-@import "admin/components.admin-page";
 
 

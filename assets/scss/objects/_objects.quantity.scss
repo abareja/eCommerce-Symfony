@@ -1,0 +1,64 @@
+.o-quantity {
+    display: inline-flex;
+    background: #fff;
+    &__more,
+    &__less,
+    &__input-wrap,
+    &__input,
+    &__unit {
+        float: left;
+    }
+
+    &__input {
+        border: 0;
+        border-top: 1px solid theme-color(light-200);
+        border-bottom: 1px solid theme-color(light-200);
+        text-align: center;
+        width: 58px;
+        //font-weight: bold;
+        height: 58px;
+        color: $text-color;
+    }
+
+    &__more, &__less {
+        border: 1px solid theme-color(light-200);
+
+        &:hover {
+            background-color: theme-color(light-200);
+        }
+    }
+
+    &__unit {
+        line-height: 58px;
+        padding-right: 10px;
+    }
+
+    &__input-wrap {
+        height: 58px;
+        background: transparent;
+    }
+
+    &__more,
+    &__less {
+        height: 58px;
+        width: 58px;
+        background: transparent;
+        color: $text-color;
+        line-height: 58px;
+        text-align: center;
+        font-size: 24px;
+        //font-weight: bold;    
+        cursor: hand;
+        cursor: pointer; 
+        -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+        -moz-user-select: none; /* mozilla browsers */
+        -khtml-user-select: none; /* webkit (konqueror) browsers */
+        -ms-user-select: none; /* IE10+ */     
+        //border: 1px solid darken(theme-color(primary), 30%);;  
+        margin-bottom: 0px;  
+    }
+
+    &__less {
+        line-height: 58px;
+    }
+}

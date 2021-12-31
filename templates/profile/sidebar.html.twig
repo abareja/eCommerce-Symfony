@@ -2,49 +2,22 @@
     <div class="c-sidebar-nav">
         <ul class="c-sidebar-nav__list c-sidebar-nav__list--root">
             <li class="c-sidebar-nav__item">
-                <a href="{{ path('admin') }}" class="c-sidebar-nav__link">{% trans %}Dashboard{% endtrans %}</a>
+                <a href="{{ path('profile') }}" class="c-sidebar-nav__link">{% trans %}My account{% endtrans %}</a>
             </li>
             <li class="c-sidebar-nav__item">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Orders{% endtrans %}</a>
-            </li>
-            <li class="c-sidebar-nav__item has-children">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Products{% endtrans %}</a>
-
-                <ul class="c-sidebar-nav__list c-sidebar-nav__list--level-1">
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-products') }}" class="c-sidebar-nav__link">{% trans %}All products{% endtrans %}</a>
-                    </li>
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-new-product') }}" class="c-sidebar-nav__link">{% trans %}Add product{% endtrans %}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="c-sidebar-nav__item has-children">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Categories{% endtrans %}</a>
-
-                <ul class="c-sidebar-nav__list c-sidebar-nav__list--level-1">
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-categories') }}" class="c-sidebar-nav__link">{% trans %}All categories{% endtrans %}</a>
-                    </li>
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-new-category') }}" class="c-sidebar-nav__link">{% trans %}Add category{% endtrans %}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="c-sidebar-nav__item has-children">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Suppliers{% endtrans %}</a>
-
-                <ul class="c-sidebar-nav__list c-sidebar-nav__list--level-1">
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-suppliers') }}" class="c-sidebar-nav__link">{% trans %}All suppliers{% endtrans %}</a>
-                    </li>
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-new-supplier') }}" class="c-sidebar-nav__link">{% trans %}Add supplier{% endtrans %}</a>
-                    </li>
-                </ul>
+                <a href="{{ path('profile-edit-user') }}" class="c-sidebar-nav__link">{% trans %}Contact data{% endtrans %}</a>
             </li>
             <li class="c-sidebar-nav__item">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Users{% endtrans %}</a>
+                <a href="{{ path('profile-edit-user-additional') }}" class="c-sidebar-nav__link">{% trans %}Additional info{% endtrans %}</a>
+            </li>
+            <li class="c-sidebar-nav__item">
+                <a href="{{ path('profile-edit-user-password') }}" class="c-sidebar-nav__link">{% trans %}Change password{% endtrans %}</a>
+            </li>
+            <li class="c-sidebar-nav__item">
+                <a href="{{ path('profile') }}" class="c-sidebar-nav__link">{% trans %}Orders{% endtrans %}</a>
+            </li>
+            <li class="c-sidebar-nav__item">
+                <a href="{{ path('logout') }}" class="c-sidebar-nav__link">{% trans %}Logout{% endtrans %}</a>
             </li>
         </ul>
     </div>

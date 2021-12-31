@@ -38,7 +38,7 @@
         <div class="c-product-slider__wrap js-slider" data-slick-settings="{{ settings|json_encode()|escape() }}">
             {% for product in products %}
                 <div class="c-product-slider__entry" data-aos="fade-up">
-                    {% include 'partials/product/product-tile.html.twig' with product %}
+                    {% include 'product/product-tile.html.twig' with {product} %}
                 </div>
             {% endfor %}
         </div>

@@ -78,4 +78,38 @@ Registered successfully!: Registered successfully!
 Supplier already exists!: Supplier already exists!
 Category already exists!: Category already exists!
 Product already exists!: Product already exists!
-
+Discount price: Discount price
+Filters: Filters
+From: From
+To: To
+Apply: Apply
+Add to cart: Add to cart
+Scroll to full specification: Scroll to full specification
+Newest products: Newest products
+Profile data: Profile data
+Firstname and lastname: Firstname and lastname
+E-mail address: E-mail address
+Edit: Edit
+Address: Address
+Phone: Phone
+Contact data: Contact data
+Additional info: Additional info
+Not added: Not added
+Edit contact data: Edit contact data
+Save: Save
+Contact data changed!: Contact data changed!
+Firstname: Firstname
+Lastname: Lastname
+Please enter a valid firstname!: Please enter a valid firstname!
+Please enter a valid lastname!: Please enter a valid lastname!
+Please enter a valid e-mail!: Please enter a valid e-mail!
+Edit additional data: Edit additional data
+Please enter a valid phone!: Please enter a valid phone!
+Additional data changed!: Additional data changed!
+Change password: Change password
+Old password: Old password
+New password: New password
+User password changed!: User password changed!
+Please enter a valid password!: Please enter a valid password!
+Old password is not correct!: Old password is not correct!
+User with this e-mail address already exists!: User with this e-mail address already exists!

@@ -39,17 +39,30 @@
                         </div>
                     </div>
                     <div class="o-grid__item u-1/2@small-desktop">
-                        <div class="o-field{% if form_errors(form.quantityInStock) %} is-invalid{% endif %}" 
-                            data-validation="integer" data-validation-min="-1" data-validation-max="10"
+                        <div class="o-field{% if form_errors(form.discountPrice) %} is-invalid{% endif %}" 
                             data-aos="fade-up"
                             data-aos-delay="50">
-                            <label class="o-input__label" for="{{ form.quantityInStock.vars.id }}">{% trans %}Quantity{% endtrans %}</label>
-                            {{ form_widget(form.quantityInStock, {
-                                'attr': {'class': 'o-input'}
-                            }) }}
-                            <div class="o-field__error">{% trans %}Please enter a valid quantity!{% endtrans %}</div>
+                            <label class="o-input__label" for="{{ form.discountPrice.vars.id }}">{% trans %}Discount price{% endtrans %}</label>
+                            <div class="o-input__wrap">
+                                {{ form_widget(form.discountPrice, {
+                                    'attr': {'class': 'o-input'}
+                                }) }}
+                                <span class="o-input__suffix">zł</span>
+                            </div>
+                            <div class="o-field__error">{% trans %}Please enter a valid price!{% endtrans %}</div>
                         </div>
                     </div>
+                </div>
+
+                <div class="o-field{% if form_errors(form.quantityInStock) %} is-invalid{% endif %}" 
+                    data-validation="integer" data-validation-min="-1" data-validation-max="10"
+                    data-aos="fade-up"
+                    data-aos-delay="50">
+                    <label class="o-input__label" for="{{ form.quantityInStock.vars.id }}">{% trans %}Quantity{% endtrans %}</label>
+                    {{ form_widget(form.quantityInStock, {
+                        'attr': {'class': 'o-input'}
+                    }) }}
+                    <div class="o-field__error">{% trans %}Please enter a valid quantity!{% endtrans %}</div>
                 </div>
 
                 <div class="o-grid o-grid--small">

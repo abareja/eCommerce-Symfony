@@ -65,7 +65,7 @@ initSearch();
         const doc = document.documentElement;
         window.addEventListener("scroll", () => {
             const scroll = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
-            if( scroll > 90 ) {
+            if( scroll > 10 ) {
                 header.classList.add('is-sticky');
             } else {
                 header.classList.remove('is-sticky');

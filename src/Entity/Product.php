@@ -66,6 +66,16 @@ class Product
      */
     private $featuredImage;
 
+    /**
+     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
+     */
+    private $discountPrice;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateAdded;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -222,6 +232,30 @@ class Product
     public function setFeaturedImage(string $featuredImage): self
     {
         $this->featuredImage = $featuredImage;
+
+        return $this;
+    }
+
+    public function getDiscountPrice(): ?string
+    {
+        return $this->discountPrice;
+    }
+
+    public function setDiscountPrice(?string $discountPrice): self
+    {
+        $this->discountPrice = $discountPrice;
+
+        return $this;
+    }
+
+    public function getDateAdded(): ?\DateTimeInterface
+    {
+        return $this->dateAdded;
+    }
+
+    public function setDateAdded(\DateTimeInterface $dateAdded): self
+    {
+        $this->dateAdded = $dateAdded;
 
         return $this;
     }

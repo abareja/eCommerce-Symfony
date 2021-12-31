@@ -34,6 +34,10 @@ class ProductType extends AbstractType
                 'required' => true,
                 'currency' => ''
             ])
+            ->add('discountPrice', MoneyType::class, [
+                'required' => false,
+                'currency' => ''
+            ])
             ->add('quantityInStock', IntegerType::class, [
                 'required' => true,
                 'constraints' => [

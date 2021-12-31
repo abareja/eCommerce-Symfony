@@ -20,8 +20,8 @@ $buttonStyles: (
         color: theme-color(primary),
         border: 1px solid theme-color(light-200),
         bg-after: theme-color(transparent),
-        color-after: #fff,
-        border-after: 1px solid lighten(theme-color(light-200), 5%)
+        color-after: theme-color(primary),
+        border-after: 1px solid theme-color(primary),
     ),
     outline-white: (
         bg: transparent,

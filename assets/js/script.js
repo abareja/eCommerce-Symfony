@@ -183,3 +183,25 @@ const initScrollTop = () => {
     }
 };
 initScrollTop();
+
+//ZOOM
+const initZoom = () => {
+    import(/* webpackChunkName: "zoom" */ "./zoom").then((script) => {
+        const zoom = document.querySelectorAll('.js-zoom');
+    
+        if( zoom.length === 0 ) return;
+    
+        zoom.forEach(el => {
+            script.initZoom(el);
+        });
+    });
+}
+initZoom();
+
+//PRODUCT GALLERY
+const initProductGallery = () => {
+    import(/* webpackChunkName: "productGallery" */ "./productGallery").then((script) => {
+        script.init();
+    });
+}
+initProductGallery();

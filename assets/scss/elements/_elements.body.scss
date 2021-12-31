@@ -14,4 +14,12 @@ body {
     &.admin {
         padding-top: $admin-bar-height;
     }
+
+    &.header-padding {
+        padding-top: $header-height;
+    }
+
+    &.admin.header-padding {
+        padding-top: calc(#{$header-height} + #{$admin-bar-height});
+    }
 }

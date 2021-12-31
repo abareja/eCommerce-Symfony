@@ -1,0 +1,67 @@
+.c-product {
+    &__supplier {
+        color: theme-color(light-250);
+        @include font-size(14px, 1.3);
+        margin-bottom: $spacing-tiny;
+
+        a, a:hover, a:focus {
+            color: theme-color(light-250);
+        }
+    }
+
+    &__name {
+        @include font-size(24px, 1.3);
+        margin-bottom: $spacing;
+    }
+
+    &__price {
+        text-align: right;
+        margin-bottom: $spacing-small;
+        
+        & .o-price {
+            @include font-size(22px);
+            font-weight: bold;
+
+            &.has-discount {
+                @include font-size(16px);
+                font-weight: normal;
+            }
+        }
+    }
+
+    &__featured {
+        height: 500px;
+        border-bottom: 1px solid theme-color(light-200);
+        margin-bottom: $spacing-tiny;
+        padding: $spacing-small;
+        text-align: center;
+    }
+
+    &__image {
+        text-align: center;
+        margin-bottom: $spacing-tiny;
+        border: 1px solid theme-color(light-200);
+        padding: $spacing-tiny;
+
+        &.is-active {
+            border-color: #000;
+        }
+    }
+
+    &__featured img, &__image img {
+        max-height: calc(500px - #{$spacing-small});
+        max-width: calc(100% - #{$spacing-small});
+        height: auto;
+        width: auto;
+    }
+
+    &__attributes {
+        margin-bottom: $spacing-small;
+    }
+
+    &__attributes-link {
+        display: inline-block;
+        margin-top: $spacing-small;
+        font-weight: 700;
+    }
+}

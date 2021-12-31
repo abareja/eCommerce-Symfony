@@ -5,10 +5,101 @@
 
 {% block body_id 'product' %}
 
+{% set attributes = [
+    {
+        name: 'Procesor',
+        value: 'Apple M1'
+    },
+    {
+        name: 'Pamięć',
+        value: '8 GB'
+    },
+    {
+        name: 'Grafika',
+        value: 'Apple M1'
+    },
+    {
+        name: 'Typ ekranu',
+        value: 'Błyszczący, LED, IPS, Retina'
+    }
+] %}
+
 {% block body %}
 	<section class="c-product u-padding-vertical-huge">
         <div class="o-wrapper">
-            {{ product.name }}
+            <div class="o-grid o-grid--small">
+                <div class="o-grid__item u-1/2@desktop">
+                    <div class="c-product__gallery js-product-gallery" data-aos="fade-up">
+                        {% if product.featuredImagePath() %}
+                            <div class="c-product__featured o-zoom js-zoom js-product-gallery-featured">
+                                <a href="{{ asset(product.featuredImagePath()) }}" data-fancybox="product-gallery">
+                                    <img src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if product.images()|length > 0 %}
+                            <div class="c-product__images" data-aos="fade-up">
+                                <div class="o-grid o-grid--tiny">
+                                    {% if product.featuredImagePath() %}
+                                        <div class="o-grid__item u-1/4">
+                                            <div class="c-product__image js-product-gallery-image is-active">
+                                                <a href="#" data-fancybox-trigger="product-gallery">
+                                                    <img src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% for image in product.images() %}
+                                        <div class="o-grid__item u-1/4" data-aos="fade-up" data-aos-delay="{{ (loop.index % 4) * 100 }}">
+                                            <div class="c-product__image js-product-gallery-image">
+                                                <a href="{{ asset(image.path()) }}" data-fancybox="product-gallery">
+                                                    <img src="{{ asset(image.path()) }}" class="js-lazyload" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="o-grid__item u-1/2@desktop">
+                    <div class="c-product__supplier" data-aos="fade-up" data-aos-delay="100"><a href="#">{{ product.supplier }}</a></div>
+                    <h1 class="c-product__name" data-aos="fade-up">{{ product.name }}</h1>
+                    {% if attributes|length > 0 %}
+                        <div class="c-product__attributes o-table">
+                            {% for attribute in attributes %}
+                                <div class="c-product__attribute o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                    <div class="c-product__attribute-name o-table__cell">{{ attribute.name }}</div>
+                                    <div class="c-product__attribute-value o-table__cell">{{ attribute.value }}</div>
+                                </div>
+                            {% endfor %}
+                            <a class="c-product__attributes-link" href="#product-spec" data-aos="fade-up" data-aos-delay="50">{% trans %}Scroll to full specification{% endtrans %}<span class="u-margin-left-tiny o-icon o-icon--chevron-down"></span></a>
+                        </div>
+                    {% endif %}
+                    <div class="c-product__excerpt" data-aos="fade-up" data-aos-delay="100">{{ product.description }}</div>
+                    <div class="c-product__price" data-aos="fade-up" data-aos-delay="200">
+                        {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}
+                    </div>
+                    <div class="o-flex" data-aos="fade-up" data-aos-delay="300">
+                        <div class="o-quantity js-quantity">
+                            <span class="o-quantity__less js-quantity-less">-</span>
+                            <input type="text" class="o-quantity__input js-quantity-input" value="1" />
+                            <span class="o-quantity__more js-quantity-more">+</span>
+                        </div>
+                        <button type="submit" class="o-button o-button--primary o-button--full">
+                            {% trans %}Add to cart{% endtrans %}
+                            <span class="o-icon o-icon--chevron-right"></span>
+                        </button> 
+                    </div>
+                </div>
+            </div>
+
+            <hr class="u-margin-vertical-small" />
+
+            <div class="c-product__container">
+
+            </div>
         </div>
     </section>
 {% endblock %}

@@ -29,7 +29,9 @@
                             <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-edit-product', {id: product.id}) }}">{{ product.name }}</a></div>
                             <div class="o-table__cell o-table__cell--category"><a href="{{ path('admin-edit-category', {id: product.category.id}) }}">{{ product.category }}</a></div>
                             <div class="o-table__cell o-table__cell--supplier"><a href="{{ path('admin-edit-supplier', {id: product.supplier.id}) }}">{{ product.supplier }}</a></div>                            
-                            <div class="o-table__cell o-table__cell--price">{{ product.price|format_currency('PLN', locale='pl') }}</div>
+                            <div class="o-table__cell o-table__cell--price">
+                                {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}
+                            </div>
                             <div class="o-table__cell o-table__cell--quantity">{{ product.quantityInStock }}</div>
                         </div>
                     {% endfor %}

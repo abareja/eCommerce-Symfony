@@ -1,0 +1,7 @@
+<div class="o-price__wrap">
+    <div class="o-price{% if discountPrice %} has-discount {% endif %}">{{ price|format_currency('PLN', locale='pl') }}</div>
+    
+    {% if discountPrice %}
+        <div class="o-price o-price--discount">{{ discountPrice|format_currency('PLN', locale='pl') }}</div>
+    {% endif %}
+</div>

@@ -53,6 +53,7 @@ const validateInputField = (field, input) => {
     const emailReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     const priceReg = /^\d+(?:[.,]\d{0,2})$/;
+    const phoneReg = /^\(?([0-9]{3})\)?[ ]?([0-9]{3})[ ]?([0-9]{3})$/
 
     if( !validationType ) return;
 
@@ -80,6 +81,9 @@ const validateInputField = (field, input) => {
             break;
         case "price":
             if( value.match(priceReg) ) valid = true; else valid = false;
+            break;
+        case "phone":
+            if( value.match(phoneReg) ) valid = true; else valid = false;
             break;
     }
 

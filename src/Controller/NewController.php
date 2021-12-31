@@ -5,17 +5,17 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 
-class CategoryController extends AbstractController
+class NewController extends AbstractController
 {
-    #[Route('/category/{id}', name: 'category')]
-    public function index(Category $category, CategoryRepository $CategoryRepository, ProductRepository $productRepository): Response
+    #[Route('/new', name: 'new')]
+    public function index(CategoryRepository $CategoryRepository, ProductRepository $productRepository, TranslatorInterface $translator): Response
     {
-        $products = $productRepository->findBy(['category' => $category]);
+        $products = $productRepository->findBy([], ['dateAdded' => 'DESC'], 10);
         $suppliers = [];
 
         foreach( $products as $product ) {
@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
         }
 
         return $this->render('shop/index.html.twig', [
-            'title' => $category->getName(),
+            'title' => $translator->trans('Newest products'),
             'categories' => $CategoryRepository->findAll(),
             'products' => $products,
             'suppliers' => $suppliers

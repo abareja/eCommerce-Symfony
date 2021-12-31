@@ -7,9 +7,10 @@
     animation: alert-show 8s; 
     animation-delay: .5s;
     animation-fill-mode: forwards;
+    z-index: 100;
 
     border: 1px solid theme-color(light-200);
-    background: #fff;
+    background-color: #fff;
     padding: $spacing-small;
     padding-right: $spacing-large;
     background-position: 96% 50%;

@@ -38,7 +38,8 @@ class ProductAdminController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $images = $form->get('images')->getData();
                 $featuredImage = $form->get('featuredImage')->getData();
-    
+
+                $product->setDateAdded(new \Datetime());
                 $entityManager->persist($product);
                 $entityManager->flush();
 

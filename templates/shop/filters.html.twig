@@ -1,0 +1,52 @@
+<div class="c-filters" data-aos="fade-up">
+    <h2 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Filters{% endtrans %}</h2>
+    <div class="c-filters__wrap">
+        <div class="c-filters__group">
+            <h3 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{% trans %}Suppliers{% endtrans %}</h3>
+            {% for supplier in suppliers %}
+                <div class="o-field" data-aos="fade-up" data-aos-delay="100">
+                    <div class="o-checkbox">
+                        <input  type="checkbox" id="{{ supplier.name }}" name="{{ supplier.name }}" />
+                        <label for="{{ supplier.name }}">{{ supplier.name }}</label>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="c-filters__group">
+            <h3 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{% trans %}Price{% endtrans %}</h3>
+            <div class="o-grid o-grid--tiny">
+                <div class="o-grid__item u-1/2">
+                    <div class="o-field" 
+                        data-validation="price"
+                        data-aos="fade-up"
+                        data-aos-delay="50">
+                        <label class="o-input__label" for="">{% trans %}From{% endtrans %}</label>
+                        <div class="o-input__wrap">
+                            <input type="text" class="o-input" />
+                            <span class="o-input__suffix">zł</span>
+                        </div>
+                        <div class="o-field__error">{% trans %}Please enter a valid price!{% endtrans %}</div>
+                    </div>
+                </div>
+                <div class="o-grid__item u-1/2">
+                    <div class="o-field" 
+                        data-validation="price"
+                        data-aos="fade-up"
+                        data-aos-delay="50">
+                        <label class="o-input__label" for="">{% trans %}To{% endtrans %}</label>
+                        <div class="o-input__wrap">
+                            <input type="text" class="o-input" />
+                            <span class="o-input__suffix">zł</span>
+                        </div>
+                        <div class="o-field__error">{% trans %}Please enter a valid price!{% endtrans %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
+            {% trans %}Apply{% endtrans %}
+            <span class="o-icon o-icon--chevron-right"></span>
+        </button>    
+    </div>
+</div>

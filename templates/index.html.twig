@@ -23,6 +23,9 @@
         },
     ]} %}
 
-    {% include 'components/product-list.html.twig' with { title: 'Newest products', products: [] }%}
+    {% if newProducts|length > 0 %}
+        {% include 'components/product-list.html.twig' with { title: newProductsTitle, products: newProducts }%}
+    {% endif %}
+
     {% include 'components/product-slider.html.twig' with { title: 'Newest products', products: [] }%}
 {% endblock %}

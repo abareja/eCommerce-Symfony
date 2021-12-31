@@ -1,5 +1,44 @@
 {% extends 'profile/base.html.twig' %}
 
 {% block content %}
+    <div class="c-profile">
+        <h2 class="c-profile__title o-page-title" data-aos="fade-up">{% trans %}Profile data{% endtrans %}</h2>
 
+        <div class="c-profile__profile-data" data-aos="fade-up">
+            <h3 class="o-page-title" data-aos="fade-up">{% trans %}Contact data{% endtrans %}</h3>
+
+            <div><strong>{% trans %}Firstname and lastname{% endtrans %}: </strong>{{ app.user.firstname }} {{ app.user.lastname }}</div>
+            <div><strong>{% trans %}E-mail address{% endtrans %}: </strong>{{ app.user.email }}</div>
+            <a href="{{ path('profile-edit-user') }}" class="o-button o-button--primary o-button--small u-margin-vertical-small">{% trans %}Edit{% endtrans %}</a>
+            <a href="{{ path('profile-edit-user-password') }}" class="o-button o-button--outline o-button--small u-margin-vertical-small">{% trans %}Change password{% endtrans %}</a>
+        </div>
+
+        <hr class="u-margin-vertical-small" />
+
+        <div class="c-profile__profile-data" data-aos="fade-up">
+            <h3 class="o-page-title" data-aos="fade-up">{% trans %}Additional info{% endtrans %}</h3>
+
+            <div>
+                <strong>{% trans %}Address{% endtrans %}: </strong>
+                {% if app.user.address %}
+                    {{ app.user.address }}
+                {% else %}
+                    {% trans %}Not added{% endtrans %}
+                {% endif %}
+            </div>
+            <div>
+                <strong>{% trans %}Phone{% endtrans %}: </strong>
+                {% if app.user.phone %}
+                    {{ app.user.phone }}
+                {% else %}
+                    {% trans %}Not added{% endtrans %}
+                {% endif %}
+            </div>
+            <a href="#" class="o-button o-button--primary o-button--small u-margin-vertical-small">{% trans %}Edit{% endtrans %}</a>
+        </div>
+
+        <hr class="u-margin-vertical-small" />
+        
+    </div>
 {% endblock %}
+
