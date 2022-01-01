@@ -1,0 +1,21 @@
+.c-cart-totals {
+    padding: $spacing-small;
+    border: 1px solid theme-color(light-200);
+
+    &__summary {
+
+    }
+
+    &__summary-item {
+        display: flex;
+    }
+
+    &__summary-name {
+        font-weight: bold;
+    }
+
+    &__summary-value {
+        margin-left: auto;
+        text-align: right;
+    }
+}

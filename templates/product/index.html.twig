@@ -81,17 +81,30 @@
                     <div class="c-product__price" data-aos="fade-up" data-aos-delay="200">
                         {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}
                     </div>
-                    <div class="o-flex" data-aos="fade-up" data-aos-delay="300">
-                        <div class="o-quantity js-quantity">
-                            <span class="o-quantity__less js-quantity-less">-</span>
-                            <input type="text" class="o-quantity__input js-quantity-input" value="1" />
-                            <span class="o-quantity__more js-quantity-more">+</span>
+                    {{ form_start(form, {
+                        'attr': {
+                            'novalidate': 'novalidate',
+                        }
+                    }) }}
+                        <div class="o-flex" data-aos="fade-up" data-aos-delay="300">
+                            <div class="o-field{% if form_errors(form.quantity) %} is-invalid{% endif %}" 
+                                data-aos="fade-up"
+                                data-aos-delay="50">
+                                <div class="o-quantity js-quantity">
+                                    <span class="o-quantity__less js-quantity-less">-</span>
+                                    {{ form_widget(form.quantity, {
+                                        'attr': {'class': 'o-quantity__input js-quantity-input'}
+                                    }) }}
+                                    <span class="o-quantity__more js-quantity-more">+</span>
+                                </div>
+                            </div>
+                            <button type="submit" class="o-button o-button--primary o-button--full">
+                                {% trans %}Add to cart{% endtrans %}
+                                <span class="o-icon o-icon--chevron-right"></span>
+                            </button>
                         </div>
-                        <button type="submit" class="o-button o-button--primary o-button--full">
-                            {% trans %}Add to cart{% endtrans %}
-                            <span class="o-icon o-icon--chevron-right"></span>
-                        </button> 
-                    </div>
+
+                    {{ form_end(form) }}
                 </div>
             </div>
 

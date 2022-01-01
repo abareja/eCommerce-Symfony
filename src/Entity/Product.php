@@ -248,6 +248,10 @@ class Product
         return $this;
     }
 
+    public function hasDiscount(): bool {
+        return $this->getDiscountPrice() != "";
+    }
+
     public function getDateAdded(): ?\DateTimeInterface
     {
         return $this->dateAdded;

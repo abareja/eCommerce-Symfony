@@ -72,4 +72,47 @@
         font-weight: bold;   
         transition: color .3s linear, background-color .3s linear;
     }
+
+    &__wrapper {
+        margin-bottom: $spacing-small;
+    }
+
+    &__product {
+        border-bottom: 1px solid theme-color(light-200);
+    }
+
+    &__product-image {
+        width: 100%;
+        padding-bottom: 50%;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-bottom: $spacing-small;
+    }
+
+    &__product-name {
+        line-height: 1.2;
+        margin-bottom: $spacing-tiny;
+    }
+
+    &__product-quantity {
+        color: theme-color(light-250);
+        @include font-size(14px);
+    }
+
+    &__product-price {
+        margin-bottom: $spacing-tiny;
+        text-align: right;
+
+        & .o-price {
+            @include font-size(16px);
+            font-weight: bold;
+
+            &.has-discount {
+                @include font-size(14px);
+                font-weight: normal;
+            }
+        }
+    }
+
 }

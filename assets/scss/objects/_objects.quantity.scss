@@ -61,4 +61,30 @@
     &__less {
         line-height: 58px;
     }
+
+    &--small &__input, &--small &__more, &--small &__less {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    &--small &__input-wrap {
+        height: 40px;
+    }
+
+    &--small &__unit {
+        line-height: 40px;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
 }

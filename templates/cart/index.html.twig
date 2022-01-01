@@ -1,0 +1,27 @@
+{% extends 'cart/base.html.twig' %}
+
+{% block content %}
+    <section class="c-cart u-margin-vertical-large">
+        <div class="o-wrapper o-wrapper--full u-margin-vertical-large">
+            {% if cart.items|length > 0 %}  
+                <div class="o-grid">
+                    <div class="o-grid__item u-3/4@desktop">
+                        {%  include 'cart/cart-table.html.twig' %}
+                    </div>
+                    <div class="o-grid__item u-1/4@desktop">
+                        {%  include 'cart/cart-totals.html.twig' %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="u-text-center u-margin-vertical-huge u-padding-vertical-huge">
+                    <h2 class="o-title">{% trans %}No items in cart{% endtrans %}</h2>
+                    <a href="{{ path('new') }}" title="{% trans %}Go shopping{% endtrans %}" class="o-button o-button--outline">
+                        {% trans %}Go shopping{% endtrans %}
+                        <span class="o-icon o-icon--chevron-right"></span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+

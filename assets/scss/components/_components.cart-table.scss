@@ -1,0 +1,25 @@
+.c-cart-table {
+    &__remove-button {
+        display: inline-block;
+        transition: all .3s ease-in-out;
+        border: 0;
+        cursor: hand;
+        cursor: pointer;
+        line-height: 1;
+        @include font-size(16px, 1);
+        background: transparent;
+        color: theme-color(light-250);
+        padding: .5em 0;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+    }
+
+    &__name {
+        line-height: 1.3;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+}

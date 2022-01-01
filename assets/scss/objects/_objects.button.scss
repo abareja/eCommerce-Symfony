@@ -90,6 +90,7 @@ $buttonStyles: (
                 background-color: map-get($value, bg-after);
                 color: map-get($value, color-after);
                 border: map-get($value, border-after);
+                text-decoration: underline;
             }
         }
     }

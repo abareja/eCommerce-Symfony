@@ -1,11 +1,36 @@
 <div class="c-header-cart js-header-cart">
     <a href="#" class="c-header-cart__button js-header-cart__toggle">
-        <span class="c-header-cart__count js-header-cart__count">1</span>
+        <span class="c-header-cart__count js-header-cart__count">{{ cartItemsCount }}</span>
     </a>
 
     <div class="c-header-cart__overlay js-header-cart__close"></div>
     <div class="c-header-cart__contents">
-        <h5 class="c-header-cart__contents-title o-title">{% trans %}Your cart{% endtrans %}</h5>
+        <h4 class="c-header-cart__contents-title">{% trans %}Your cart{% endtrans %}</h4>
         <div class="c-header-cart__close js-header-cart__close">&times;</div>
+        {% if cart.items|length > 0 %}
+            <div class="c-header-cart__wrapper">
+                {% for item in cart.items %}
+                    {% set product = item.product %}
+                    <div class="c-header-cart__product">
+                        {% if product.featuredImagePath() %}
+                            <a href="{{ path('product', {id: product.id}) }}" title="{{ product.name }}">
+                                <div class="c-header-cart__product-image js-lazyload" data-bg="{{ asset(product.featuredImagePath()) }}"></div>
+                            </a>
+                        {% endif %}
+                        <div class="c-header-cart__product-name"><a href="{{ path('product', {id: product.id}) }}" title="{{ product.name }}">{{ product.name }}</a></div>
+                        <div class="o-grid o-grid--tiny">
+                            <div class="o-grid__item u-1/3">
+                                <div class="c-header-cart__product-quantity">{% trans %}Quantity{% endtrans %}: {{ item.quantity }}</div>
+                            </div>
+                            <div class="o-grid__item u-2/3">
+                                <div class="c-header-cart__product-price">{% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <a href="{{ path('cart') }}" class="o-button o-button--primary o-button--full u-margin-bottom-tiny">{% trans %}Cart{% endtrans %}</a>
+        <a href="{{ path('cart') }}" class="o-button o-button--outline o-button--full">{% trans %}To checkout{% endtrans %}</a>
     </div>
 </div>

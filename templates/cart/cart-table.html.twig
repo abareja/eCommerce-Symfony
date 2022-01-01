@@ -1,0 +1,60 @@
+<div class="c-cart-table">
+    <h2 class="c-cart__title o-page-title" data-aos="fade-up">{% trans %}Cart{% endtrans %}</h2>
+    {{ form_start(form, {
+        'attr': {
+            'novalidate': 'novalidate',
+        }
+    }) }}
+        <div class="c-cart-table__table o-table">
+            <div class="o-table__head">
+                <div class="o-table__row" data-aos="fade-up">
+                    <div class="o-table__cell o-table__cell--image"></div>
+                    <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
+                    <div class="o-table__cell o-table__cell--quantity">{% trans %}Quantity{% endtrans %}</div>
+                    <div class="o-table__cell o-table__cell--price">{% trans %}Price{% endtrans %}</div>
+                    <div class="o-table__cell o-table__cell--total">{% trans %}Total{% endtrans %}</div>
+                </div>
+            </div>
+            <div class="o-table__body">
+                {% for item in form.items %}
+                    {% set product = item.vars.data.product %}
+                    <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                        <div class="o-table__cell o-table__cell--image">
+                            {% if product.featuredImagePath() %}
+                                <a href="{{ path('product', {id: product.id}) }}">
+                                    <img data-src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="c-cart-table__name o-table__cell o-table__cell--name">
+                            <a href="{{ path('product', {id: product.id}) }}">{{ product.name }}</a>
+                            {{ form_widget(item.remove, {'attr': {'class': 'c-cart-table__remove-button'}}) }}
+                        </div>
+                        <div class="o-table__cell o-table__cell--quantity">
+                            <div class="o-quantity o-quantity--small js-quantity">
+                                <span class="o-quantity__less js-quantity-less">-</span>
+                                {{ form_widget(item.quantity, {
+                                    'attr': {'class': 'o-quantity__input js-quantity-input'}
+                                }) }}
+                                <span class="o-quantity__more js-quantity-more">+</span>
+                            </div>
+                        </div>
+                        <div class="o-table__cell o-table__cell--price">
+                            {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}
+                        </div>
+                        <div class="o-table__cell o-table__cell--total">
+                            {% include 'product/product-price.html.twig' with {price: item.vars.data.total(), discountPrice: null} %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="c-cart__actions u-margin-vertical-small u-text-right" data-aos="fade-up" data-aos-delay="100"> 
+            {{ form_widget(form.save, {'attr': {'class': 'o-button o-button--primary o-button--small'}}) }}
+            {{ form_widget(form.clear, {'attr': {'class': 'o-button o-button--outline o-button--small'}}) }}
+        </div>
+
+        {{ form_row(form._token) }}
+
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

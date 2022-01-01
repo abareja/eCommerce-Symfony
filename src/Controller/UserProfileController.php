@@ -14,12 +14,11 @@ use App\Form\UserType;
 use App\Form\UserAdditionalType;
 use App\Form\UserPasswordType;
 use App\Repository\CategoryRepository;
-use Exception;
 
 class UserProfileController extends AbstractController
 {
     #[Route('/profile/user', name: 'profile-edit-user')]
-    public function user(CategoryRepository $categoryRepository, Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function user(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
@@ -36,7 +35,6 @@ class UserProfileController extends AbstractController
         }
         
         return $this->render('profile/user/form.html.twig', [
-            'categories' => $categoryRepository->findAll(),
             'form' => $form->createView(),
             'title' => $translator->trans('Edit contact data'),
             'buttonText' => $translator->trans('Save')
@@ -44,7 +42,7 @@ class UserProfileController extends AbstractController
     }
 
     #[Route('/profile/user-additional', name: 'profile-edit-user-additional')]
-    public function userAdditional(CategoryRepository $categoryRepository, Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function userAdditional(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserAdditionalType::class, $user);
@@ -61,7 +59,6 @@ class UserProfileController extends AbstractController
         }
         
         return $this->render('profile/user/form-additional.html.twig', [
-            'categories' => $categoryRepository->findAll(),
             'form' => $form->createView(),
             'title' => $translator->trans('Edit additional data'),
             'buttonText' => $translator->trans('Save')
@@ -69,7 +66,7 @@ class UserProfileController extends AbstractController
     }
 
     #[Route('/profile/user-password', name: 'profile-edit-user-password')]
-    public function userChangePassword(CategoryRepository $categoryRepository, Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, TranslatorInterface $translator): Response
+    public function userChangePassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserPasswordType::class, $user);
@@ -99,7 +96,6 @@ class UserProfileController extends AbstractController
         }
         
         return $this->render('profile/user/form-password.html.twig', [
-            'categories' => $categoryRepository->findAll(),
             'form' => $form->createView(),
             'title' => $translator->trans('Change password'),
             'buttonText' => $translator->trans('Save')

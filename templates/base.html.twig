@@ -24,7 +24,7 @@
         {% endif %}
 
         {% block header %}
-            {%  include 'header/site-header.html.twig' %}
+            {{ render(controller('App\\Controller\\SiteHeaderController::index')) }}
         {% endblock %}
 
         <div class="o-page">

@@ -13,12 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-use App\Repository\CategoryRepository;
-
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryRepository $CategoryRepository, TranslatorInterface $translator): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         try {
             $user = new User();
@@ -45,7 +43,6 @@ class RegistrationController extends AbstractController
         
         return $this->render('registration/index.html.twig', [
             'form' => $form->createView(),
-            'categories' => $CategoryRepository->findAll()
         ]);
     }
 }
