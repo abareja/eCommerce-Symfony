@@ -1,0 +1,71 @@
+.c-supplier-slider {
+    &__entry {
+        padding: 0 $spacing-tiny;
+        height: 100%;
+        text-align: center;
+
+        img {
+            max-height: 80px;
+            width: auto;
+            opacity: .6;
+            transition: opacity .3s ease-out;
+        }
+    }
+
+    &__entry:hover img {
+        opacity: 1;
+    }
+
+    &__wrap {
+        margin-left: -$spacing-tiny;
+        margin-right: -$spacing-tiny;
+
+        @include mq($from: wide) {
+            margin-left: -$spacing;
+            margin-right: -$spacing;
+        }
+    }
+
+    &__wrap .slick {
+        &-track {
+            display: flex !important;
+        }
+
+        &-slide {
+            height: inherit !important;
+        }
+
+        &-slide > div {
+            height: 100%;
+        }
+
+        &-arrow {
+            top: -$spacing;
+            transform: translateY(-100%);
+            border: 1px solid theme-color(light-200);
+            width: 40px;
+            height: 40px;
+
+            @include mq($until: desktop) {
+                display: none !important;
+            }
+        }
+
+        &-next {
+            right: $spacing;
+
+            @include mq($until: wide) {
+                right: $spacing-tiny;
+            }
+        }
+
+        &-prev {
+            right: $spacing + 40px + $spacing-tiny;
+            left: unset;
+
+            @include mq($until: wide) {
+                right: $spacing-tiny + 40px + $spacing-tiny;
+            }
+        }
+    }
+}

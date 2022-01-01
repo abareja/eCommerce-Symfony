@@ -1,0 +1,50 @@
+{% if suppliers|length > 0 %}
+
+{% set settings = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '64px',
+    infinite: true,
+    dots: false,
+    arrows: true,
+    lazyLoad: 'ondemand',
+    autoplay: false,
+    fade: false,
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 4,
+                centerMode: false
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 3,
+                centerMode: false
+            }
+        },
+    ]
+} %}
+
+<section class="c-supplier-slider o-content">
+    <div class="o-wrapper o-wrapper--full">
+        {% if title %}
+            <h2 class="o-title u-margin-bottom" data-aos="fade-up">{{ title }}</h2>
+        {% endif %}
+
+        <div class="c-supplier-slider__wrap js-slider" data-slick-settings="{{ settings|json_encode()|escape() }}">
+            {% for supplier in suppliers %}
+                <div class="c-supplier-slider__entry" data-aos="fade-up">
+                    <a href="#" title="{{ supplier.name }}">
+                        <img data-src="{{ asset(supplier.imagePath()) }}" class="js-lazyload" />
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endif %}

@@ -23,9 +23,10 @@
         },
     ]} %}
 
-    {% if newProducts|length > 0 %}
-        {% include 'components/product-list.html.twig' with { title: newProductsTitle, products: newProducts }%}
-    {% endif %}
+    {{ render(controller('App\\Controller\\ProductListComponentController::new', {limit: 10})) }}
 
-    {% include 'components/product-slider.html.twig' with { title: 'Newest products', products: [] }%}
+    {{ render(controller('App\\Controller\\ProductSliderComponentController::new', {limit: 10})) }}
+
+    {{ render(controller('App\\Controller\\SupplierSliderComponentController::index')) }}
+
 {% endblock %}
