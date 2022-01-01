@@ -29,8 +29,12 @@
                     </div>
                 {% endfor %}
             </div>
+            <a href="{{ path('cart') }}" class="o-button o-button--primary o-button--full u-margin-bottom-tiny">{% trans %}Cart{% endtrans %}</a>
+            <a href="{{ path('cart') }}" class="o-button o-button--outline o-button--full">{% trans %}To checkout{% endtrans %}</a>
+        {% else %}
+            <div class="c-header-cart__wrapper">
+                {% trans %}No items in cart{% endtrans %}
+            </div>
         {% endif %}
-        <a href="{{ path('cart') }}" class="o-button o-button--primary o-button--full u-margin-bottom-tiny">{% trans %}Cart{% endtrans %}</a>
-        <a href="{{ path('cart') }}" class="o-button o-button--outline o-button--full">{% trans %}To checkout{% endtrans %}</a>
     </div>
 </div>
