@@ -4,12 +4,7 @@
     <div class="c-admin-page">
         <h2 class="c-admin-page__title o-title u-margin-bottom" data-aos="fade-up">{{ title }}</h2>
 
-            {{ form_start(form, {
-                'attr': {
-                    'novalidate': 'novalidate',
-                    'enctype': 'multipart/form-data'
-                }
-            }) }}
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate','enctype': 'multipart/form-data'}}) }}
 
                 <div class="o-field{% if form_errors(form.name) %} is-invalid{% endif %}" 
                     data-validation="required"

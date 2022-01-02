@@ -18,9 +18,11 @@ class CheckoutController extends AbstractController
     public function index(Request $request, CartManager $cartManager, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        $address = $user->getAddress();
+        $address = new Address();
 
-        if( !$address ) $address = new Address();
+        if( $user ) {
+            $address = $user->getAddress();
+        }
 
         $cart = $cartManager->getCurrentCart();
         $cart->setAddress($address);
@@ -29,6 +31,7 @@ class CheckoutController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $cart->setStatus('order');
             
             $entityManager->persist($cart);        
             $entityManager->flush($cart);

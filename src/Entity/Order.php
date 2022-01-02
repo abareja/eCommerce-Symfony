@@ -39,7 +39,7 @@ class Order
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
@@ -53,6 +53,16 @@ class Order
      * @ORM\JoinColumn(nullable=true)
      */
     private $address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Shipping::class)
+     */
+    private $shipping;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Payment::class)
+     */
+    private $payment;
 
     public function __construct()
     {
@@ -178,6 +188,30 @@ class Order
     public function setAddress(?Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getShipping(): ?Shipping
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping(?Shipping $shipping): self
+    {
+        $this->shipping = $shipping;
+
+        return $this;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }

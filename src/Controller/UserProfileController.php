@@ -35,7 +35,7 @@ class UserProfileController extends AbstractController
             return $this->redirectToRoute('profile-edit-user');
         }
         
-        return $this->render('profile/user/form.html.twig', [
+        return $this->render('profile/user/form-user.html.twig', [
             'form' => $form->createView(),
             'title' => $translator->trans('Edit contact data'),
             'buttonText' => $translator->trans('Save')

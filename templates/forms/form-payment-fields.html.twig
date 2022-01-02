@@ -1,0 +1,10 @@
+<div class="o-field{% if form_errors(form.payment) %} is-invalid{% endif %}" 
+    data-validation="required"
+    data-aos="fade-up"
+    data-aos-delay="50">
+    <label class="o-input__label" for="{{ form.payment.vars.id }}">{% trans %}Payment{% endtrans %}</label>
+    {{ form_widget(form.payment, {
+        'attr': {'class': 'o-input js-select2'}
+    }) }}
+    <div class="o-field__error">{% trans %}Please select payment method!{% endtrans %}</div>
+</div>  

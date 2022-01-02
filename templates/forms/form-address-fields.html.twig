@@ -1,0 +1,81 @@
+<div class="o-grid o-grid--small">
+    <div class="o-grid__item u-1/2@small-desktop">
+        <div class="o-field{% if form_errors(form.country) %} is-invalid{% endif %}" 
+            data-validation="required"
+            data-aos="fade-up"
+            data-aos-delay="50">
+            <label class="o-input__label" for="{{ form.country.vars.id }}">{% trans %}Country{% endtrans %}</label>
+            {{ form_widget(form.country, {
+                'attr': {'class': 'o-input js-select2'}
+            }) }}
+            <div class="o-field__error">{% trans %}Please enter a valid country!{% endtrans %}</div>
+        </div>
+    </div>
+    <div class="o-grid__item u-1/2@small-desktop">
+        <div class="o-field{% if form_errors(form.city) %} is-invalid{% endif %}" 
+            data-validation="required"
+            data-aos="fade-up"
+            data-aos-delay="50">
+            <label class="o-input__label" for="{{ form.city.vars.id }}">{% trans %}City{% endtrans %}</label>
+            {{ form_widget(form.city, {
+                'attr': {'class': 'o-input'}
+            }) }}
+            <div class="o-field__error">{% trans %}Please enter a valid city!{% endtrans %}</div>
+        </div>
+    </div>
+</div>
+
+<div class="o-grid o-grid--small">
+    <div class="o-grid__item u-1/2@small-desktop">
+        <div class="o-field{% if form_errors(form.street) %} is-invalid{% endif %}" 
+            data-aos="fade-up"
+            data-aos-delay="50">
+            <label class="o-input__label" for="{{ form.street.vars.id }}">{% trans %}Street{% endtrans %}</label>
+            {{ form_widget(form.street, {
+                'attr': {'class': 'o-input'}
+            }) }}
+            <div class="o-field__error">{% trans %}Please enter a valid street!{% endtrans %}</div>
+        </div>
+    </div>
+    <div class="o-grid__item u-1/2@small-desktop">
+        <div class="o-field{% if form_errors(form.number) %} is-invalid{% endif %}" 
+            data-validation="required"
+            data-aos="fade-up"
+            data-aos-delay="50">
+            <label class="o-input__label" for="{{ form.number.vars.id }}">{% trans %}Number{% endtrans %}</label>
+            {{ form_widget(form.number, {
+                'attr': {'class': 'o-input'}
+            }) }}
+            <div class="o-field__error">{% trans %}Please enter a valid number!{% endtrans %}</div>
+        </div>
+    </div>
+</div>
+
+<div class="o-grid o-grid--small">
+    <div class="o-grid__item u-1/2@small-desktop">
+        <div class="o-field{% if form_errors(form.postalCode) %} is-invalid{% endif %}" 
+            data-validation="required"
+            data-aos="fade-up"
+            data-aos-delay="50">
+            <label class="o-input__label" for="{{ form.postalCode.vars.id }}">{% trans %}Postal code{% endtrans %}</label>
+            {{ form_widget(form.postalCode, {
+                'attr': {'class': 'o-input'}
+            }) }}
+            <div class="o-field__error">{% trans %}Please enter a valid postal code!{% endtrans %}</div>
+        </div>
+    </div>
+    <div class="o-grid__item u-1/2@small-desktop">
+        <div class="o-field{% if form_errors(form.phone) %} is-invalid{% endif %}" 
+            data-validation="phone-not-required"
+            data-aos="fade-up"
+            data-aos-delay="50">
+            <label class="o-input__label" for="{{ form.phone.vars.id }}">{% trans %}Phone{% endtrans %}</label>
+            {{ form_widget(form.phone, {
+                'attr': {'class': 'o-input'}
+            }) }}
+            <div class="o-field__error">{% trans %}Please enter a valid phone!{% endtrans %}</div>
+        </div>
+    </div>
+</div>
+
+    

@@ -60,8 +60,23 @@
                     </li>
                 </ul>
             </li>
-            <li class="c-sidebar-nav__item">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Users{% endtrans %}</a>
+            <li class="c-sidebar-nav__item has-children">
+                <a href="#" class="c-sidebar-nav__link">{% trans %}Settings{% endtrans %}</a>
+
+                <ul class="c-sidebar-nav__list c-sidebar-nav__list--level-1">
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-settings') }}" class="c-sidebar-nav__link">{% trans %}All{% endtrans %}</a>
+                    </li>
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-new-country') }}" class="c-sidebar-nav__link">{% trans %}Add country{% endtrans %}</a>
+                    </li>
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-new-shipping') }}" class="c-sidebar-nav__link">{% trans %}Add shipping method{% endtrans %}</a>
+                    </li>
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-new-payment') }}" class="c-sidebar-nav__link">{% trans %}Add payment method{% endtrans %}</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

@@ -4,7 +4,7 @@
     <div class="c-admin-page">
         <h2 class="c-admin-page__title o-title u-margin-bottom" data-aos="fade-up">{{ title }}</h2>
 
-            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'enctype': 'multipart/form-data'}}) }}
 
                 <div class="o-field{% if form_errors(form.name) %} is-invalid{% endif %}" 
                     data-validation="required"
@@ -14,14 +14,26 @@
                     {{ form_widget(form.name, {
                         'attr': {'class': 'o-input'}
                     }) }}
-                    <div class="o-field__error">{% trans %}Please enter a valid country name!{% endtrans %}</div>
+                    <div class="o-field__error">{% trans %}Please enter a valid product name!{% endtrans %}</div>
                 </div>
+
+                <div class="o-field{% if form_errors(form.cost) %} is-invalid{% endif %}"   
+                    data-validation="price"
+                    data-aos="fade-up"
+                    data-aos-delay="50">
+                    <label class="o-input__label" for="{{ form.cost.vars.id }}">{% trans %}Cost{% endtrans %}</label>
+                    {{ form_widget(form.cost, {
+                        'attr': {'class': 'o-input'}
+                    }) }}
+                    <div class="o-field__error">{% trans %}Please enter a valid cost!{% endtrans %}</div>
+                </div>
+        
 
                 <div class="o-field u-margin-top-small">
                     <div class="o-grid o-grid--small u-padding-bottom-small">
                         <div class="o-grid__item u-1/2@small-desktop">
-                            {% if country %}
-                                <a class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300" href="{{ path('admin-delete-country', {id: country.id}) }}">
+                            {% if shipping %}
+                                <a class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300" href="{{ path('admin-delete-shipping', {id: shipping.id}) }}">
                                     {% trans %}Remove{% endtrans %}
                                 </a>
                             {% endif %}
