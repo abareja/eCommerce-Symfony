@@ -15,27 +15,27 @@
 
         <hr class="u-margin-vertical-small" />
 
-        <div class="c-profile__profile-data" data-aos="fade-up">
-            <h3 class="o-page-title" data-aos="fade-up">{% trans %}Additional info{% endtrans %}</h3>
-
-            <div>
-                <strong>{% trans %}Address{% endtrans %}: </strong>
-                {% if app.user.address %}
-                    {{ app.user.address }}
-                {% else %}
-                    {% trans %}Not added{% endtrans %}
-                {% endif %}
+        {% set address = app.user.address() %}
+        {% if address %}
+            <div class="c-profile__profile-data" data-aos="fade-up">
+                <h3 class="o-page-title" data-aos="fade-up">{% trans %}Address{% endtrans %}</h3>
+                
+                <div>
+                    <strong>{% trans %}Address{% endtrans %}: </strong>
+                    {{ address.country }}, {{ address.city }} {% if address.street %} {{ address.street }} {% endif %}{{ address.number }}, {{ address.postalCode }}
+                    
+                </div>
+                <div>
+                    <strong>{% trans %}Phone{% endtrans %}: </strong>
+                    {% if address.phone %}
+                        {{ address.phone }}
+                    {% else %}
+                        {% trans %}Not added{% endtrans %}
+                    {% endif %}
+                </div>
+                <a href="{{ path('profile-edit-user-address') }}" class="o-button o-button--primary o-button--small u-margin-vertical-small">{% trans %}Edit{% endtrans %}</a>
             </div>
-            <div>
-                <strong>{% trans %}Phone{% endtrans %}: </strong>
-                {% if app.user.phone %}
-                    {{ app.user.phone }}
-                {% else %}
-                    {% trans %}Not added{% endtrans %}
-                {% endif %}
-            </div>
-            <a href="#" class="o-button o-button--primary o-button--small u-margin-vertical-small">{% trans %}Edit{% endtrans %}</a>
-        </div>
+        {% endif %}
 
         <hr class="u-margin-vertical-small" />
         

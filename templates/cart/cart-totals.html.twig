@@ -6,5 +6,5 @@
             <div class="c-cart-totals__summary-value">{{ cart.total|format_currency('PLN', locale='pl') }}</div>
         </div>
     </div>
-    <a href="#" class="o-button o-button--primary o-button--full u-margin-top-small">{% trans %}To checkout{% endtrans %}</a>
+    <a href="{{ path('checkout') }}" class="o-button o-button--primary o-button--full u-margin-top-small">{% trans %}To checkout{% endtrans %}</a>
 </div>

@@ -85,6 +85,9 @@ const validateInputField = (field, input) => {
         case "phone":
             if( value.match(phoneReg) ) valid = true; else valid = false;
             break;
+        case "phone-not-required": 
+            if( value === "" || value.match(phoneReg) ) valid = true; else valid = false;
+            break;
     }
 
     if( !valid ) {

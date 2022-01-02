@@ -43,16 +43,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=15, nullable=true)
-     */
-    private $phone;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $address;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -61,6 +51,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user", orphanRemoval=true)
      */
     private $orders;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
+     */
+    private $address;
 
     public function __construct()
     {
@@ -120,30 +115,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         return $this;
     }
 
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
     /**
      * The public representation of the user (e.g. a username, an email address, etc.)
      *
@@ -185,7 +156,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
             $this->firstname,
             $this->lastname,
             $this->email,
-            $this->phone,
             $this->address,
             $this->password,
             // see section on salt below
@@ -201,7 +171,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
             $this->firstname,
             $this->lastname,
             $this->email,
-            $this->phone,
             $this->address,
             $this->password,
             // see section on salt below
@@ -235,6 +204,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
                 $order->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

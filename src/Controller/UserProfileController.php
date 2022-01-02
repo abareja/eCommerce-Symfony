@@ -11,9 +11,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use App\Form\UserType;
-use App\Form\UserAdditionalType;
+use App\Form\AddressType;
 use App\Form\UserPasswordType;
-use App\Repository\CategoryRepository;
+
+use App\Entity\Address;
 
 class UserProfileController extends AbstractController
 {
@@ -41,26 +42,32 @@ class UserProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/user-additional', name: 'profile-edit-user-additional')]
-    public function userAdditional(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    #[Route('/profile/user-address', name: 'profile-edit-user-address')]
+    public function userAddress(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(UserAdditionalType::class, $user);
+        $address = $user->getAddress();
+
+        if( !$address ) $address = new Address();
+
+        $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $user->setAddress($address);
+
             $entityManager->persist($user);
+            $entityManager->persist($address);
             $entityManager->flush();
             
-            $this->addFlash('success', $translator->trans("Additional data changed!"));
+            $this->addFlash('success', $translator->trans("Address changed!"));
 
-            return $this->redirectToRoute('profile-edit-user-additional');
+            return $this->redirectToRoute('profile-edit-user-address');
         }
         
-        return $this->render('profile/user/form-additional.html.twig', [
+        return $this->render('profile/user/form-address.html.twig', [
             'form' => $form->createView(),
-            'title' => $translator->trans('Edit additional data'),
+            'title' => $translator->trans('Edit address'),
             'buttonText' => $translator->trans('Save')
         ]);
     }

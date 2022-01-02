@@ -10,26 +10,7 @@
                 }
             }) }}
 
-                <div class="o-field{% if form_errors(form.address) %} is-invalid{% endif %}" 
-                    data-aos="fade-up"
-                    data-aos-delay="50">
-                    <label class="o-input__label" for="{{ form.address.vars.id }}">{% trans %}Address{% endtrans %}</label>
-                    {{ form_widget(form.address, {
-                        'attr': {'class': 'o-input o-input--textarea'}
-                    }) }}
-                </div>
-            
-
-                <div class="o-field{% if form_errors(form.phone) %} is-invalid{% endif %}" 
-                    data-validation="phone"
-                    data-aos="fade-up"
-                    data-aos-delay="50">
-                    <label class="o-input__label" for="{{ form.phone.vars.id }}">{% trans %}Phone{% endtrans %}</label>
-                    {{ form_widget(form.phone, {
-                        'attr': {'class': 'o-input'}
-                    }) }}
-                    <div class="o-field__error">{% trans %}Please enter a valid phone!{% endtrans %}</div>
-                </div>  
+                
 
                 <div class="o-field u-margin-top-small">
                     <div class="o-grid o-grid--small u-padding-bottom-small">

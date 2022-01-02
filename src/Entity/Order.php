@@ -48,6 +48,12 @@ class Order
      */
     private $items;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Address::class)
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $address;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -162,5 +168,17 @@ class Order
         }
 
         return $total;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 }
