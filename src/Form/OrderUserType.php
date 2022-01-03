@@ -2,29 +2,36 @@
 
 namespace App\Form;
 
-use App\Entity\Shipping;
+use App\Entity\OrderUser;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
-class ShippingType extends AbstractType
+class OrderUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
+            ->add('firstname', TextType::class, [
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
-            ->add('cost', MoneyType::class, [
-                'required' => false,
-                'currency' => ''
+            ->add('lastname', TextType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ],
+            ])
+            ->add('email', EmailType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
         ;
     }
@@ -32,7 +39,7 @@ class ShippingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Shipping::class,
+            'data_class' => OrderUser::class,
         ]);
     }
 }

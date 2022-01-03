@@ -22,9 +22,12 @@
                     data-aos="fade-up"
                     data-aos-delay="50">
                     <label class="o-input__label" for="{{ form.cost.vars.id }}">{% trans %}Cost{% endtrans %}</label>
-                    {{ form_widget(form.cost, {
-                        'attr': {'class': 'o-input'}
-                    }) }}
+                    <div class="o-input__wrap">
+                        {{ form_widget(form.cost, {
+                            'attr': {'class': 'o-input'}
+                        }) }}
+                        <span class="o-input__suffix">zł</span>
+                    </div>
                     <div class="o-field__error">{% trans %}Please enter a valid cost!{% endtrans %}</div>
                 </div>
         

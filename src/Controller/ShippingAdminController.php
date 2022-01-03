@@ -32,7 +32,7 @@ class ShippingAdminController extends AbstractController
                 
                 $this->addFlash('success', $translator->trans("Shipping method added!"));
 
-                return $this->redirectToRoute('admin');
+                return $this->redirectToRoute('admin-settings');
             }
         } catch(UniqueConstraintViolationException $e) {
             $this->addFlash('error', $translator->trans("Shipping method already exists!"));
@@ -62,10 +62,10 @@ class ShippingAdminController extends AbstractController
                 
                 $this->addFlash('success', $translator->trans("Shipping method edited!"));
 
-                return $this->redirectToRoute('admin');
+                return $this->redirectToRoute('admin-settings');
             }
         } catch(UniqueConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("Shipping method exists!"));
+            $this->addFlash('error', $translator->trans("Shipping method already exists!"));
 
             return $this->redirectToRoute('admin-edit-shipping', ['id' => $shipping->getId()]);
         }
@@ -87,9 +87,9 @@ class ShippingAdminController extends AbstractController
 
             $this->addFlash('success', $translator->trans("Shipping method removed!"));
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin-settings');
         } catch (ForeignKeyConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("This shipping has connected orders, so it can't be removed"));
+            $this->addFlash('error', $translator->trans("This shipping has connected orders, so it can't be removed!"));
 
             return $this->redirectToRoute('admin-edit-shipping', ['id' => $shipping->getId()]);
         }

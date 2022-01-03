@@ -15,6 +15,7 @@ use App\Form\AddressType;
 use App\Form\UserPasswordType;
 
 use App\Entity\Address;
+use App\Repository\OrderRepository;
 
 class UserProfileController extends AbstractController
 {
@@ -106,6 +107,17 @@ class UserProfileController extends AbstractController
             'form' => $form->createView(),
             'title' => $translator->trans('Change password'),
             'buttonText' => $translator->trans('Save')
+        ]);
+    }
+
+    #[Route('/profile/user-orders', name: 'profile-user-orders')]
+    public function userOrders(OrderRepository $orderRepository): Response
+    {
+        $user = $this->getUser();
+        $orders = $orderRepository->findBy(['user' => $user]);
+
+        return $this->render('profile/user/orders.html.twig', [
+            'orders' => $orders
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Order;
 use App\Entity\OrderItem;
+use App\Entity\OrderUser;
 use App\Entity\Product;
 use Symfony\Component\Security\Core\Security;
 
@@ -31,7 +32,6 @@ class OrderFactory
     {
         $order = new Order();
         $order
-            ->setUser($this->security->getUser())
             ->setStatus(Order::STATUS_CART)
             ->setCreatedAt(new \DateTime());
 

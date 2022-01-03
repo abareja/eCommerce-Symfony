@@ -46,7 +46,7 @@ class CategoryAdminController extends AbstractController
                     $entityManager->flush();
                 }
                 
-                $this->addFlash('success', $translator->trans("Category added"));
+                $this->addFlash('success', $translator->trans("Category added!"));
 
                 return $this->redirectToRoute('admin-categories');
             }
@@ -87,7 +87,7 @@ class CategoryAdminController extends AbstractController
                     $entityManager->flush();
                 }
                 
-                $this->addFlash('success', $translator->trans("Category edited"));
+                $this->addFlash('success', $translator->trans("Category edited!"));
 
                 return $this->redirectToRoute('admin-categories');
             }
@@ -118,11 +118,11 @@ class CategoryAdminController extends AbstractController
                 $fileUploader->remove($image);
             }
 
-            $this->addFlash('success', $translator->trans("Category removed"));
+            $this->addFlash('success', $translator->trans("Category removed!"));
 
             return $this->redirectToRoute('admin-categories');
         } catch (ForeignKeyConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("This category has connected products, so it can't be removed"));
+            $this->addFlash('error', $translator->trans("This category has connected products, so it can't be removed!"));
 
             return $this->redirectToRoute('admin-edit-category', ['id' => $category->getId()]);
         }

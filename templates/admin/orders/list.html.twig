@@ -1,0 +1,30 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="c-admin-page">
+        <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Orders{% endtrans %}</h2>
+
+        {% if orders|length > 0 %}
+            <div class="o-table">
+                <div class="o-table__head">
+                    <div class="o-table__row" data-aos="fade-up">
+                        <div class="o-table__cell o-table__cell--name">{% trans %}Client{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--status">{% trans %}Status{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--total">{% trans %}Total{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--date">{% trans %}Date{% endtrans %}</div>
+                    </div>
+                </div>
+                <div class="o-table__body">
+                    {% for order in orders %}
+                        <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                            <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-order', {id: order.id}) }}">{{ order.user().firstname }} {{ order.user().lastname }}</a></div>
+                            <div class="o-table__cell o-table__cell--status">{{ order.statusLabel()|trans }}</div>                        
+                            <div class="o-table__cell o-table__cell--total">{{ order.total()|format_currency('PLN', locale='pl') }}</div>                        
+                            <div class="o-table__cell o-table__cell--date">{{ order.createdAt()|format_datetime() }}</div>                                    
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

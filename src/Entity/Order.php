@@ -31,6 +31,7 @@ class Order
      * @var string
      */
     const STATUS_CART = 'cart';
+    const STATUS_ORDER = 'order';
 
     /**
      * @ORM\Column(type="datetime")
@@ -38,21 +39,9 @@ class Order
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $user;
-
-    /**
      * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="orderRef", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $items;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Address::class)
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $address;
 
     /**
      * @ORM\ManyToOne(targetEntity=Shipping::class)
@@ -63,6 +52,18 @@ class Order
      * @ORM\ManyToOne(targetEntity=Payment::class)
      */
     private $payment;
+
+    /**
+     * @ORM\OneToOne(targetEntity=OrderUser::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity=OrderAddress::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $address;
 
     public function __construct()
     {
@@ -77,6 +78,14 @@ class Order
     public function getStatus(): ?string
     {
         return $this->status;
+    }
+
+    public function getStatusLabel(): ?string
+    {
+        switch( $this->status ) {
+            case self::STATUS_CART: return 'Cart';
+            case self::STATUS_ORDER: return 'In progress';
+        }
     }
 
     public function setStatus(string $status): self
@@ -94,18 +103,6 @@ class Order
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -180,18 +177,6 @@ class Order
         return $total;
     }
 
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?Address $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
     public function getShipping(): ?Shipping
     {
         return $this->shipping;
@@ -212,6 +197,30 @@ class Order
     public function setPayment(?Payment $payment): self
     {
         $this->payment = $payment;
+
+        return $this;
+    }
+
+    public function getUser(): ?OrderUser
+    {
+        return $this->user;
+    }
+
+    public function setUser(?OrderUser $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAddress(): ?OrderAddress
+    {
+        return $this->address;
+    }
+
+    public function setAddress(OrderAddress $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

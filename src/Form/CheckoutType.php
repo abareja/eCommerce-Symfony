@@ -5,8 +5,8 @@ namespace App\Form;
 use App\Entity\Order;
 use App\Entity\Payment;
 use App\Entity\Shipping;
-use App\Form\AddressType;
-use App\Form\UserType;
+use App\Form\OrderAddressType;
+use App\Form\OrderUserType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,8 +18,8 @@ class CheckoutType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('user', UserType::class)
-            ->add('address', AddressType::class)
+            ->add('user', OrderUserType::class)
+            ->add('address', OrderAddressType::class)
             ->add('payment', EntityType::class, [
                 'required' => true,
                 'class' => Payment::class

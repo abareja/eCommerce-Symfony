@@ -62,18 +62,18 @@ Edit product: Edit product
 Edit category: Edit category
 Remove: Remove
 Edit supplier: Edit supplier
-Supplier added: Supplier added
-Supplier edited: Supplier edited 
-Supplier removed: Supplier removed
-This supplier has connected products, so it can't be removed: This supplier has connected products, so it can't be removed
-Category added: Category added
-Category edited: Category edited
-Category removed: Category removed
-This category has connected products, so it can't be removed: This category has connected products, so it can't be removed
-Product added: Product added
-Product edited: Product edited
-Product removed: Product removed
-This product can't be removed: This product can't be removed
+Supplier added!: Supplier added!
+Supplier edited!: Supplier edited!
+Supplier removed!: Supplier removed!
+This supplier has connected products, so it can't be removed!: This supplier has connected products, so it can't be removed!
+Category added!: Category added!
+Category edited!: Category edited!
+Category removed!: Category removed!
+This category has connected products, so it can't be removed!: This category has connected products, so it can't be removed!
+Product added!: Product added!
+Product edited!: Product edited!
+Product removed!: Product removed!
+This product can't be removed!: This product can't be removed!
 Registered successfully!: Registered successfully! 
 Supplier already exists!: Supplier already exists!
 Category already exists!: Category already exists!
@@ -127,3 +127,53 @@ Street: Street
 Number: Number
 Postal Code: Postal Code
 Country: Country
+Settings: Settings
+All: All
+Add country: Add country
+Add shipping method: Add shipping method
+Add payment method: Add payment method
+Cost: Cost
+Countries: Countries
+Shippings: Shippings
+Add shipping: Add shipping
+Add payment: Add payment
+Payments: Payments
+Edit shipping: Edit shipping
+Edit payment: Edit payment
+Country added!: Country added!
+Country already exists!: Country already exists!
+Country edited!: Country edited!
+Country removed!: Country removed!
+This country has connected users, so it can't be removed!: This country has connected users, so it can't be removed!
+Payment method added!: Payment method added!
+Payment method already exists!: Payment method already exists!
+Payment method edited!: Payment method edited!
+Payment method removed!: Payment method removed!
+This payment has connected orders, so it can't be removed!: This payment has connected orders, so it can't be removed!
+Shipping method added!: Shipping method added!
+Shipping method already exists!: Shipping method already exists!
+Shipping method edited!: Shipping method edited!
+Shipping method removed!: Shipping method removed!
+This shipping has connected orders, so it can't be removed!: This shipping has connected orders, so it can't be removed!
+Please enter a valid country name!: Please enter a valid country name!
+Please enter a valid cost!: Please enter a valid cost!
+Edit country: Edit country
+Payment method exists!: Payment method exists!
+Product already in cart!: Product already in cart!
+Address changed!: Address changed!
+Please select a valid country!: Please select a valid country!
+Please enter a valid city!: Please enter a valid city!
+Please enter a valid street!: Please enter a valid street!
+Please enter a valid number!: Please enter a valid number!
+Postal code: Postal code
+Please enter a valid postal code!: Please enter a valid postal code!
+Shipping: Shipping
+Payment: Payment
+Please select payment method!: Please select payment method!
+Please select shipping method!: Please select shipping method!
+Buy: Buy
+Go shopping: Go shopping
+In progress: In progress
+Client: Client
+Status: Status
+Date: Date

@@ -62,18 +62,18 @@ Edit product: Edytuj produkt
 Edit category: Edytuj kategorię
 Remove: Usuń
 Edit supplier: Edytuj producenta
-Supplier added: Producent został dodany
-Supplier edited: Producent został zmodyfikowany
-Supplier removed: Producent został usunięty
-This supplier has connected products, so it can't be removed: Producent nie może zostać usunięty, ponieważ zawiera powiązane produkty
-Category added: Kategoria została dodana
-Category edited: Kategoria została zmodyfikowana
-Category removed: Kategoria została usunięta
-This category has connected products, so it can't be removed: Kategoria nie może zostać usunięta, ponieważ zawiera powiązane produkty
-Product added: Produkt został dodany
-Product edited: Produkt został zmodyfikowany
-Product removed: Produkt został usunięty
-This product can't be removed: Produkt nie może zostać usunięty
+Supplier added!: Producent został dodany!
+Supplier edited!: Producent został zmodyfikowany!
+Supplier removed!: Producent został usunięty!
+This supplier has connected products, so it can't be removed!: Producent nie może zostać usunięty, ponieważ zawiera powiązane produkty!
+Category added!: Kategoria została dodana!
+Category edited!: Kategoria została zmodyfikowana!
+Category removed!: Kategoria została usunięta!
+This category has connected products, so it can't be removed!: Kategoria nie może zostać usunięta, ponieważ zawiera powiązane produkty!
+Product added!: Produkt został dodany!
+Product edited!: Produkt został zmodyfikowany!
+Product removed!: Produkt został usunięty!
+This product can't be removed!: Produkt nie może zostać usunięty!
 Registered successfully!: Zarejestrowano pomyślnie!
 Supplier already exists!: Producent już istnieje!
 Category already exists!: Kategoria już istnieje!
@@ -127,3 +127,53 @@ Street: Ulica
 Number: Numer
 Postal Code: Kod pocztowy
 Country: Państwo
+Settings: Ustawienia
+All: Wszystkie
+Add country: Dodaj państwo
+Add shipping method: Dodaj metodę wysyłki
+Add payment method: Dodaj metodę płatności
+Cost: Koszt
+Countries: Państwa
+Shippings: Metody wysyłki
+Add shipping: Dodaj metodę wysyłki
+Add payment: Dodaj metodę płatności
+Payments: Metody płatności
+Edit shipping: Edytuj metodę wysyłki
+Edit payment: Edytuj metodę płatności
+Country added!: Państwo zostało dodane!
+Country already exists!: Państwo istnieje już w bazie!
+Country edited!: Państwo zostało zaktualizowane!
+Country removed!: Państwo zostało usunięte!
+This country has connected users, so it can't be removed!: Państwo zawiera powiązanych użytkowników!
+Payment method added!: Metoda płatności została dodana!
+Payment method already exists!: Metoda płatności już istnieje!
+Payment method edited!: Metoda płatności została zmodyfikowana!
+Payment method removed!: Metoda płatności została usunięta!
+This payment has connected orders, so it can't be removed!: Metoda płatności zawiera powiązne zamówienia!
+Shipping method added!: Metoda wysyłki została dodana!
+Shipping method already exists!: Metoda wysyłki już istnieje!
+Shipping method edited!: Metoda wysyłki została zmodyfikowana!
+Shipping method removed!: Metoda wysyłki została usunięta!
+This shipping has connected orders, so it can't be removed!: Metoda wysyłki zawiera powiązane zamówienia!
+Please enter a valid country name!: Wprowadź poprawną nazwę państwa!
+Please enter a valid cost!: Wprowadź poprawny koszt!
+Edit country: Edytuj państwo
+Payment method exists!: Metoda płatności już istnieje!
+Product already in cart!: Produkt znajduje się już w koszyku!
+Address changed!: Adres został zmodyfikowany!
+Please select a valid country!: Wybierz państwo!
+Please enter a valid city!: Wprowadź miasto!
+Please enter a valid street!: Wprowadź prawidłową ulicę!
+Please enter a valid number!: Wprowadź prawidłowy numer!
+Postal code: Kod pocztowy
+Please enter a valid postal code!: Wprowadź prawidłowy kod pocztowy!
+Shipping: Metoda wysyłki
+Payment: Metoda płatności
+Please select payment method!: Wybierz metodę płatności!
+Please select shipping method!: Wybierz metodę wysyłki!
+Buy: Kup
+Go shopping: Do sklepu
+In progress: W trakcie realizacji
+Client: Klient
+Status: Status
+Date: Data

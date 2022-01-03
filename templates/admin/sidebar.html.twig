@@ -10,7 +10,7 @@
                 <a href="{{ path('admin') }}" class="c-sidebar-nav__link">{% trans %}Dashboard{% endtrans %}</a>
             </li>
             <li class="c-sidebar-nav__item">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Orders{% endtrans %}</a>
+                <a href="{{ path('admin-orders') }}" class="c-sidebar-nav__link">{% trans %}Orders{% endtrans %}</a>
             </li>
             <li class="c-sidebar-nav__item has-children">
                 <a href="#" class="c-sidebar-nav__link">{% trans %}Products{% endtrans %}</a>
@@ -45,18 +45,6 @@
                     </li>
                     <li class="c-sidebar-nav__item">
                         <a href="{{ path('admin-new-supplier') }}" class="c-sidebar-nav__link">{% trans %}Add supplier{% endtrans %}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="c-sidebar-nav__item has-children">
-                <a href="#" class="c-sidebar-nav__link">{% trans %}Countries{% endtrans %}</a>
-
-                <ul class="c-sidebar-nav__list c-sidebar-nav__list--level-1">
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-countries') }}" class="c-sidebar-nav__link">{% trans %}All countries{% endtrans %}</a>
-                    </li>
-                    <li class="c-sidebar-nav__item">
-                        <a href="{{ path('admin-new-country') }}" class="c-sidebar-nav__link">{% trans %}Add country{% endtrans %}</a>
                     </li>
                 </ul>
             </li>

@@ -46,7 +46,7 @@ class SupplierAdminController extends AbstractController
                     $entityManager->flush();
                 }
     
-                $this->addFlash('success', $translator->trans("Supplier added"));
+                $this->addFlash('success', $translator->trans("Supplier added!"));
     
                 return $this->redirectToRoute('admin-suppliers');
             }
@@ -87,7 +87,7 @@ class SupplierAdminController extends AbstractController
                     $entityManager->flush();
                 }
                 
-                $this->addFlash('success', $translator->trans("Supplier edited"));
+                $this->addFlash('success', $translator->trans("Supplier edited!"));
     
                 return $this->redirectToRoute('admin-suppliers');
             }
@@ -118,11 +118,11 @@ class SupplierAdminController extends AbstractController
                 $fileUploader->remove($image);
             }
             
-            $this->addFlash('success', $translator->trans("Supplier removed"));
+            $this->addFlash('success', $translator->trans("Supplier removed!"));
 
             return $this->redirectToRoute('admin-suppliers');
         } catch (ForeignKeyConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("This supplier has connected products, so it can't be removed"));
+            $this->addFlash('error', $translator->trans("This supplier has connected products, so it can't be removed!"));
 
             return $this->redirectToRoute('admin-edit-supplier', ['id' => $supplier->getId()]);
         }

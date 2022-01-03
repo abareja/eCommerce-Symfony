@@ -18,7 +18,7 @@ class Payment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -26,6 +26,11 @@ class Payment
      * @ORM\Column(type="decimal", precision=7, scale=2)
      */
     private $cost;
+
+    public function __toString() 
+    {
+        return "$this->name ($this->cost zł)";
+    }
 
     public function getId(): ?int
     {

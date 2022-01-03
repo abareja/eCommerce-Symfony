@@ -59,7 +59,7 @@ class ProductAdminController extends AbstractController
                     $entityManager->flush();
                 }
     
-                $this->addFlash('success', $translator->trans("Product added"));
+                $this->addFlash('success', $translator->trans("Product added!"));
     
                 return $this->redirectToRoute('admin-products');
             }
@@ -120,7 +120,7 @@ class ProductAdminController extends AbstractController
                     $entityManager->flush();
                 }
     
-                $this->addFlash('success', $translator->trans("Product edited"));
+                $this->addFlash('success', $translator->trans("Product edited!"));
     
                 return $this->redirectToRoute('admin-products');
             }
@@ -158,11 +158,11 @@ class ProductAdminController extends AbstractController
                 }
             }
             
-            $this->addFlash('success', $translator->trans("Product removed"));
+            $this->addFlash('success', $translator->trans("Product removed!"));
 
             return $this->redirectToRoute('admin-products');
         } catch (ForeignKeyConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("This product can't be removed"));
+            $this->addFlash('error', $translator->trans("This product can't be removed!"));
 
             return $this->redirectToRoute('admin-edit-product', ['id' => $product->getId()]);
         }

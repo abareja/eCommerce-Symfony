@@ -13,18 +13,9 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 use App\Entity\Country;
 use App\Form\CountryType;
-use App\Repository\CountryRepository;
 
 class CountryAdminController extends AbstractController
 {
-    #[Route('/admin/countries', name: 'admin-countries')]
-    public function countries(CountryRepository $countryRepository): Response
-    {
-        return $this->render('admin/country/list.html.twig', [
-            'countries' => $countryRepository->findAll()
-        ]);
-    }
-
     #[Route('/admin/countries/new', name: 'admin-new-country')]
     public function newCountry(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
@@ -38,9 +29,9 @@ class CountryAdminController extends AbstractController
                 $entityManager->persist($country);
                 $entityManager->flush();
                 
-                $this->addFlash('success', $translator->trans("Country added"));
+                $this->addFlash('success', $translator->trans("Country added!"));
 
-                return $this->redirectToRoute('admin-countries');
+                return $this->redirectToRoute('admin-settings');
             }
         } catch(UniqueConstraintViolationException $e) {
             $this->addFlash('error', $translator->trans("Country already exists!"));
@@ -68,9 +59,9 @@ class CountryAdminController extends AbstractController
                 $entityManager->persist($country);
                 $entityManager->flush();
 
-                $this->addFlash('success', $translator->trans("Country edited"));
+                $this->addFlash('success', $translator->trans("Country edited!"));
 
-                return $this->redirectToRoute('admin-countries');
+                return $this->redirectToRoute('admin-settings');
             }
         } catch(UniqueConstraintViolationException $e) {
             $this->addFlash('error', $translator->trans("Country already exists!"));
@@ -93,11 +84,11 @@ class CountryAdminController extends AbstractController
             $entityManager->remove($country);
             $entityManager->flush();
 
-            $this->addFlash('success', $translator->trans("Country removed"));
+            $this->addFlash('success', $translator->trans("Country removed!"));
 
-            return $this->redirectToRoute('admin-countries');
+            return $this->redirectToRoute('admin-settings');
         } catch (ForeignKeyConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("This country has connected users, so it can't be removed"));
+            $this->addFlash('error', $translator->trans("This country has connected users, so it can't be removed!"));
 
             return $this->redirectToRoute('admin-edit-country', ['id' => $country->getId()]);
         }

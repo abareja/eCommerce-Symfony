@@ -30,12 +30,12 @@ class PaymentAdminController extends AbstractController
                 $entityManager->persist($payment);
                 $entityManager->flush();
                 
-                $this->addFlash('success', $translator->trans("payment method added!"));
+                $this->addFlash('success', $translator->trans("Payment method added!"));
 
-                return $this->redirectToRoute('admin');
+                return $this->redirectToRoute('admin-settings');
             }
         } catch(UniqueConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("payment method already exists!"));
+            $this->addFlash('error', $translator->trans("Payment method already exists!"));
 
             return $this->redirectToRoute('admin-new-payment');
         }
@@ -60,12 +60,12 @@ class PaymentAdminController extends AbstractController
                 $entityManager->persist($payment);
                 $entityManager->flush();
                 
-                $this->addFlash('success', $translator->trans("payment method edited!"));
+                $this->addFlash('success', $translator->trans("Payment method edited!"));
 
-                return $this->redirectToRoute('admin');
+                return $this->redirectToRoute('admin-settings');
             }
         } catch(UniqueConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("payment method exists!"));
+            $this->addFlash('error', $translator->trans("Payment method exists!"));
 
             return $this->redirectToRoute('admin-edit-payment', ['id' => $payment->getId()]);
         }
@@ -87,9 +87,9 @@ class PaymentAdminController extends AbstractController
 
             $this->addFlash('success', $translator->trans("Payment method removed!"));
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin-settings');
         } catch (ForeignKeyConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("This payment has connected orders, so it can't be removed"));
+            $this->addFlash('error', $translator->trans("This payment has connected orders, so it can't be removed!"));
 
             return $this->redirectToRoute('admin-edit-payment', ['id' => $payment->getId()]);
         }

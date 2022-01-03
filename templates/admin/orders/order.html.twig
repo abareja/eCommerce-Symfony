@@ -1,0 +1,48 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="c-admin-page">
+        <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Order{% endtrans %}</h2>
+
+        {% set user = order.user() %}
+        {% set address = order.address() %}
+
+
+        {% set items = order.items() %}
+        {% if items|length > 0 %}
+            <div class="o-table">
+                <div class="o-table__head">
+                    <div class="o-table__row" data-aos="fade-up">
+                        <div class="o-table__cell o-table__cell--image"></div>
+                        <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--category">{% trans %}Category{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--supplier">{% trans %}Supplier{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--price">{% trans %}Price{% endtrans %}</div>
+                        <div class="o-table__cell o-table__cell--quantity">{% trans %}Quantity{% endtrans %}</div>
+                    </div>
+                </div>
+                <div class="o-table__body">
+                    {% for item in items %}
+                        {% set product = item.product() %}
+                        <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                            <div class="o-table__cell o-table__cell--image">
+                                {% if product.featuredImagePath() %}
+                                    <a href="{{ path('admin-edit-product', {id: product.id}) }}">
+                                        <img data-src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-edit-product', {id: product.id}) }}">{{ product.name }}</a></div>
+                            <div class="o-table__cell o-table__cell--category"><a href="{{ path('admin-edit-category', {id: product.category.id}) }}">{{ product.category }}</a></div>
+                            <div class="o-table__cell o-table__cell--supplier"><a href="{{ path('admin-edit-supplier', {id: product.supplier.id}) }}">{{ product.supplier }}</a></div>                            
+                            <div class="o-table__cell o-table__cell--price">
+                                {% include 'product/product-price.html.twig' with {price: item.price, discountPrice: ''} %}
+                            </div>
+                            <div class="o-table__cell o-table__cell--quantity">{{ item.quantity }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

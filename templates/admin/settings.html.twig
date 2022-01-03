@@ -1,0 +1,78 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="c-admin-page">
+        <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Settings{% endtrans %}</h2>
+
+        {% if countries|length > 0 %}
+            <div class="c-admin-page__group">
+                <h3 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Countries{% endtrans %}</h3>
+
+                <div class="o-table">
+                    <div class="o-table__head">
+                        <div class="o-table__row" data-aos="fade-up">
+                            <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
+                        </div>
+                    </div>
+                    <div class="o-table__body">
+                        {% for country in countries %}
+                            <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-edit-country', {id: country.id}) }}">{{ country.name }}</a></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if shippings|length > 0 %}
+            <div class="c-admin-page__group">
+                <h3 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Shippings{% endtrans %}</h3>
+
+                <div class="o-table">
+                    <div class="o-table__head">
+                        <div class="o-table__row" data-aos="fade-up">
+                            <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
+                            <div class="o-table__cell o-table__cell--price">{% trans %}Cost{% endtrans %}</div>
+                        </div>
+                    </div>
+                    <div class="o-table__body">
+                        {% for shipping in shippings %}
+                            <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-edit-shipping', {id: shipping.id}) }}">{{ shipping.name }}</a></div>
+                                <div class="o-table__cell o-table__cell--price">{{ shipping.cost|format_currency('PLN', locale='pl') }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+
+        {% if payments|length > 0 %}
+            <div class="c-admin-page__group">
+                <h3 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Payments{% endtrans %}</h3>
+
+                <div class="o-table">
+                    <div class="o-table__head">
+                        <div class="o-table__row" data-aos="fade-up">
+                            <div class="o-table__cell o-table__cell--name">{% trans %}Name{% endtrans %}</div>
+                            <div class="o-table__cell o-table__cell--price">{% trans %}Cost{% endtrans %}</div>
+                        </div>
+                    </div>
+                    <div class="o-table__body">
+                        {% for payment in payments %}
+                            <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-edit-payment', {id: payment.id}) }}">{{ payment.name }}</a></div>
+                                <div class="o-table__cell o-table__cell--price">{{ payment.cost|format_currency('PLN', locale='pl') }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        
+        
+    </div>
+{% endblock %}
