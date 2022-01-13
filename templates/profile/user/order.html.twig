@@ -1,4 +1,4 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'profile/base.html.twig' %}
 
 {% set settings = {
     valueNames: [ 'name', 'category', 'supplier', 'price', 'quantity' ],
@@ -7,8 +7,8 @@
 } %}
 
 {% block content %}
-    <div class="c-admin-page">
-        <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Order{% endtrans %}</h2>
+    <div class="c-profile">
+        <h2 class="c-profile__title o-title u-margin-bottom" data-aos="fade-up">{% trans %}Order{% endtrans %}</h2>
 
         {% set user = order.user() %}
         {% set address = order.address() %}
@@ -29,40 +29,6 @@
             <div><strong>{% trans %}Shipping{% endtrans %}: </strong>{{ order.shipping().name }} ({{ order.shipping().cost|format_currency('PLN', locale='pl') }})</div>
             <div><strong>{% trans %}Payment{% endtrans %}: </strong>{{ order.payment().name }} ({{ order.payment().cost|format_currency('PLN', locale='pl') }})</div>
             <div><strong>{% trans %}Status{% endtrans %}: </strong>{% include 'order/order-status.html.twig' %}</div>
-
-            <hr class="u-margin-top-small" />
-            <strong>{% trans %}Change status{% endtrans %}</strong>
-            <div class="u-padding-top-small">
-                {{ form_start(form) }}
-
-                <div class="o-field{% if form_errors(form.status) %} is-invalid{% endif %}" 
-                    data-validation="required"
-                    data-aos="fade-up"
-                    data-aos-delay="50">
-                    {{ form_widget(form.status, {
-                        'attr': {'class': 'o-input js-select2'}
-                    }) }}
-                    <div class="o-field__error">{% trans %}Please select order status!{% endtrans %}</div>
-                </div>
-
-                <div class="o-field u-margin-top-small">
-                    <div class="o-grid o-grid--small">
-                        <div class="o-grid__item u-1/2@small-desktop">
-                            <a class="o-button o-button--outline o-button--full" data-aos="fade-up" data-aos-delay="300" href="{{ path('admin-delete-order', {id: order.id}) }}">
-                                {% trans %}Remove{% endtrans %}
-                            </a>
-                        </div>
-                        <div class="o-grid__item u-1/2@small-desktop u-text-right">
-                            <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
-                                {% trans %}Save{% endtrans %}
-                                <span class="o-icon o-icon--chevron-right"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {{ form_end(form) }}
-            </div>
 
             <hr class="u-margin-top-small" />
             <strong>{% trans %}Summary{% endtrans %}</strong>
@@ -127,14 +93,14 @@
                             <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
                                 <div class="o-table__cell o-table__cell--image">
                                     {% if product.featuredImagePath() %}
-                                        <a href="{{ path('admin-edit-product', {id: product.id}) }}">
+                                        <a href="{{ path('product', {id: product.id}) }}">
                                             <img data-src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
                                         </a>
                                     {% endif %}
                                 </div>
-                                <div class="o-table__cell o-table__cell--name name"><a href="{{ path('admin-edit-product', {id: product.id}) }}">{{ product.name }}</a></div>
-                                <div class="o-table__cell o-table__cell--category category"><a href="{{ path('admin-edit-category', {id: product.category.id}) }}">{{ product.category }}</a></div>
-                                <div class="o-table__cell o-table__cell--supplier supplier"><a href="{{ path('admin-edit-supplier', {id: product.supplier.id}) }}">{{ product.supplier }}</a></div>                            
+                                <div class="o-table__cell o-table__cell--name name"><a href="{{ path('product', {id: product.id}) }}">{{ product.name }}</a></div>
+                                <div class="o-table__cell o-table__cell--category category">{{ product.category }}</div>
+                                <div class="o-table__cell o-table__cell--supplier supplier">{{ product.supplier }}</div>                            
                                 <div class="o-table__cell o-table__cell--price price">
                                     {% include 'product/product-price.html.twig' with {price: item.price, discountPrice: ''} %}
                                 </div>

@@ -1,0 +1,50 @@
+<div class="c-checkout-totals">
+    <h2 class="c-checkout-page__title o-title u-margin-bottom" data-aos="fade-up">{% trans %}Order totals{% endtrans %}</h2>
+    
+    <div class="o-card" data-aos="fade-up">
+        <div><strong>{% trans %}Shipping{% endtrans %}: </strong>{{ cart.shipping().name }} ({{ cart.shipping().cost|format_currency('PLN', locale='pl') }})</div>
+        <div><strong>{% trans %}Payment{% endtrans %}: </strong>{{ cart.payment().name }} ({{ cart.payment().cost|format_currency('PLN', locale='pl') }})</div>
+
+        <hr class="u-margin-top-small" />
+        <strong>{% trans %}Summary{% endtrans %}</strong>
+
+        <div class="o-table o-table--left">
+            <div class="o-table__row">
+                <div class="o-table__cell">{% trans %}Products{% endtrans %}: </div>
+                <div class="o-table__cell">{{ cart.itemsPrice()|format_currency('PLN', locale='pl') }}</div>
+            </div>
+
+            <div class="o-table__row">
+                <div class="o-table__cell">{% trans %}Shipping{% endtrans %}: </div>
+                <div class="o-table__cell">{{ cart.shipping().cost|format_currency('PLN', locale='pl') }}</div>
+            </div>
+
+            <div class="o-table__row">
+                <div class="o-table__cell">{% trans %}Payment{% endtrans %}: </div>
+                <div class="o-table__cell">{{ cart.payment().cost|format_currency('PLN', locale='pl') }}</div>
+            </div>
+
+            <div class="o-table__row">
+                <div class="o-table__cell">{% trans %}Total{% endtrans %}: </div>
+                <div class="o-table__cell">{{ cart.total()|format_currency('PLN', locale='pl') }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="o-field u-margin-top-small">
+        <div class="o-grid o-grid--small">
+            <div class="o-grid__item u-1/2">
+                <a href="{{ path('cart') }}" title="{% trans %}Back to cart{% endtrans %}" class="o-button o-button--outline o-button--full" data-aos="fade-up" data-aos-delay="300">
+                    {% trans %}Back to cart{% endtrans %}
+                    <span class="o-icon o-icon--chevron-right"></span>
+                </a>
+            </div>
+            <div class="o-grid__item u-1/2">
+                <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
+                    {% trans %}Buy{% endtrans %}
+                    <span class="o-icon o-icon--chevron-right"></span>
+                </button>
+            </div>
+        </div>      
+    </div>
+</div>

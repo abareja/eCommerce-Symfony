@@ -1,10 +1,17 @@
 <div class="c-cart-totals" data-aos="fade-up" data-aos-delay="200">
     <h2 class="c-cart__title o-page-title" data-aos="fade-up">{% trans %}Order summary{% endtrans %}</h2>
+
+    {% include 'forms/form-payment-fields.html.twig' %}
+
+    {% include 'forms/form-shipping-fields.html.twig' %}
+
+    <hr class="u-margin-top-small" />
+
     <div class="c-cart-totals__summary">
         <div class="c-cart-totals__summary-item">
-            <div class="c-cart-totals__summary-name">{% trans %}Total{% endtrans %}: </div>
-            <div class="c-cart-totals__summary-value">{{ cart.total|format_currency('PLN', locale='pl') }}</div>
+            <div class="c-cart-totals__summary-name">{% trans %}Products{% endtrans %}: </div>
+            <div class="c-cart-totals__summary-value">{{ cart.itemsPrice|format_currency('PLN', locale='pl') }}</div>
         </div>
     </div>
-    <a href="{{ path('checkout') }}" class="o-button o-button--primary o-button--full u-margin-top-small">{% trans %}To checkout{% endtrans %}</a>
+    {{ form_widget(form.proceedToCheckout, {'attr': {'class': 'o-button o-button--primary o-button--full u-margin-top-small'}}) }}
 </div>

@@ -23,6 +23,10 @@ class CartController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $cartManager->save($cart);
 
+            if( $form->get('proceedToCheckout')->isClicked() ) {
+                return $this->redirectToRoute('checkout');
+            } 
+
             return $this->redirectToRoute('cart');
         }
 

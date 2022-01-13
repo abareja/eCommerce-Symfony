@@ -1,29 +1,51 @@
 {% extends 'profile/base.html.twig' %}
 
+{% set settings = {
+    valueNames: [ 'status', 'total', 'date' ],
+    page: 10,
+    pagination: true
+} %}
+
 {% block content %}
     <div class="c-profile">
         <h2 class="c-profile__title o-title u-margin-bottom" data-aos="fade-up">{% trans %}Orders{% endtrans %}</h2>
 
         {% if orders|length > 0 %}
-            <div class="o-table">
-                <div class="o-table__head">
-                    <div class="o-table__row" data-aos="fade-up">
-                        <div class="o-table__cell o-table__cell--name">{% trans %}Client{% endtrans %}</div>
-                        <div class="o-table__cell o-table__cell--status">{% trans %}Status{% endtrans %}</div>
-                        <div class="o-table__cell o-table__cell--total">{% trans %}Total{% endtrans %}</div>
-                        <div class="o-table__cell o-table__cell--date">{% trans %}Date{% endtrans %}</div>
+            <div id="orders" class="js-list" data-list-settings="{{ settings|json_encode()|escape() }}">
+                <div class="o-field u-margin-bottom" data-aos="fade-up" data-aos-delay="50">
+                    <label class="o-input__label" for="">{% trans %}Search{% endtrans %}</label>
+                    <div class="o-input__wrap">
+                        <input type="text" class="o-input search" />
+                        <span class="o-input__suffix"><span class="o-icon o-icon--search"></span></span>
                     </div>
                 </div>
-                <div class="o-table__body">
-                    {% for order in orders %}
-                        <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
-                            <div class="o-table__cell o-table__cell--name"><a href="{{ path('admin-order', {id: order.id}) }}">{{ order.user().firstname }} {{ order.user().lastname }}</a></div>
-                            <div class="o-table__cell o-table__cell--status">{{ order.statusLabel()|trans }}</div>                        
-                            <div class="o-table__cell o-table__cell--total">{{ order.total()|format_currency('PLN', locale='pl') }}</div>                        
-                            <div class="o-table__cell o-table__cell--date">{{ order.createdAt()|format_datetime() }}</div>                                    
+                <div class="o-table">
+                    <div class="o-table__head">
+                        <div class="o-table__row" data-aos="fade-up">
+                            <div class="o-table__cell o-table__cell--status">
+                                <span class="sort" data-sort="status">{% trans %}Status{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--total">
+                                <span class="sort" data-sort="total">{% trans %}Total{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--date">
+                                <span class="sort" data-sort="date">{% trans %}Date{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--actions"></div>
                         </div>
-                    {% endfor %}
+                    </div>
+                    <div class="o-table__body list">
+                        {% for order in orders %}
+                            <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                <div class="o-table__cell o-table__cell--status status">{% include 'order/order-status.html.twig' %}</div>                        
+                                <div class="o-table__cell o-table__cell--total total">{{ order.total()|format_currency('PLN', locale='pl') }}</div>                        
+                                <div class="o-table__cell o-table__cell--date date">{{ order.createdAt()|format_datetime() }}</div>                                    
+                                <div class="o-table__cell o-table__cell--actions"><a href="{{ path('profile-user-order', {id: order.id}) }}" class="o-button o-button--outline o-button--small">{% trans %}See order{% endtrans %}</a></div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
+                <ul class="o-pagination pagination u-margin-top" data-aos="fade-up" data-aos-delay="100"></ul>
             </div>
         {% endif %}
     </div>

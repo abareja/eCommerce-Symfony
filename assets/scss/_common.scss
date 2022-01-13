@@ -31,6 +31,7 @@
 @import "objects/objects.price";
 @import "objects/objects.quantity";
 @import "objects/objects.zoom";
+@import "objects/objects.pagination";
 
 // COMPONENTS
 @import "components/components.main-nav";
@@ -54,6 +55,7 @@
 @import "components/components.cart-totals";
 @import "components/components.cart";
 @import "components/components.supplier-slider";
+@import "components/components.order-status";
 
 //NODE MODULES
 @import '~aos/src/sass/aos.scss';
@@ -82,6 +84,8 @@
 @import "trumps/trumps.slick";
 @import "trumps/trumps.aos";
 @import "trumps/trumps.fancybox";
+@import "trumps/trumps.list";
+
 
 
 

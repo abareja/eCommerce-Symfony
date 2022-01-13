@@ -1,0 +1,23 @@
+.sort {
+    position: relative;
+    cursor: pointer;
+
+    &.asc, &.desc {
+        &:after {
+            font-family: 'icomoon';
+            position: absolute;
+            right: -0.25em;
+            transform: translateX(100%);
+            line-height: 1;
+            vertical-align: middle;
+        }
+    }
+
+    &.asc:after {
+        content: icon(chevron-down);
+    }
+
+    &.desc:after {
+        content: icon(chevron-up);
+    }
+}

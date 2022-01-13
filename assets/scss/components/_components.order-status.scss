@@ -1,0 +1,9 @@
+.c-order-status {
+    &--order {
+        color: orange;
+    }
+
+    &--finished {
+        color: green;
+    }
+}

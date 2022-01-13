@@ -9,8 +9,23 @@
             <li class="c-sidebar-nav__item">
                 <a href="{{ path('admin') }}" class="c-sidebar-nav__link">{% trans %}Dashboard{% endtrans %}</a>
             </li>
-            <li class="c-sidebar-nav__item">
-                <a href="{{ path('admin-orders') }}" class="c-sidebar-nav__link">{% trans %}Orders{% endtrans %}</a>
+            <li class="c-sidebar-nav__item has-children">
+                <a href="#" class="c-sidebar-nav__link">{% trans %}Orders{% endtrans %}</a>
+            
+                <ul class="c-sidebar-nav__list c-sidebar-nav__list--level-1">
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-orders') }}" class="c-sidebar-nav__link">{% trans %}All orders{% endtrans %}</a>
+                    </li>
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-orders-new') }}" class="c-sidebar-nav__link">{% trans %}New orders{% endtrans %}</a>
+                    </li>
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-orders-finished') }}" class="c-sidebar-nav__link">{% trans %}Finished orders{% endtrans %}</a>
+                    </li>
+                    <li class="c-sidebar-nav__item">
+                        <a href="{{ path('admin-orders-archived') }}" class="c-sidebar-nav__link">{% trans %}Archived orders{% endtrans %}</a>
+                    </li>
+                </ul>
             </li>
             <li class="c-sidebar-nav__item has-children">
                 <a href="#" class="c-sidebar-nav__link">{% trans %}Products{% endtrans %}</a>

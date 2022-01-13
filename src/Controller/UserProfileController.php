@@ -13,9 +13,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Form\UserType;
 use App\Form\AddressType;
 use App\Form\UserPasswordType;
-
+use App\Entity\Order;
 use App\Entity\Address;
+use App\Entity\OrderUser;
 use App\Repository\OrderRepository;
+use App\Repository\OrderUserRepository;
+
 
 class UserProfileController extends AbstractController
 {
@@ -111,13 +114,26 @@ class UserProfileController extends AbstractController
     }
 
     #[Route('/profile/user-orders', name: 'profile-user-orders')]
-    public function userOrders(OrderRepository $orderRepository): Response
+    public function userOrders(OrderRepository $orderRepository, OrderUserRepository $orderUserRepository): Response
     {
         $user = $this->getUser();
-        $orders = $orderRepository->findBy(['user' => $user]);
+        $orders = [];
+        $orderUsers = $orderUserRepository->findBy(['user' => $user]);
 
+        foreach( $orderUsers as $orderUser ) {
+            $orders = array_merge($orders, $orderRepository->findBy(['user' => $orderUser]));
+        }
+        
         return $this->render('profile/user/orders.html.twig', [
             'orders' => $orders
+        ]);
+    }
+
+    #[Route('/profile/user-orders/{id}', name: 'profile-user-order')]
+    public function userOrder(Order $order): Response
+    {
+        return $this->render('profile/user/order.html.twig', [
+            'order' => $order
         ]);
     }
 }

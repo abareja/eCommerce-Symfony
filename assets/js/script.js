@@ -1,6 +1,7 @@
 import "slick-carousel";
 import "./import-jquery";
 import(/* webpackChunkName: "sidebar" */ "./sidebar");
+import List from "list.js";
 
 //LAZYLOAD
 const initLazyload = () => {
@@ -52,7 +53,10 @@ initForms();
 //ANIMATIONS ON SCROLL
 const initAOS = () => {
   import(/* webpackChunkName: "AOS" */ "aos").then((AOS) => {
-    AOS.init();
+    AOS.init({
+        once: true,
+        offset: -100
+    });
   });
 }
 initAOS();
@@ -205,3 +209,22 @@ const initProductGallery = () => {
     });
 }
 initProductGallery();
+
+//LIST.JS
+const initLists = () => {
+    const lists = document.querySelectorAll('.js-list');
+
+    if( lists.length === 0 ) return;
+
+    lists.forEach(list => {
+        const settings = JSON.parse(list.dataset.listSettings);
+        let id = list.id;
+
+        var options = {
+            ...settings
+        };
+
+        var list = new List(id, options);
+    });
+}
+initLists();

@@ -32,6 +32,8 @@ class Order
      */
     const STATUS_CART = 'cart';
     const STATUS_ORDER = 'order';
+    const STATUS_FINISHED = 'finished';
+    const STATUS_ARCHIVED = 'archived';
 
     /**
      * @ORM\Column(type="datetime")
@@ -85,6 +87,8 @@ class Order
         switch( $this->status ) {
             case self::STATUS_CART: return 'Cart';
             case self::STATUS_ORDER: return 'In progress';
+            case self::STATUS_FINISHED: return 'Finished';
+            case self::STATUS_ARCHIVED: return 'Archived';
         }
     }
 
@@ -167,6 +171,25 @@ class Order
      * @return float
      */
     public function getTotal(): float
+    {
+        $total = 0;
+
+        foreach ($this->getItems() as $item) {
+            $total += $item->getTotal();
+        }
+
+        if ($payment = $this->getPayment()) {
+            $total += $payment->getCost();
+        }
+
+        if ($shipping = $this->getShipping()) {
+            $total += $shipping->getCost();
+        }
+
+        return $total;
+    }
+
+    public function getItemsPrice(): float
     {
         $total = 0;
 

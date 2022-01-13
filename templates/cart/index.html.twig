@@ -4,14 +4,18 @@
     <section class="c-cart u-margin-vertical-large">
         <div class="o-wrapper o-wrapper--full u-margin-vertical-large">
             {% if cart.items|length > 0 %}  
-                <div class="o-grid">
-                    <div class="o-grid__item u-3/4@desktop">
-                        {%  include 'cart/cart-table.html.twig' %}
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate',}}) }}
+
+                    <div class="o-grid">
+                        <div class="o-grid__item u-3/4@desktop">
+                            {%  include 'cart/cart-table.html.twig' %}
+                        </div>
+                        <div class="o-grid__item u-1/4@desktop">
+                            {%  include 'cart/cart-totals.html.twig' %}
+                        </div>
                     </div>
-                    <div class="o-grid__item u-1/4@desktop">
-                        {%  include 'cart/cart-totals.html.twig' %}
-                    </div>
-                </div>
+
+                {{ form_end(form, {'render_rest': false}) }}
             {% else %}
                 <div class="u-text-center u-margin-vertical-huge u-padding-vertical-huge">
                     <h2 class="o-title">{% trans %}No items in cart{% endtrans %}</h2>

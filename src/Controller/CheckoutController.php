@@ -62,12 +62,18 @@ class CheckoutController extends AbstractController
             $entityManager->persist($cart);        
             $entityManager->flush($cart);
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('checkout-done');
         }
 
         return $this->render('checkout/index.html.twig', [
             'cart' => $cart,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/checkout/done', name: 'checkout-done')]
+    public function done(): Response
+    {
+        return $this->render('checkout/done.html.twig');
     }
 }

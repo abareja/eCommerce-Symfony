@@ -34,5 +34,9 @@
         bottom: 0;
         border-top-color: transparent;
         z-index: 1;
+
+        body.admin & {
+            top: $header-height + $admin-bar-height + $spacing-tiny;
+        }
     }
 }

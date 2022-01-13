@@ -1,5 +1,12 @@
 .o-card {
-    box-shadow: 0px 0px 10px 0px rgba(#000, .15);
+    border: 1px solid theme-color(light-200);
     padding: $spacing-small;
-    background: #fff;
+
+    &__title {
+        padding-bottom: $spacing-small;
+        border-bottom: 1px solid theme-color(light-200);
+        margin-bottom: $spacing-small;
+        font-weight: 600;
+        @include font-size(24px, 1.3);
+    }
 }

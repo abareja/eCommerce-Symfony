@@ -11,26 +11,10 @@
                         {% include 'checkout/checkout-address.html.twig' %}
                     </div>
                     <div class="o-grid__item u-1/2@desktop">
-                        {% include 'checkout/checkout-shipping.html.twig' %}
+                        {% include 'checkout/checkout-totals.html.twig' %}
                     </div>
                 </div>
-
-                <div class="o-field u-margin-top-small">
-                    <div class="o-grid o-grid--small u-padding-bottom-small">
-                        <div class="o-grid__item u-1/2@small-desktop">
-                            
-                        </div>
-                        <div class="o-grid__item u-1/2@small-desktop u-text-right">
-                            <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
-                                {% trans %}Buy{% endtrans %}
-                                <span class="o-icon o-icon--chevron-right"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <hr data-aos="fade-in" data-aos-delay="350" />
-
+                
                 {{ form_end(form) }}
             {% else %}
                 <div class="u-text-center u-margin-vertical-huge u-padding-vertical-huge">

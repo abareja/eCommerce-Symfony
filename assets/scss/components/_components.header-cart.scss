@@ -75,6 +75,18 @@
 
     &__wrapper {
         margin-bottom: $spacing-small;
+        overflow: auto;
+        max-height: calc(100% - 132px - #{$spacing-large} - #{$spacing-tiny});
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        body.admin & {
+            max-height: calc(100% - 132px - #{$spacing} - #{$admin-bar-height});
+        }
     }
 
     &__product {

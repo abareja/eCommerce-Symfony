@@ -3,20 +3,28 @@
 namespace App\Form;
 
 use App\Entity\Order;
-use App\Form\OrderAddressType;
-use App\Form\OrderUserType;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CheckoutType extends AbstractType
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Entity\Shipping;
+use App\Entity\Payment;
+
+class OrderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('user', OrderUserType::class)
-            ->add('address', OrderAddressType::class)
+            ->add('status', ChoiceType::class, [
+                'required' => true,
+                'choices'  => [
+                    'In progress' => 'order',
+                    'Finished' => 'finished',
+                    'Archived' => 'archived'
+                ],
+            ])
         ;
     }
 

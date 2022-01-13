@@ -1,0 +1,17 @@
+{% extends 'checkout/base.html.twig' %}
+
+{% block content %}
+    <section class="c-checkout u-margin-vertical-large">
+        <div class="o-wrapper o-wrapper--full u-margin-vertical-large">
+            <div class="u-text-center u-margin-vertical-huge u-padding-vertical-huge" data-aos="fade-up">
+                <h2 class="o-title">{% trans %}Thank you for your purchase!{% endtrans %}</h2>
+                <h4 class="o-title">{% trans %}You can check your order in "My account" tab{% endtrans %}</h4>
+                <a href="{{ path('new') }}" title="{% trans %}Go shopping{% endtrans %}" class="o-button o-button--outline">
+                    {% trans %}Go shopping{% endtrans %}
+                    <span class="o-icon o-icon--chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

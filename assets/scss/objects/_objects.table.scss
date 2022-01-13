@@ -40,4 +40,9 @@
         text-align: left;
         justify-content: flex-start;
     }
+
+    &--left &__cell {
+        justify-content: flex-start;
+        padding: 0.5em 0;
+    }
 }

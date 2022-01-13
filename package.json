@@ -29,6 +29,7 @@
         "gulp": "^4.0.2",
         "inuitcss": "^6.0.0",
         "jquery": "^3.6.0",
+        "list.js": "^2.3.1",
         "select2": "^4.1.0-rc.0",
         "slick-carousel": "^1.8.1",
         "vanilla-lazyload": "^17.5.0"
