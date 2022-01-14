@@ -102,19 +102,19 @@ export const isInt = (str) => {
 }
 
 export const isIntFromRange = (value, minValue, maxValue) => {
-    const minVal = minValue ? parseInt(minValue) : "";
-    const maxVal = maxValue ? parseInt(maxValue) : "";
+    const minVal = minValue ? parseInt(minValue) : null;
+    const maxVal = maxValue ? parseInt(maxValue) : null;
     let valid = false;
 
     if( isInt(value) ) {
         valid = true;
         value = parseInt(value);
 
-        if( minVal != "" && maxVal != "" ) {
+        if( minVal != null && maxVal != null ) {
             if( value >= minVal && value <= maxVal ) valid = true; else valid = false;
-        } else if( minVal != "" && maxVal == "" ) {
+        } else if( minVal != null && maxVal == null ) {
             if( value >= minVal ) valid = true; else valid = false;
-        } else if( minVal == "" && maxVal != "" ) {
+        } else if( minVal == null && maxVal != null ) {
             if( value <= maxVal ) valid = true; else valid = false;
         }
     } else {

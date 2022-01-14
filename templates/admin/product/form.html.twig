@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="o-field{% if form_errors(form.quantityInStock) %} is-invalid{% endif %}" 
-                    data-validation="integer" data-validation-min="-1" data-validation-max="10"
+                    data-validation="integer" data-validation-min="0"
                     data-aos="fade-up"
                     data-aos-delay="50">
                     <label class="o-input__label" for="{{ form.quantityInStock.vars.id }}">{% trans %}Quantity{% endtrans %}</label>
