@@ -65,7 +65,7 @@ class PaymentAdminController extends AbstractController
                 return $this->redirectToRoute('admin-settings');
             }
         } catch(UniqueConstraintViolationException $e) {
-            $this->addFlash('error', $translator->trans("Payment method exists!"));
+            $this->addFlash('error', $translator->trans("Payment method already exists!"));
 
             return $this->redirectToRoute('admin-edit-payment', ['id' => $payment->getId()]);
         }

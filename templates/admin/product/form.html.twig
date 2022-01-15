@@ -92,7 +92,7 @@
                     data-aos-delay="50">
                     <label class="o-input__label" for="{{ form.description.vars.id }}">{% trans %}Description{% endtrans %}</label>
                     {{ form_widget(form.description, {
-                        'attr': {'class': 'o-input o-input--textarea'}
+                        'attr': {'class': 'o-input o-input--textarea o-input--textarea-high o-input--textarea-resizable'}
                     }) }}
                 </div>
 
@@ -142,6 +142,13 @@
                         </div>
                     </div>
                     <div class="o-field__error">{% trans %}Please choose images!{% endtrans %}</div>
+                </div>
+
+                 <div class="o-field{% if form_errors(form.productAttributes) %} is-invalid{% endif %}" 
+                    data-aos="fade-up"
+                    data-aos-delay="50">
+                    <label class="o-input__label" for="{{ form.productAttributes.vars.id }}">{% trans %}Attributes{% endtrans %}</label>
+                    {{ form_widget(form.productAttributes) }}
                 </div>
 
                 <div class="o-field u-margin-top-small">

@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CountryRepository;
 use App\Repository\ShippingRepository;
 use App\Repository\PaymentRepository;
+use App\Repository\AttributeRepository;
 
 class AdminController extends AbstractController
 {
@@ -19,16 +20,18 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/settings', name: 'admin-settings')]
-    public function adminSettings(CountryRepository $countryRepository, ShippingRepository $shippingRepository, PaymentRepository $paymentRepository): Response
+    public function adminSettings(CountryRepository $countryRepository, ShippingRepository $shippingRepository, PaymentRepository $paymentRepository, AttributeRepository $attributeRepository): Response
     {
         $countries = $countryRepository->findAll();
         $shippings = $shippingRepository->findAll();
         $payments = $paymentRepository->findAll();
+        $attributes = $attributeRepository->findAll();
 
         return $this->render('admin/settings.html.twig', [
             'countries' => $countries, 
             'shippings' => $shippings, 
-            'payments' => $payments
+            'payments' => $payments,
+            'attributes' => $attributes
         ]);
     }
 }

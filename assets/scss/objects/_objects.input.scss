@@ -24,6 +24,14 @@
         resize: none;
     }
 
+    &--textarea-resizable {
+        resize: vertical;
+    }
+
+    &--textarea-high {
+        min-height: 20em;
+    }
+
     &__wrap {
         position: relative;
         display: flex;

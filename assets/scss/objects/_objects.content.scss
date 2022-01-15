@@ -1,9 +1,5 @@
 .o-content {
-    padding: $spacing-large 0;
-
-    @include mq($until: desktop) {
-        padding: $spacing 0;
-    }
+    padding: $spacing 0;
 }
 
 

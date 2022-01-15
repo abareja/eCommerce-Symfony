@@ -16,6 +16,9 @@ use App\Entity\Image;
 use App\Service\ProductFileUploader;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Entity\AttributeValue;
+use App\Entity\ProductAttribute;
+use App\Entity\Attribute;
 
 class ProductAdminController extends AbstractController
 {
@@ -38,6 +41,7 @@ class ProductAdminController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $images = $form->get('images')->getData();
                 $featuredImage = $form->get('featuredImage')->getData();
+                $productAttributes = $form->get('productAttributes');
 
                 $product->setDateAdded(new \Datetime());
                 $entityManager->persist($product);
@@ -56,6 +60,20 @@ class ProductAdminController extends AbstractController
                 if( $featuredImage ) {
                     $featuredImageFileName = $fileUploader->upload($featuredImage);
                     $product->setFeaturedImage($featuredImageFileName);
+                    $entityManager->flush();
+                }
+
+                if( count($productAttributes) > 0 ) {
+                    foreach( $productAttributes as $productAttribute ) {
+                        $attribute = $productAttribute->get('attribute')->getData();
+                        $attributeValue = $productAttribute->get('attributeValue')->getData();
+                        $attributeValue->setAttribute($attribute);
+
+                        $productAttributeObj = new ProductAttribute();
+                        $productAttributeObj->setAttribute($attribute);
+                        $productAttributeObj->setAttributeValue($attributeValue);
+                        $product->addProductAttribute($productAttributeObj);
+                    }
                     $entityManager->flush();
                 }
     
@@ -83,12 +101,15 @@ class ProductAdminController extends AbstractController
         try {
             $prevFeaturedImage = $product->getFeaturedImage();
             $prevImages = $product->getImages();
+            $prevProductAttributes = $product->getProductAttributes();
             $form = $this->createForm(ProductType::class, $product);
+            $form->get('productAttributes')->setData($prevProductAttributes);
             $form->handleRequest($request);
     
             if ($form->isSubmitted() && $form->isValid()) {
                 $images = $form->get('images')->getData();
                 $featuredImage = $form->get('featuredImage')->getData();
+                $productAttributes = $form->get('productAttributes');
     
                 $entityManager->persist($product);
                 $entityManager->flush();
@@ -117,6 +138,28 @@ class ProductAdminController extends AbstractController
                     }
                     $featuredImageFileName = $fileUploader->upload($featuredImage);
                     $product->setFeaturedImage($featuredImageFileName);
+                    $entityManager->flush();
+                }
+
+                if( count($prevProductAttributes) > 0) {
+                    foreach( $prevProductAttributes as $prevProductAttribute ) {
+                        $entityManager->remove($prevProductAttribute);
+                        $entityManager->flush();
+                    }
+                }
+
+                if( count($productAttributes) > 0 ) { 
+                    foreach( $productAttributes as $productAttribute ) {
+                        $attribute = $productAttribute->get('attribute')->getData();
+                        $attributeValue = $productAttribute->get('attributeValue')->getData();
+                        
+                        $attributeValue->setAttribute($attribute);
+
+                        $productAttributeObj = new ProductAttribute();
+                        $productAttributeObj->setAttribute($attribute);
+                        $productAttributeObj->setAttributeValue($attributeValue);
+                        $product->addProductAttribute($productAttributeObj);
+                    }
                     $entityManager->flush();
                 }
     

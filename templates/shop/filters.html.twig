@@ -13,6 +13,24 @@
             {% endfor %}
         </div>
 
+        {% if attributes is defined and attributes|length > 0 %}
+            {% for item in attributes %}
+                {% set attribute = item.attribute %}
+                {% set attributeValues = item.attributeValues %}
+                <div class="c-filters__group">
+                    <h3 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{{ attribute.name }}</h3>
+                    {% for attributeValue in attributeValues %}
+                        <div class="o-field" data-aos="fade-up" data-aos-delay="100">
+                            <div class="o-checkbox">
+                                <input  type="checkbox" id="{{ attributeValue.value }}" name="{{ attributeValue.value }}" />
+                                <label for="{{ attributeValue.value }}">{{ attributeValue.value }}</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
+
         <div class="c-filters__group">
             <h3 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{% trans %}Price{% endtrans %}</h3>
             <div class="o-grid o-grid--tiny">

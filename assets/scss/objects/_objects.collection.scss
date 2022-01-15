@@ -1,0 +1,52 @@
+.o-collection {
+    &__button {
+        cursor: pointer;
+        height: 3em;
+        width: 3em;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid theme-color(light-200);
+
+        &:hover {
+            border: 1px solid #000;
+        } 
+
+        &--full {
+            width: 100%;
+        }
+    }
+
+    &__group {
+        position: relative;
+        margin-bottom: 1em;
+
+        @include mq($until: desktop) {
+            & > div > div {
+                margin-bottom: .5em;
+            }
+        }
+
+        @include mq($from: desktop) {
+            & > div {
+                display: flex;
+    
+                & > div {
+                    width: 30%;
+                }
+    
+                & > div + div {
+                    padding-left: $spacing-tiny;
+                    width: 70%;
+                }
+            }
+        }
+
+        & div[class$="parent-actions"] {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+    }
+}

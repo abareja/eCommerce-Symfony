@@ -4,6 +4,10 @@
         border-bottom: 1px solid theme-color(light-200);
     }
 
+    &--hoverable &__row:hover {
+        background-color: rgba(#000, .05);
+    }
+
     &__head &__cell {
         @include font-size(15px, 1.3);
         white-space: nowrap;
@@ -20,6 +24,8 @@
         align-items: center;
         padding: .5em 1em;
         text-align: center;
+        line-height: 1.2;
+        min-height: 50px;
     }
 
     &__cell--image {

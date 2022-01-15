@@ -1,10 +1,12 @@
 import { triggerEvent, isScrolledIntoView } from "./helpers";
+import "./import-jquery";
 
 const el = {
     header: document.querySelector('.js-header'),
     toggleNav: document.querySelector('.js-toggle-nav'),
     searchToggle: document.querySelectorAll('.js-header-search-toggle'),
     search: document.querySelector('.js-header-search'),
+    anchors: document.querySelectorAll('a[href*="#"]')
 };
 
 const closeAllSubmenus = () => {
@@ -100,5 +102,40 @@ initSearch();
             });
         }
     });   
+})();
+
+(() => {
+    const collection = el.anchors;
+    const {header, toggleNav} = el;
+    if( collection.length !== 0 ) {
+        const $root = $('html, body');
+        const offset = 120;
+        collection.forEach((el) => {
+            if( el.classList.contains('js-anchor-initialized') ) { return; }
+            const href = el.getAttribute('href');
+            const newhref = href.substring(0,href.indexOf("#"));
+            const currenthref = window.location.pathname;
+            const target = document.getElementById(href.substring(href.indexOf("#") + 1));
+            el.classList.add('js-anchor-initialized');
+
+            if( target ) {
+                
+                el.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    $root.animate({
+                        scrollTop: $(target).offset().top - offset
+                    }, 500, 'swing');
+                    window.location.hash = target.id;
+
+                    if( header && toggleNav ) {
+                        header.classList.remove('is-nav-open');
+                        toggleNav.classList.remove('is-open');
+                    }
+
+                    return false;
+                });
+            }
+        });
+    }
 })();
 

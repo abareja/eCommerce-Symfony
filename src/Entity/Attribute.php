@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AttributeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,19 +20,30 @@ class Attribute
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity=AttributeValue::class, mappedBy="attribute", orphanRemoval=true, cascade={"persist"})
      */
-    private $value;
+    private $attributeValues;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="attributes")
+     * @ORM\OneToMany(targetEntity=ProductAttribute::class, mappedBy="attribute", orphanRemoval=true)
      */
-    private $product;
+    private $productAttributes;
+
+    public function __toString() 
+    {
+        return $this->name;
+    }
+
+    public function __construct()
+    {
+        $this->attributeValues = new ArrayCollection();
+        $this->productAttributes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -49,26 +62,62 @@ class Attribute
         return $this;
     }
 
-    public function getValue(): ?string
+    /**
+     * @return Collection|AttributeValue[]
+     */
+    public function getAttributeValues(): Collection
     {
-        return $this->value;
+        return $this->attributeValues;
     }
 
-    public function setValue(string $value): self
+    public function addAttributeValue(AttributeValue $attributeValue): self
     {
-        $this->value = $value;
+        if (!$this->attributeValues->contains($attributeValue)) {
+            $this->attributeValues[] = $attributeValue;
+            $attributeValue->setAttribute($this);
+        }
 
         return $this;
     }
 
-    public function getProduct(): ?Product
+    public function removeAttributeValue(AttributeValue $attributeValue): self
     {
-        return $this->product;
+        if ($this->attributeValues->removeElement($attributeValue)) {
+            // set the owning side to null (unless already changed)
+            if ($attributeValue->getAttribute() === $this) {
+                $attributeValue->setAttribute(null);
+            }
+        }
+
+        return $this;
     }
 
-    public function setProduct(?Product $product): self
+    /**
+     * @return Collection|ProductAttribute[]
+     */
+    public function getProductAttributes(): Collection
     {
-        $this->product = $product;
+        return $this->productAttributes;
+    }
+
+    public function addProductAttribute(ProductAttribute $productAttribute): self
+    {
+        if (!$this->productAttributes->contains($productAttribute)) {
+            $this->productAttributes[] = $productAttribute;
+            $productAttribute->setAttribute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductAttribute(ProductAttribute $productAttribute): self
+    {
+        if ($this->productAttributes->removeElement($productAttribute)) {
+            // set the owning side to null (unless already changed)
+            if ($productAttribute->getAttribute() === $this) {
+                $productAttribute->setAttribute(null);
+            }
+        }
 
         return $this;
     }

@@ -228,3 +228,24 @@ const initLists = () => {
     });
 }
 initLists();
+
+//COLLECTIONS
+const initCollections = () => {
+    import(/* webpackChunkName: "collection" */ "symfony-collection").then(() => {
+        $('.js-collection').collection({
+            add: '<span class="o-collection__button o-collection__button--full"><span class="o-icon o-icon--plus"></span></span>',
+            remove: '<span class="o-collection__button"><span class="o-icon o-icon--minus"></span></span>',
+            allow_up: false,
+            allow_down: false,
+            allow_duplicate: false,
+            add_at_the_end: true,
+            prefix: 'parent',
+            prototype_name: '__parent_name__',
+            name_prefix: '{{ formView.myCollectionField.vars.full_name }}',
+            after_add: function (collection, element) {
+                initSelect2();
+            },
+        }); 
+    });
+}
+initCollections();

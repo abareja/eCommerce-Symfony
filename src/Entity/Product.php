@@ -52,11 +52,6 @@ class Product
     private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity=Attribute::class, mappedBy="product")
-     */
-    private $attributes;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -76,10 +71,16 @@ class Product
      */
     private $dateAdded;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductAttribute::class, mappedBy="product", orphanRemoval=true, cascade={"persist"})
+     */
+    private $productAttributes;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->attributes = new ArrayCollection();
+        $this->productAttributes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,36 +178,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Attribute[]
-     */
-    public function getAttributes(): Collection
-    {
-        return $this->attributes;
-    }
-
-    public function addAttribute(Attribute $attribute): self
-    {
-        if (!$this->attributes->contains($attribute)) {
-            $this->attributes[] = $attribute;
-            $attribute->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAttribute(Attribute $attribute): self
-    {
-        if ($this->attributes->removeElement($attribute)) {
-            // set the owning side to null (unless already changed)
-            if ($attribute->getProduct() === $this) {
-                $attribute->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -260,6 +231,45 @@ class Product
     public function setDateAdded(\DateTimeInterface $dateAdded): self
     {
         $this->dateAdded = $dateAdded;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductAttribute[]
+     */
+    public function getProductAttributes(): Collection
+    {
+        return $this->productAttributes;
+    }
+
+     /**
+     * @return Collection|ProductAttribute[]
+     */
+    public function getFeaturedProductAttributes(): Collection
+    {
+        $productAttributes = $this->productAttributes;
+        return new ArrayCollection($productAttributes->slice(0, 4));
+    }
+
+    public function addProductAttribute(ProductAttribute $productAttribute): self
+    {
+        if (!$this->productAttributes->contains($productAttribute)) {
+            $this->productAttributes[] = $productAttribute;
+            $productAttribute->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductAttribute(ProductAttribute $productAttribute): self
+    {
+        if ($this->productAttributes->removeElement($productAttribute)) {
+            // set the owning side to null (unless already changed)
+            if ($productAttribute->getProduct() === $this) {
+                $productAttribute->setProduct(null);
+            }
+        }
 
         return $this;
     }

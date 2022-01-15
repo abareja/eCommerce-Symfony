@@ -1,0 +1,43 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="c-admin-page">
+        <h2 class="c-admin-page__title o-title u-margin-bottom" data-aos="fade-up">{{ title }}</h2>
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'enctype': 'multipart/form-data'}}) }}
+
+                <div class="o-field{% if form_errors(form.name) %} is-invalid{% endif %}" 
+                    data-validation="required"
+                    data-aos="fade-up"
+                    data-aos-delay="50">
+                    <label class="o-input__label" for="{{ form.name.vars.id }}">{% trans %}Name{% endtrans %}</label>
+                    {{ form_widget(form.name, {
+                        'attr': {'class': 'o-input'}
+                    }) }}
+                    <div class="o-field__error">{% trans %}Please enter a valid product name!{% endtrans %}</div>
+                </div>
+
+                <div class="o-field u-margin-top-small">
+                    <div class="o-grid o-grid--small u-padding-bottom-small">
+                        <div class="o-grid__item u-1/2@small-desktop">
+                            {% if attribute %}
+                                <a class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300" href="{{ path('admin-delete-attribute', {id: attribute.id}) }}">
+                                    {% trans %}Remove{% endtrans %}
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="o-grid__item u-1/2@small-desktop u-text-right">
+                            <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
+                                {{ buttonText }}
+                                <span class="o-icon o-icon--chevron-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr data-aos="fade-in" data-aos-delay="350" />
+
+            {{ form_end(form) }}
+        
+    </div>
+{% endblock %}

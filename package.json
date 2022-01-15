@@ -32,6 +32,7 @@
         "list.js": "^2.3.1",
         "select2": "^4.1.0-rc.0",
         "slick-carousel": "^1.8.1",
+        "symfony-collection": "github:ninsuo/symfony-collection",
         "vanilla-lazyload": "^17.5.0"
     }
 }

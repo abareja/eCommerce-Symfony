@@ -64,4 +64,15 @@
         margin-top: $spacing-small;
         font-weight: 700;
     }
+
+    &__description {
+        img {
+            margin: $spacing auto;
+            max-width: 100%;
+            height: auto;
+            //max-height: 500px;
+            width: auto;
+            display: block;
+        }
+    }
 }

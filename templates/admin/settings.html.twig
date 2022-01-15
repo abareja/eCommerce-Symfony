@@ -1,8 +1,47 @@
 {% extends 'admin/base.html.twig' %}
 
+{% set settings = {
+    valueNames: [ 'name' ],
+    page: 10,
+    pagination: true
+} %}
+
 {% block content %}
     <div class="c-admin-page">
         <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Settings{% endtrans %}</h2>
+
+        {% if attributes|length > 0 %}
+            <div class="c-admin-page__group">
+                <h3 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Attributes{% endtrans %}</h3>
+
+                <div id="attributes" class="js-list" data-list-settings="{{ settings|json_encode()|escape() }}">
+                    <div class="o-field u-margin-bottom" data-aos="fade-up" data-aos-delay="50">
+                        <label class="o-input__label" for="">{% trans %}Search{% endtrans %}</label>
+                        <div class="o-input__wrap">
+                            <input type="text" class="o-input search" />
+                            <span class="o-input__suffix"><span class="o-icon o-icon--search"></span></span>
+                        </div>
+                    </div>
+                    <div class="o-table">
+                        <div class="o-table__head">
+                            <div class="o-table__row" data-aos="fade-up">
+                                <div class="o-table__cell o-table__cell--name">
+                                    <span class="sort" data-sort="name">{% trans %}Name{% endtrans %}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="o-table__body list">
+                            {% for attribute in attributes %}
+                                <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                    <div class="o-table__cell o-table__cell--name name"><a href="{{ path('admin-edit-attribute', {id: attribute.id}) }}">{{ attribute.name }}</a></div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <ul class="o-pagination pagination u-margin-top" data-aos="fade-up" data-aos-delay="100"></ul>
+                </div>
+            </div>
+        {% endif %}
 
         {% if countries|length > 0 %}
             <div class="c-admin-page__group">
