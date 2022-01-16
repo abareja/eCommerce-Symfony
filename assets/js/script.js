@@ -251,37 +251,41 @@ const initProductList = () => {
     });
 
     //INIT LIST
-    const settings = JSON.parse(listElem.dataset.listSettings);
-    let id = listElem.id;
-
-    var options = {
-        ...settings
-    };
-    var list = new List(id, options);
-
-    list.on('updated', () => {
-        initLazyload();
-    });
-
-    list.on('sortStart', () => {
-        spinner.style.opacity = "1";
-    });
-
-    list.on('sortComplete', () => {
-        setTimeout(() => {
-            spinner.style.opacity = "0";
-        }, 900);
-    });
-
-    if( sort ) {
-        sort.addEventListener('change', e => {
-            switch( e.target.value ) {
-                case "price-asc": list.sort('price', { order: 'asc' }); break;
-                case "price-desc": list.sort('price', { order: 'desc' }); break;
-                default: break;
-            }
+    if( listElem.querySelectorAll('.js-filters-product').length > 0 ) {
+        const settings = JSON.parse(listElem.dataset.listSettings);
+        let id = listElem.id;
+    
+        var options = {
+            ...settings
+        };
+        var list = new List(id, options);
+    
+        list.on('updated', () => {
+            initLazyload();
         });
-    }
+    
+        if( spinner ) {
+            list.on('sortStart', () => {
+                spinner.style.opacity = "1";
+            });
+        
+            list.on('sortComplete', () => {
+                setTimeout(() => {
+                    spinner.style.opacity = "0";
+                }, 900);
+            });
+        }
+    
+        if( sort ) {
+            sort.addEventListener('change', e => {
+                switch( e.target.value ) {
+                    case "price-asc": list.sort('price', { order: 'asc' }); break;
+                    case "price-desc": list.sort('price', { order: 'desc' }); break;
+                    default: break;
+                }
+            });
+        }
+    }    
 }
 initProductList();
 

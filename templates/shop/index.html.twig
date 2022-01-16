@@ -7,19 +7,19 @@
 
 {% block content %}
     <section class="c-products">
-        {% if products|length > 0 %}
-            <div class="c-products__wrap">
-                <div class="c-products__spinner o-spinner__wrap js-spinner">
-                    <div class="o-spinner"></div>
-                </div>
-                <div class="o-grid o-grid--tiny js-equalize js-filters-products list">
+        <div class="c-products__wrap">
+            <div class="c-products__spinner o-spinner__wrap js-spinner">
+                <div class="o-spinner"></div>
+            </div>
+            <div class="o-grid o-grid--tiny js-equalize js-filters-products list">
+                {% if products|length > 0 %}
                     {% for product in products %}
                         <div class="o-grid__item u-1/3@extra-wide u-1/2@small-desktop js-filters-product" data-product="{{ product.id }}" data-aos="fade-up">
                             {% include 'product/product-tile.html.twig' with {product} %}
                         </div>
                     {% endfor %}
-                </div>
+                {% endif %}
             </div>
-        {% endif %}
+        </div>
     </section>
 {% endblock %}
