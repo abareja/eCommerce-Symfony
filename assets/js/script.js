@@ -281,6 +281,8 @@ const initProductList = () => {
                 switch( e.target.value ) {
                     case "price-asc": list.sort('price', { order: 'asc' }); break;
                     case "price-desc": list.sort('price', { order: 'desc' }); break;
+                    case "name-a": list.sort('name', { order: 'asc' }); break;
+                    case "name-z": list.sort('name', { order: 'desc' }); break;
                     default: break;
                 }
             });

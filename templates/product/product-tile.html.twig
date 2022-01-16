@@ -21,7 +21,7 @@
     {% endif %}
     {% if product.name %}
         <div class="c-product-tile__name" data-equalizer-watch="name">
-            <a href="{{ path('product', {id: product.id}) }}">{{ product.name }}</a>
+            <a href="{{ path('product', {id: product.id}) }}" class="name">{{ product.name }}</a>
         </div>
     {% endif %}
     {% if product.price %}
