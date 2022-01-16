@@ -2,6 +2,7 @@ import "slick-carousel";
 import "./import-jquery";
 import(/* webpackChunkName: "sidebar" */ "./sidebar");
 import List from "list.js";
+import { triggerEvent } from "./helpers";
 
 //LAZYLOAD
 const initLazyload = () => {
@@ -225,9 +226,64 @@ const initLists = () => {
         };
 
         var list = new List(id, options);
+
+        list.on('updated', () => {
+            initLazyload();
+        });
     });
 }
 initLists();
+
+//PRODUCT LIST
+const initProductList = () => {
+    const listElem = document.querySelector('.js-product-list');
+    
+    if( !listElem ) return;
+
+    const filters = listElem.querySelector('.js-filters');
+    const spinner = listElem.querySelector('.js-spinner');
+    const sort = listElem.querySelector('.js-sort');
+
+    //INIT FILTERS
+    if( !filters ) return;
+    import(/* webpackChunkName: "filters" */ "./filters").then((script) => {
+        script.init(filters, spinner)
+    });
+
+    //INIT LIST
+    const settings = JSON.parse(listElem.dataset.listSettings);
+    let id = listElem.id;
+
+    var options = {
+        ...settings
+    };
+    var list = new List(id, options);
+
+    list.on('updated', () => {
+        initLazyload();
+    });
+
+    list.on('sortStart', () => {
+        spinner.style.opacity = "1";
+    });
+
+    list.on('sortComplete', () => {
+        setTimeout(() => {
+            spinner.style.opacity = "0";
+        }, 900);
+    });
+
+    if( sort ) {
+        sort.addEventListener('change', e => {
+            switch( e.target.value ) {
+                case "price-asc": list.sort('price', { order: 'asc' }); break;
+                case "price-desc": list.sort('price', { order: 'desc' }); break;
+                default: break;
+            }
+        });
+    }
+}
+initProductList();
 
 //COLLECTIONS
 const initCollections = () => {

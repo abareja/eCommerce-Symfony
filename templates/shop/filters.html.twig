@@ -1,70 +1,87 @@
 <div class="c-filters" data-aos="fade-up">
-    <h2 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Filters{% endtrans %}</h2>
+    <h2 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Sort{% endtrans %}</h2>
+
     <div class="c-filters__wrap">
         <div class="c-filters__group">
-            <h3 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{% trans %}Suppliers{% endtrans %}</h3>
-            {% for supplier in suppliers %}
-                <div class="o-field" data-aos="fade-up" data-aos-delay="100">
-                    <div class="o-checkbox">
-                        <input  type="checkbox" id="{{ supplier.name }}" name="{{ supplier.name }}" />
-                        <label for="{{ supplier.name }}">{{ supplier.name }}</label>
-                    </div>
-                </div>
-            {% endfor %}
+            <select class="o-input js-select2 js-sort">
+                <option value="default" selected>{% trans %}Default{% endtrans %}</option>
+                <option value="price-asc">{% trans %}Price ascending{% endtrans %}</option>
+                <option value="price-desc">{% trans %}Price descending{% endtrans %}</option>
+            </select>
         </div>
+    </div>
 
-        {% if attributes is defined and attributes|length > 0 %}
-            {% for item in attributes %}
-                {% set attribute = item.attribute %}
-                {% set attributeValues = item.attributeValues %}
+    <form class="js-filters no-validation">
+        {% if productsJSON is defined %}
+            <input class="js-filters-json" type="hidden" name="json" value="{{ productsJSON }}" />
+        {% endif %}
+        <h2 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Filters{% endtrans %}</h2>
+        <div class="c-filters__wrap">
+
+            {% if suppliers|length > 0 %}
                 <div class="c-filters__group">
-                    <h3 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{{ attribute.name }}</h3>
-                    {% for attributeValue in attributeValues %}
+                    <h4 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{% trans %}Suppliers{% endtrans %}</h4>
+                    {% for supplier in suppliers %}
                         <div class="o-field" data-aos="fade-up" data-aos-delay="100">
                             <div class="o-checkbox">
-                                <input  type="checkbox" id="{{ attributeValue.value }}" name="{{ attributeValue.value }}" />
-                                <label for="{{ attributeValue.value }}">{{ attributeValue.value }}</label>
+                                <input  type="checkbox" id="{{ supplier.name ~ "-" ~ supplier.id }}" name="supplier" value="{{ supplier.id }}"/>
+                                <label for="{{ supplier.name ~ "-" ~ supplier.id }}">{{ supplier.name }}</label>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
-            {% endfor %}
-        {% endif %}
+            {% endif %}
 
-        <div class="c-filters__group">
-            <h3 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{% trans %}Price{% endtrans %}</h3>
-            <div class="o-grid o-grid--tiny">
-                <div class="o-grid__item u-1/2">
-                    <div class="o-field" 
-                        data-validation="price"
-                        data-aos="fade-up"
-                        data-aos-delay="50">
-                        <label class="o-input__label" for="">{% trans %}From{% endtrans %}</label>
-                        <div class="o-input__wrap">
-                            <input type="text" class="o-input" />
-                            <span class="o-input__suffix">zł</span>
+            {% if attributes is defined and attributes|length > 0 %}
+                {% for item in attributes %}
+                    {% set attribute = item.attribute %}
+                    {% set attributeValues = item.attributeValues %}
+                    <div class="c-filters__group">
+                        <h4 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{{ attribute.name }}</h4>
+                        {% for attributeValue in attributeValues %}
+                            <div class="o-field" data-aos="fade-up" data-aos-delay="100">
+                                <div class="o-checkbox">
+                                    <input  type="checkbox" id="{{ attributeValue.value ~ "-" ~ attributeValue.id }}" name="{{ attribute.id }}" value="{{ attributeValue.id }}" />
+                                    <label for="{{ attributeValue.value ~ "-" ~ attributeValue.id }}">{{ attributeValue.value }}</label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="c-filters__group">
+                <h4 class="o-title u-margin-bottom-tiny" data-aos="fade-up">{% trans %}Price{% endtrans %}</h4>
+                <div class="o-grid o-grid--tiny">
+                    <div class="o-grid__item u-1/2">
+                        <div class="o-field" 
+                            data-validation="price-not-required"
+                            data-aos="fade-up"
+                            data-aos-delay="50">
+                            <div class="o-input__wrap">
+                                <input type="text" class="o-input" name="price-from" placeholder="{% trans %}From{% endtrans %}" />
+                                <span class="o-input__suffix">zł</span>
+                            </div>
                         </div>
-                        <div class="o-field__error">{% trans %}Please enter a valid price!{% endtrans %}</div>
+                    </div>
+                    <div class="o-grid__item u-1/2">
+                        <div class="o-field" 
+                            data-validation="price-not-required"
+                            data-aos="fade-up"
+                            data-aos-delay="50">
+                            <div class="o-input__wrap">
+                                <input type="text" class="o-input" name="price-to" placeholder="{% trans %}To{% endtrans %}" />
+                                <span class="o-input__suffix">zł</span>
+                            </div>
+                            <div class="o-field__error">{% trans %}Please enter a valid price!{% endtrans %}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="o-grid__item u-1/2">
-                    <div class="o-field" 
-                        data-validation="price"
-                        data-aos="fade-up"
-                        data-aos-delay="50">
-                        <label class="o-input__label" for="">{% trans %}To{% endtrans %}</label>
-                        <div class="o-input__wrap">
-                            <input type="text" class="o-input" />
-                            <span class="o-input__suffix">zł</span>
-                        </div>
-                        <div class="o-field__error">{% trans %}Please enter a valid price!{% endtrans %}</div>
-                    </div>
-                </div>
-            </div>
+            </div> 
+            <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
+                {% trans %}Apply{% endtrans %}
+                <span class="o-icon o-icon--chevron-right"></span>
+            </button>    
         </div>
-        <button type="submit" class="o-button o-button--primary o-button--full" data-aos="fade-up" data-aos-delay="300">
-            {% trans %}Apply{% endtrans %}
-            <span class="o-icon o-icon--chevron-right"></span>
-        </button>    
-    </div>
+    </form>
 </div>

@@ -1,7 +1,7 @@
 import { isIntFromRange } from "./helpers";
 
 export const init = () => {
-    const forms = document.querySelectorAll('form');
+    const forms = document.querySelectorAll('form:not(.no-validation)');
 
     if( forms.length === 0 ) return;
 

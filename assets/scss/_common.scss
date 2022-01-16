@@ -33,6 +33,7 @@
 @import "objects/objects.zoom";
 @import "objects/objects.pagination";
 @import "objects/objects.collection";
+@import "objects/objects.spinner";
 
 // COMPONENTS
 @import "components/components.main-nav";
@@ -57,6 +58,7 @@
 @import "components/components.cart";
 @import "components/components.supplier-slider";
 @import "components/components.order-status";
+@import "components/components.products";
 
 //NODE MODULES
 @import '~aos/src/sass/aos.scss';
