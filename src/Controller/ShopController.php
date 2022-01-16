@@ -8,36 +8,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
-use App\Repository\AttributeValueRepository;
+use App\Repository\ProductAttributeRepository;
 
 class ShopController extends AbstractController
 {
     #[Route('/new', name: 'new')]
-    public function new(ProductRepository $productRepository, AttributeValueRepository $attributeValueRepository, SerializerInterface $serializer, TranslatorInterface $translator): Response
+    public function new(ProductRepository $productRepository, ProductAttributeRepository $productAttributeRepository, SerializerInterface $serializer, TranslatorInterface $translator): Response
     {
         $products = $productRepository->findBy([], ['dateAdded' => 'DESC'], 10);
-        $suppliers = [];
-        $attributes = [];
-
-        foreach( $products as $product ) {
-            if( !in_array($product->getSupplier(), $suppliers) ) {
-                array_push($suppliers, $product->getSupplier());
-            } 
-
-            $productAttributes = $product->getProductAttributes();
-
-            foreach( $productAttributes as $productAttribute ) {
-                $attribute = $productAttribute->getAttribute();
-                $attributeValues = $attributeValueRepository->findBy(['attribute' => $attribute]);
-
-                $attributeArr = ['attribute' => $attribute, 'attributeValues' => $attributeValues];
-
-                if( !in_array($attribute, array_column($attributes, 'attribute')) ) {
-                    array_push($attributes, $attributeArr);
-                }
-            }
-        }
+        $data = Product::getDataForProducts($products, $productAttributeRepository);
+        $suppliers = $data['suppliers'];
+        $attributes = $data['attributes'];
 
         return $this->render('shop/index.html.twig', [
             'title' => $translator->trans('Newest products'),
@@ -53,30 +36,12 @@ class ShopController extends AbstractController
     }
 
     #[Route('/sale', name: 'sale')]
-    public function sale(ProductRepository $productRepository, AttributeValueRepository $attributeValueRepository, SerializerInterface $serializer, TranslatorInterface $translator): Response
+    public function sale(ProductRepository $productRepository, ProductAttributeRepository $productAttributeRepository, SerializerInterface $serializer, TranslatorInterface $translator): Response
     {
         $products = $productRepository->sale();
-        $suppliers = [];
-        $attributes = [];
-
-        foreach( $products as $product ) {
-            if( !in_array($product->getSupplier(), $suppliers) ) {
-                array_push($suppliers, $product->getSupplier());
-            } 
-
-            $productAttributes = $product->getProductAttributes();
-
-            foreach( $productAttributes as $productAttribute ) {
-                $attribute = $productAttribute->getAttribute();
-                $attributeValues = $attributeValueRepository->findBy(['attribute' => $attribute]);
-
-                $attributeArr = ['attribute' => $attribute, 'attributeValues' => $attributeValues];
-
-                if( !in_array($attribute, array_column($attributes, 'attribute')) ) {
-                    array_push($attributes, $attributeArr);
-                }
-            }
-        }
+        $data = Product::getDataForProducts($products, $productAttributeRepository);
+        $suppliers = $data['suppliers'];
+        $attributes = $data['attributes'];
 
         return $this->render('shop/index.html.twig', [
             'title' => $translator->trans('Sale'),

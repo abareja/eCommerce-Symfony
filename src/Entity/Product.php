@@ -273,4 +273,35 @@ class Product
 
         return $this;
     }
+
+    public static function getDataForProducts($products, $productAttributeRepository) {
+        $suppliers = [];
+        $attributes = [];
+
+        foreach( $products as $product ) {
+            if( !in_array($product->getSupplier(), $suppliers) ) {
+                array_push($suppliers, $product->getSupplier());
+            } 
+
+            $productAttributes = $product->getProductAttributes();
+
+            foreach( $productAttributes as $productAttribute ) {
+                $attribute = $productAttribute->getAttribute();
+                $productAttributeValues = $productAttributeRepository->findBy(['product' => $products, 'attribute' => $attribute]);
+                
+                $attributeValues = [];
+                foreach( $productAttributeValues as $productAttributeValue ) {
+                    array_push($attributeValues, $productAttributeValue->getAttributeValue());
+                }
+
+                $attributeArr = ['attribute' => $attribute, 'attributeValues' => $attributeValues];
+
+                if( !in_array($attribute, array_column($attributes, 'attribute')) ) {
+                    array_push($attributes, $attributeArr);
+                }
+            }
+        }
+
+        return ['suppliers' => $suppliers, 'attributes' => $attributes];
+    }
 }
