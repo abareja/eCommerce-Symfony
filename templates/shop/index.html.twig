@@ -20,6 +20,15 @@
                     {% endfor %}
                 {% endif %}
             </div>
+            <div class="c-products__not-found js-filters-products-not-found">
+                <div class="o-card u-padding-vertical-large" data-aos="fade-up">
+                    <div class="u-text-center">
+                        <h3 class="o-title u-margin-bottom-none">
+                            {% trans %}No products found{% endtrans %}
+                        </h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}

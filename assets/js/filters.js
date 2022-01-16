@@ -9,6 +9,7 @@ class Filters {
         this.productsContainer = document.querySelector('.js-filters-products');
         this.products = this.productsContainer.querySelectorAll('.js-filters-product');
         this.spinner = spinner;
+        this.notFound = document.querySelector('.js-filters-products-not-found');
 
         this.initFormSubmission();
 
@@ -133,6 +134,10 @@ class Filters {
     formSubmit = (e) => {
         const $root = $('html, body');
 
+        if( this.notFound ) {
+            this.notFound.style.display = "none";
+        }
+
         e.preventDefault(); 
         this.spinner.style.opacity = "1";
 
@@ -153,6 +158,10 @@ class Filters {
                 product.classList.add('u-hidden');
             }
         });
+
+        if( this.notFound && products.length === 0 ) {
+            this.notFound.style.display = "block";
+        }
 
         $root.animate({
             scrollTop: 0

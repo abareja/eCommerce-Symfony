@@ -12,4 +12,8 @@
         z-index: 1;
         pointer-events: none;
     }
+
+    &__not-found {
+        display: none;
+    }
 }
