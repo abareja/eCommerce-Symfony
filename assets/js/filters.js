@@ -11,6 +11,10 @@ class Filters {
         this.spinner = spinner;
 
         this.initFormSubmission();
+
+        window.addEventListener('load', (e) => {
+            this.formSubmit(e);
+        });
     }
 
     getFormData = () => {
@@ -126,38 +130,42 @@ class Filters {
         return filteredArray;
     }
 
-    initFormSubmission = () => {
+    formSubmit = (e) => {
         const $root = $('html, body');
 
+        e.preventDefault(); 
+        this.spinner.style.opacity = "1";
+
+        let formData = this.getFormData();
+        let productsByPrice = this.filterByPrice(formData);
+        let productsBySupplier = this.filterBySupplier(formData);
+        let productsByAttributes = this.filterByAttributes(formData);
+
+        let products = this.arrayIntersection(productsByPrice, productsBySupplier);
+        products = this.arrayIntersection(products, productsByAttributes);
+        
+        this.products.forEach(product => {
+            const id = parseInt(product.dataset.product);
+
+            if( products.includes(id) ) {
+                product.classList.remove('u-hidden');
+            } else {
+                product.classList.add('u-hidden');
+            }
+        });
+
+        $root.animate({
+            scrollTop: 0
+        }, 500, 'swing');
+
+        setTimeout(() => {
+            this.spinner.style.opacity = "0";
+        }, 900);
+    }
+
+    initFormSubmission = () => {
         this.form.addEventListener('submit', e => {
-            e.preventDefault(); 
-            this.spinner.style.opacity = "1";
-
-            let formData = this.getFormData();
-            let productsByPrice = this.filterByPrice(formData);
-            let productsBySupplier = this.filterBySupplier(formData);
-            let productsByAttributes = this.filterByAttributes(formData);
-
-            let products = this.arrayIntersection(productsByPrice, productsBySupplier);
-            products = this.arrayIntersection(products, productsByAttributes);
-            
-            this.products.forEach(product => {
-                const id = parseInt(product.dataset.product);
-
-                if( products.includes(id) ) {
-                    product.classList.remove('u-hidden');
-                } else {
-                    product.classList.add('u-hidden');
-                }
-            });
-
-            $root.animate({
-                scrollTop: 0
-            }, 500, 'swing');
-
-            setTimeout(() => {
-                this.spinner.style.opacity = "0";
-            }, 900);
+            this.formSubmit(e);
         });
     }
 }
