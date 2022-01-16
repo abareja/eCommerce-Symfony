@@ -31,7 +31,18 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    //SELECT p.id, COUNT(*) FROM `order` o INNER JOIN order_item oi ON o.id = oi.order_ref_id INNER JOIN product p ON oi.product_id = p.id WHERE status="order" GROUP BY oi.product_id
+
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function sale()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.discountPrice IS NOT NULL')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     /**
      * @return Product[] Returns an array of Product objects
