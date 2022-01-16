@@ -23,6 +23,16 @@ class ProductSliderComponentController extends AbstractController
         ]);
     }
 
+    public function bestsellers($limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    {
+        $newProducts = $productRepository->bestsellers($limit);
+
+        return $this->render('components/product-slider.html.twig', [
+            'products' => $newProducts,
+            'title' => $translator->trans('Bestsellers')
+        ]);
+    }
+
     public function category(Category $category, Product $product = null, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
     {
         $products = $productRepository->findBy(['category' => $category], ['dateAdded' => 'DESC'], $limit);

@@ -20,4 +20,14 @@ class ProductListComponentController extends AbstractController
             'title' => $translator->trans('Newest products')
         ]);
     }
+
+    public function bestsellers($limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    {
+        $newProducts = $productRepository->bestsellers($limit);
+
+        return $this->render('components/product-slider.html.twig', [
+            'products' => $newProducts,
+            'title' => $translator->trans('Bestsellers')
+        ]);
+    }
 }
