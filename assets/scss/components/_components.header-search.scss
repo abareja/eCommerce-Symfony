@@ -3,6 +3,7 @@
     right: $spacing-tiny !important;
 
     &__input {
+        width: 100%;
         border: none;
         @include font-size(28px, 1.4);
         color: theme-color(light-300);

@@ -12,10 +12,8 @@
                 </div>
                 <div class="o-grid__item u-1/4@desktop u-1/2@small-desktop u-margin-bottom" data-aos="fade-up" data-aos-delay="50">
                     <div class="c-site-footer__group">
-                        <div class="c-site-footer__group-title">Promocje</div>
-                        <a href="#">Wyprzedaż</a>
-                        <a href="#">Promocje</a>
-    
+                        <div class="c-site-footer__group-title">{% trans %}Promotions{% endtrans %}</div>
+                        <a href="{{ path('sale') }}" title="{% trans %}Sale{% endtrans %}">{% trans %}Sale{% endtrans %}</a>
                     </div>
                 </div>
                 <div class="o-grid__item u-1/4@desktop u-1/2@small-desktop u-margin-bottom" data-aos="fade-up" data-aos-delay="100">
@@ -28,7 +26,7 @@
                 </div>
                 <div class="o-grid__item u-1/4@desktop u-1/2@small-desktop u-margin-bottom" data-aos="fade-up" data-aos-delay="150">
                     <div class="c-site-footer__group">
-                        <div class="c-site-footer__group-title">Kontakt</div>
+                        <div class="c-site-footer__group-title">{% trans %}Contact{% endtrans %}</div>
                         <p>
                             <a href="tel:">123 456 789</a>
                             <a href="mailto:">shop@contact.com</a>

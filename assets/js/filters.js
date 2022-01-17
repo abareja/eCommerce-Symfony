@@ -12,8 +12,22 @@ class Filters {
         this.notFound = document.querySelector('.js-filters-products-not-found');
 
         this.initFormSubmission();
+        this.initReset();
 
         window.addEventListener('load', (e) => {
+            this.formSubmit(e);
+        });
+    }
+
+    initReset = () => {
+        const reset = document.querySelector('.js-filters-reset');
+
+        if( !reset ) return;
+
+        reset.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            this.form.reset();
             this.formSubmit(e);
         });
     }

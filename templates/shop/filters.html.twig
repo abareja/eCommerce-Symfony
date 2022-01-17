@@ -2,7 +2,7 @@
     <h2 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Sort{% endtrans %}</h2>
 
     <div class="c-filters__wrap">
-        <div class="c-filters__group">
+        <div class="c-filters__group u-margin-bottom-small">
             <select class="o-input js-select2 js-sort">
                 <option value="default" selected>{% trans %}Default{% endtrans %}</option>
                 <option value="price-asc">{% trans %}Price ascending{% endtrans %}</option>
@@ -10,6 +10,8 @@
                 <option value="name-a">{% trans %}Name A-Z{% endtrans %}</option>
                 <option value="name-z">{% trans %}Name Z-A{% endtrans %}</option>
             </select>
+
+            <a href="#" class="c-filters__reset js-filters-reset u-margin-top-small">{% trans %}Reset filters{% endtrans %}</a>
         </div>
     </div>
 
