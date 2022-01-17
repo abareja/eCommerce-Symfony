@@ -20,6 +20,6 @@ body {
     }
 
     &.admin.header-padding {
-        padding-top: calc(#{$header-height} + #{$admin-bar-height});
+        padding-top: calc(#{$header-height} + #{$admin-bar-height} + #{$spacing-small});
     }
 }

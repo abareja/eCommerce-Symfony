@@ -139,3 +139,29 @@ initSearch();
     }
 })();
 
+(async () => {
+    const el = document.querySelector('.js-cookieconsent');
+
+    if( !el ) return;
+
+    const settings = JSON.parse(el.dataset.settings);
+
+    if(settings) {
+        import(/* webpackChunkName: "cookieconsent" */ "cookieconsent").then(cookieconsent => {
+            window.cookieconsent.initialise({
+                palette: {
+                    popup: {
+                        background: "#f3f3f3",
+                        text: "#000"
+                    },
+                    button: {
+                        background: "#000",
+                        text: "#fff"
+                    }
+                },
+                position: 'bottom-right',
+                ...settings
+            });
+        });
+    }
+})();

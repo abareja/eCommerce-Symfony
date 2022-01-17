@@ -2,7 +2,7 @@ import "slick-carousel";
 import "./import-jquery";
 import(/* webpackChunkName: "sidebar" */ "./sidebar");
 import List from "list.js";
-import { triggerEvent } from "./helpers";
+import { triggerEvent, isInViewport } from "./helpers";
 
 //LAZYLOAD
 const initLazyload = () => {
@@ -311,3 +311,25 @@ const initCollections = () => {
     });
 }
 initCollections();
+
+//MAP
+const initMap = () => {
+    const el = document.querySelectorAll('.js-map');
+
+    if( el.length !== 0 ) {
+        import(/* webpackChunkName: "omap" */ "./omap").then(omap => {
+            el.forEach(item => {
+                const initMap = () => {
+                    if( isInViewport(item) ) {
+                        new omap.default(item);
+                        window.removeEventListener("scroll", initMap);
+                    }
+                }
+                window.addEventListener("scroll", initMap, {passive: true});
+            });
+            triggerEvent(window,"scroll");
+            triggerEvent(window, "resize");
+        });
+    }
+}
+initMap();

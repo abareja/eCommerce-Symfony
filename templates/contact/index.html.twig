@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body_class 'header-padding' %}
+
+{% block body %}
+    <div class="c-contact-page c-info-page">
+        <div class="o-wrapper o-wrapper--full">
+            <div class="o-grid">
+                <div class="o-grid__item u-1/2@desktop">
+                    <div class="c-map" data-aos="fade-up">
+                        <div class="c-map__wrap js-map">
+                            <div class="marker"
+                                data-address="Singel 465 1012 WP Amsterdam The Netherlands"
+                                data-lng="4.8897162"
+                                data-lat="52.3672758"
+                                data-icon="{{ asset('build/images/marker.svg') }}"
+                                data-icon-height="40"
+                            >
+                            </div>
+                             <div class="c-map__mask c-map__mask--desktop js-map-mask">{% trans %}Press CTRL to zoom{% endtrans %}</div>
+                                <div class="c-map__mask c-map__mask--mobile js-map-mask">{% trans %}Move map with two fingers{% endtrans %}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="o-grid__item u-1/2@desktop">
+                    <div class="c-contact o-content">
+                        <h3 class="o-title">{% trans %}Contact{% endtrans %}</h3>
+                            <div><a href="tel:">123 456 789</a></div>
+                            <div class="u-margin-bottom-small"><a href="mailto:">shop@contact.com</a></div>
+                            
+                            <p>
+                                Singel 465<br />
+                                1012 WP Amsterdam<br />
+                                The Netherlands
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
