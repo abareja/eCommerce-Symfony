@@ -64,16 +64,32 @@
 
     &--small &__input, &--small &__more, &--small &__less {
         width: 40px;
-        height: 40px;
-        line-height: 40px;
+        height: 44px;
+        line-height: 44px;
     }
 
     &--small &__input-wrap {
-        height: 40px;
+        height: 44px;
     }
 
     &--small &__unit {
-        line-height: 40px;
+        line-height: 44px;
+    }
+
+    @include mq($until: desktop) {
+        &__input, &__more, &__less {
+            width: 40px;
+            height: 44px;
+            line-height: 44px;
+        }
+    
+        &__input-wrap {
+            height: 44px;
+        }
+    
+        &__unit {
+            line-height: 44px;
+        }
     }
 
     /* Chrome, Safari, Edge, Opera */

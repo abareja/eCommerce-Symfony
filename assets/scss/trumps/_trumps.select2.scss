@@ -12,6 +12,10 @@ $select2-theme: 'shop' !default;
             color: #000;
             font-family: $font-family-base;
 
+            @include mq($until: desktop) {
+                padding: 0.5em;
+            }
+            
             &--single {
                 height: 48px !important;
                 position: relative;
@@ -22,9 +26,9 @@ $select2-theme: 'shop' !default;
 
             &__rendered {
                 padding-left: 0 !important;
-                padding-right: 0 !important;
-                padding: 0 !important;
-                overflow: visible !important;
+                padding-right: 2em !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis;
 
                 &:after {
                     @include icomoon;

@@ -49,6 +49,12 @@
 
     &--left &__cell {
         justify-content: flex-start;
-        padding: 0.5em 0;
+        text-align: left;
+    }
+
+    &__cell.hide-mobile {
+        @include mq($until: desktop) {
+            display: none;
+        }
     }
 }

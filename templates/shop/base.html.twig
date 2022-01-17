@@ -7,16 +7,18 @@
 } %}
 
 {% block body %}
-    <div class="o-wrapper o-wrapper--full u-padding-vertical-huge">
-        <div class="o-grid o-grid--small js-product-list" id="products-list" data-list-settings="{{ settings|json_encode()|escape() }}">
-            <div class="o-grid__item u-1/3@desktop u-1/4@wide">
-                {%  include 'shop/filters.html.twig' %}
-            </div>
-            <div class="o-grid__item u-2/3@desktop u-3/4@wide">
-                {% block content %}
-                {% endblock %}
+    <div class="c-shop">
+        <div class="o-wrapper o-wrapper--full">
+            <div class="o-grid o-grid--small js-product-list" id="products-list" data-list-settings="{{ settings|json_encode()|escape() }}">
+                <div class="o-grid__item u-1/3@desktop u-1/4@wide">
+                    {%  include 'shop/filters.html.twig' %}
+                </div>
+                <div class="o-grid__item u-2/3@desktop u-3/4@wide">
+                    {% block content %}
+                    {% endblock %}
 
-                <ul class="o-pagination pagination u-margin-top" data-aos="fade-up" data-aos-delay="100"></ul>
+                    <ul class="o-pagination pagination u-margin-top" data-aos="fade-up" data-aos-delay="100"></ul>
+                </div>
             </div>
         </div>
     </div>

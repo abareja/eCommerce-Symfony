@@ -1,4 +1,40 @@
+$sizes: (
+    div: (
+        desktop: 42px,
+        mobile: 42px * 0.75
+    ),
+    h1: (
+        desktop: $inuit-font-size-h1,
+        mobile: $inuit-font-size-h1 * 0.75
+    ),
+    h2: (
+        desktop: $inuit-font-size-h2,
+        mobile: $inuit-font-size-h2 * 0.75
+    ),
+    h3: (
+        desktop: $inuit-font-size-h3,
+        mobile: $inuit-font-size-h3 * 0.75
+    ),
+    h4: (
+        desktop: $inuit-font-size-h4,
+        mobile: $inuit-font-size-h4 * 0.75
+    ),
+    h5: (
+        desktop: $inuit-font-size-h5,
+        mobile: $inuit-font-size-h5 * 0.75
+    ),
+) !default;
+
 .o-title {
     font-weight: 400;
 }
 
+@each $name, $value in $sizes {
+    #{$name}.o-title {
+        @include font-size(map-get($value, desktop), 1.2);
+
+        @include mq($until: desktop) {
+            @include font-size(map-get($value, mobile), 1.2);
+        }
+    }
+}

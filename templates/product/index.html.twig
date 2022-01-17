@@ -6,7 +6,7 @@
 {% block body_id 'product' %}
 
 {% block body %}
-	<section class="c-product u-padding-vertical-huge">
+	<section class="c-product">
         <div class="o-wrapper">
             <div class="o-grid o-grid--small">
                 <div class="o-grid__item u-1/2@desktop">
@@ -22,7 +22,7 @@
                             <div class="c-product__images" data-aos="fade-up">
                                 <div class="o-grid o-grid--tiny">
                                     {% if product.featuredImagePath() %}
-                                        <div class="o-grid__item u-1/4">
+                                        <div class="o-grid__item u-1/4@tablet u-1/2">
                                             <div class="c-product__image js-product-gallery-image is-active">
                                                 <a href="#" data-fancybox-trigger="product-gallery">
                                                     <img src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
@@ -31,7 +31,7 @@
                                         </div>
                                     {% endif %}
                                     {% for image in product.images() %}
-                                        <div class="o-grid__item u-1/4" data-aos="fade-up" data-aos-delay="{{ (loop.index % 4) * 100 }}">
+                                        <div class="o-grid__item u-1/4@tablet u-1/2" data-aos="fade-up" data-aos-delay="{{ (loop.index % 4) * 100 }}">
                                             <div class="c-product__image js-product-gallery-image">
                                                 <a href="{{ asset(image.path()) }}" data-fancybox="product-gallery">
                                                     <img src="{{ asset(image.path()) }}" class="js-lazyload" />
@@ -49,7 +49,7 @@
                     <h1 class="c-product__name" data-aos="fade-up">{{ product.name }}</h1>
                 
                     {% if product.featuredProductAttributes()|length > 0 %}
-                        <div class="c-product__attributes o-table">
+                        <div class="c-product__attributes o-table o-table--hoverable o-table--left">
                             {% for productAttribute in product.featuredProductAttributes() %}
                                 {% set attribute = productAttribute.attribute %}
                                 {% set attributeValue = productAttribute.attributeValue %}
@@ -89,7 +89,7 @@
                                     <span class="o-quantity__more js-quantity-more">+</span>
                                 </div>
                             </div>
-                            <button type="submit" class="o-button o-button--primary o-button--full"
+                            <button type="submit" class="c-product__addToCartButton o-button o-button--primary o-button--full"
                             {% if product.quantityInStock == 0 %} disabled {% endif %}>
                                 {% trans %}Add to cart{% endtrans %}
                                 <span class="o-icon o-icon--chevron-right"></span>
@@ -123,9 +123,9 @@
                 {% endif %}
 
             </div>
-
-            {{ render(controller('App\\Controller\\ProductSliderComponentController::category', {category: product.category, product: product, limit: 10})) }}
-
         </div>
+
+        {{ render(controller('App\\Controller\\ProductSliderComponentController::category', {centerMode: false, category: product.category, product: product, limit: 10})) }}
+
     </section>
 {% endblock %}

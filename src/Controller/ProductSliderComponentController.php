@@ -13,27 +13,31 @@ use App\Repository\ProductRepository;
 
 class ProductSliderComponentController extends AbstractController
 {
-    public function new($limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function new($width = null, $centerMode = true, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
     {
         $newProducts = $productRepository->findBy([], ['dateAdded' => 'DESC'], $limit);
 
         return $this->render('components/product-slider.html.twig', [
+            'width' => $width,
+            'centerMode' => $centerMode,
             'products' => $newProducts,
             'title' => $translator->trans('Newest products')
         ]);
     }
 
-    public function bestsellers($limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function bestsellers($width = null, $centerMode = true, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
     {
         $newProducts = $productRepository->bestsellers($limit);
 
         return $this->render('components/product-slider.html.twig', [
+            'width' => $width,
+            'centerMode' => $centerMode,
             'products' => $newProducts,
             'title' => $translator->trans('Bestsellers')
         ]);
     }
 
-    public function category(Category $category, Product $product = null, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function category($width = null, $centerMode = true, Category $category, Product $product = null, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
     {
         $products = $productRepository->findBy(['category' => $category], ['dateAdded' => 'DESC'], $limit);
 
@@ -46,6 +50,8 @@ class ProductSliderComponentController extends AbstractController
         }
 
         return $this->render('components/product-slider.html.twig', [
+            'width' => $width,
+            'centerMode' => $centerMode,
             'products' => $products,
             'title' => $translator->trans('Other products from this category')
         ]);

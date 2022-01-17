@@ -1,0 +1,14 @@
+.c-checkout {
+
+    @include mq($until: desktop) {
+        &-totals {
+            margin-top: $spacing;
+        }
+
+        &-totals .o-table {
+            @include mq($until: desktop) {
+                @include font-size(15px, 1.2);
+            }
+        }
+    }
+}

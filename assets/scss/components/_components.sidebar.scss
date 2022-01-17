@@ -1,10 +1,7 @@
 .c-sidebar {
     padding: $spacing-small;
     border: 1px solid theme-color(light-200);
-
-    body.admin & {
-        top: $admin-bar-height + $spacing-tiny;        
-    }
+    margin-top: $spacing;
 
     &__logo {
         max-height: 80px;

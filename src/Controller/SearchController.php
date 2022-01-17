@@ -42,7 +42,7 @@ class SearchController extends AbstractController
         }
 
         return $this->render('shop/index.html.twig', [
-            'title' => $translator->trans('Search'),
+            'title' => $translator->trans('Search results'),
             'products' => $products,
             'productsJSON' => $serializer->serialize($products, 'json', [
                 'circular_reference_handler' => function ($object) {

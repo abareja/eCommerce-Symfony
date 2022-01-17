@@ -1,5 +1,7 @@
 <div class="c-filters" data-aos="fade-up">
-    <h2 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Sort{% endtrans %}</h2>
+    <h2 class="o-title">{{ title }}</h2>
+    <hr />
+    <h3 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Sort{% endtrans %}</h3>
 
     <div class="c-filters__wrap">
         <div class="c-filters__group u-margin-bottom-small">
@@ -19,7 +21,7 @@
         {% if productsJSON is defined %}
             <input class="js-filters-json" type="hidden" name="json" value="{{ productsJSON }}" />
         {% endif %}
-        <h2 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Filters{% endtrans %}</h2>
+        <h3 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Filters{% endtrans %}</h3>
         <div class="c-filters__wrap">
 
             {% if suppliers|length > 0 %}

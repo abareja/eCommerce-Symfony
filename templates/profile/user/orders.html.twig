@@ -22,10 +22,10 @@
                 <div class="o-table">
                     <div class="o-table__head">
                         <div class="o-table__row" data-aos="fade-up">
-                            <div class="o-table__cell o-table__cell--status">
+                            <div class="o-table__cell o-table__cell--status hide-mobile">
                                 <span class="sort" data-sort="status">{% trans %}Status{% endtrans %}</span>
                             </div>
-                            <div class="o-table__cell o-table__cell--total">
+                            <div class="o-table__cell o-table__cell--total hide-mobile">
                                 <span class="sort" data-sort="total">{% trans %}Total{% endtrans %}</span>
                             </div>
                             <div class="o-table__cell o-table__cell--date">
@@ -37,8 +37,8 @@
                     <div class="o-table__body list">
                         {% for order in orders %}
                             <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
-                                <div class="o-table__cell o-table__cell--status status">{% include 'order/order-status.html.twig' %}</div>                        
-                                <div class="o-table__cell o-table__cell--total total">{{ order.total()|format_currency('PLN', locale='pl') }}</div>                        
+                                <div class="o-table__cell o-table__cell--status status hide-mobile">{% include 'order/order-status.html.twig' %}</div>                        
+                                <div class="o-table__cell o-table__cell--total total hide-mobile">{{ order.total()|format_currency('PLN', locale='pl') }}</div>                        
                                 <div class="o-table__cell o-table__cell--date date">{{ order.createdAt()|format_datetime() }}</div>                                    
                                 <div class="o-table__cell o-table__cell--actions"><a href="{{ path('profile-user-order', {id: order.id}) }}" class="o-button o-button--outline o-button--small">{% trans %}See order{% endtrans %}</a></div>
                             </div>

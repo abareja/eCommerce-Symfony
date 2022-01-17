@@ -49,6 +49,10 @@ $buttonStyles: (
         padding: 1em 1.5em;
     }
 
+    @include mq($until: desktop) {
+        @include font-size(14px, 1);
+    }
+
     &:disabled {
         opacity: .5 !important;
         cursor: default;
@@ -61,6 +65,10 @@ $buttonStyles: (
 
     &--small {
         @include font-size(14px,1);
+
+        @include mq($until: desktop) {
+            @include font-size(13px,1);
+        }
     }
 
     span.o-icon {
