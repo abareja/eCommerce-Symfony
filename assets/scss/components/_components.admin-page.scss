@@ -1,4 +1,6 @@
 .c-admin-page {
+    margin-bottom: $spacing-large;
+    
     &__title {
         padding: $spacing 0;
         border-bottom: 1px solid theme-color(light-200);

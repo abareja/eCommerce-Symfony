@@ -21,6 +21,19 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+    public function getTotals()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            "SELECT SUM(oi.price * oi.quantity) as total, DATE_FORMAT(o.createdAt, '%M-%Y') as totalDate
+            FROM App\Entity\Order o
+            INNER JOIN App\Entity\OrderItem oi WITH o.id = oi.orderRef
+            GROUP BY o.id"
+        );
+
+        return $query->getResult();
+    }
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */

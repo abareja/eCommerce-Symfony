@@ -1,5 +1,114 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block content %}
-    
+    <div class="c-admin-page">
+        <h2 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Dashboard{% endtrans %}</h2>
+
+        {% if totalEarningsByMonth|length > 0 %}
+            <div class="c-admin-page__group">
+                <h3 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Earnings{% endtrans %}</h3>
+
+                <div class="o-table">
+                    <div class="o-table__head">
+                        <div class="o-table__row" data-aos="fade-up">
+                            <div class="o-table__cell">{% trans %}Month{% endtrans %}</div>
+                            <div class="o-table__cell">{% trans %}Earnings{% endtrans %}</div>
+                        </div>
+                    </div>
+                    <div class="o-table__body list">
+                        {% for item in totalEarningsByMonth %}
+                            <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                <div class="o-table__cell">{{ ('month.'~item.date|date("m"))|trans|raw }} {{ item.date|date("Y") }}</div>
+                                <div class="o-table__cell">{{ item.earnings|format_currency('PLN', locale='pl') }}</div>                        
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if lastOrders|length > 0 %}
+            <div class="c-admin-page__group">
+                <h3 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}New orders{% endtrans %}</h3>
+
+                <div class="o-table">
+                    <div class="o-table__head">
+                        <div class="o-table__row" data-aos="fade-up">
+                            <div class="o-table__cell o-table__cell--name hide-mobile">{% trans %}Client{% endtrans %}</div>
+                            <div class="o-table__cell o-table__cell--status hide-mobile">
+                                <span class="sort" data-sort="status">{% trans %}Status{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--total hide-mobile">
+                                <span class="sort" data-sort="total">{% trans %}Total{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--date">
+                                <span class="sort" data-sort="date">{% trans %}Date{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--actions"></div>
+                        </div>
+                    </div>
+                    <div class="o-table__body list">
+                        {% for order in lastOrders %}
+                            <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                <div class="o-table__cell o-table__cell--name name hide-mobile"><a href="{{ path('admin-order', {id: order.id}) }}">{{ order.user().firstname }} {{ order.user().lastname }}</a></div>
+                                <div class="o-table__cell o-table__cell--status status hide-mobile">{% include 'order/order-status.html.twig' %}</div>                        
+                                <div class="o-table__cell o-table__cell--total total hide-mobile">{{ order.total()|format_currency('PLN', locale='pl') }}</div>                        
+                                <div class="o-table__cell o-table__cell--date date">{{ order.createdAt()|format_datetime() }}</div>                                    
+                                <div class="o-table__cell o-table__cell--actions"><a href="{{ path('admin-order', {id: order.id}) }}" class="o-button o-button--outline o-button--small">{% trans %}See order{% endtrans %}</a></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if bestsellers|length > 0 %}
+            <div class="c-admin-page__group">
+                <h3 class="c-admin-page__title o-page-title" data-aos="fade-up">{% trans %}Bestsellers{% endtrans %}</h3>
+
+                <div class="o-table">
+                    <div class="o-table__head">
+                        <div class="o-table__row" data-aos="fade-up">
+                            <div class="o-table__cell o-table__cell--image hide-mobile"></div>
+                            <div class="o-table__cell o-table__cell--name">
+                                <span class="sort" data-sort="name">{% trans %}Name{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--category hide-mobile">
+                                <span class="sort" data-sort="category">{% trans %}Category{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--supplier hide-mobile">
+                                <span class="sort" data-sort="supplier">{% trans %}Supplier{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--price hide-mobile">
+                                <span class="sort" data-sort="price">{% trans %}Price{% endtrans %}</span>
+                            </div>
+                            <div class="o-table__cell o-table__cell--quantity hide-mobile">
+                                <span class="sort" data-sort="quantity">{% trans %}Quantity{% endtrans %}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o-table__body list">
+                        {% for product in bestsellers %}
+                            <div class="o-table__row" data-aos="fade-up" data-aos-delay="50">
+                                <div class="o-table__cell o-table__cell--image hide-mobile">
+                                    {% if product.featuredImagePath() %}
+                                        <a href="{{ path('admin-edit-product', {id: product.id}) }}">
+                                            <img data-src="{{ asset(product.featuredImagePath()) }}" class="js-lazyload" />
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <div class="o-table__cell o-table__cell--name name"><a href="{{ path('admin-edit-product', {id: product.id}) }}">{{ product.name }}</a></div>
+                                <div class="o-table__cell o-table__cell--category category hide-mobile"><a href="{{ path('admin-edit-category', {id: product.category.id}) }}">{{ product.category }}</a></div>
+                                <div class="o-table__cell o-table__cell--supplier supplier hide-mobile"><a href="{{ path('admin-edit-supplier', {id: product.supplier.id}) }}">{{ product.supplier }}</a></div>                            
+                                <div class="o-table__cell o-table__cell--price price hide-mobile">
+                                    {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}
+                                </div>
+                                <div class="o-table__cell o-table__cell--quantity quantity hide-mobile">{{ product.quantityInStock }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
