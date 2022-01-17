@@ -45,8 +45,9 @@
                     </div>
                 </div>
                 <div class="o-grid__item u-1/2@desktop">
-                    <div class="c-product__supplier" data-aos="fade-up" data-aos-delay="100"><a href="#">{{ product.supplier }}</a></div>
+                    <div class="c-product__supplier" data-aos="fade-up" data-aos-delay="100"><a href="{{ path('supplier', {id: product.supplier.id}) }}">{{ product.supplier }}</a></div>
                     <h1 class="c-product__name" data-aos="fade-up">{{ product.name }}</h1>
+                
                     {% if product.featuredProductAttributes()|length > 0 %}
                         <div class="c-product__attributes o-table">
                             {% for productAttribute in product.featuredProductAttributes() %}
@@ -60,6 +61,10 @@
                             <a class="c-product__attributes-link" href="#product-specification" data-aos="fade-up" data-aos-delay="50">{% trans %}Scroll to full specification{% endtrans %}<span class="u-margin-left-tiny o-icon o-icon--chevron-down"></span></a>
                         </div>
                     {% endif %}
+                    <div class="c-product__availability" data-aos="fade-up" data-aos-delay="150">
+                        {% include 'product/product-availability.html.twig' with {quantity: product.quantityInStock} %}
+                    </div>
+
                     <div class="c-product__price" data-aos="fade-up" data-aos-delay="200">
                         {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}
                     </div>
@@ -75,12 +80,17 @@
                                 <div class="o-quantity js-quantity">
                                     <span class="o-quantity__less js-quantity-less">-</span>
                                     {{ form_widget(form.quantity, {
-                                        'attr': {'class': 'o-quantity__input js-quantity-input'}
+                                        'attr': {
+                                            'class': 'o-quantity__input js-quantity-input',
+                                            'min': 0,
+                                            'max': product.quantityInStock
+                                        }
                                     }) }}
                                     <span class="o-quantity__more js-quantity-more">+</span>
                                 </div>
                             </div>
-                            <button type="submit" class="o-button o-button--primary o-button--full">
+                            <button type="submit" class="o-button o-button--primary o-button--full"
+                            {% if product.quantityInStock == 0 %} disabled {% endif %}>
                                 {% trans %}Add to cart{% endtrans %}
                                 <span class="o-icon o-icon--chevron-right"></span>
                             </button>

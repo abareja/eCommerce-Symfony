@@ -19,12 +19,18 @@ class ProductController extends AbstractController
     public function index(Product $product, Request $request, CartManager $cartManager, TranslatorInterface $translator): Response
     {
         try {
+            $cart = $cartManager->getCurrentCart();
             $form = $this->createForm(AddToCartType::class);
-
             $form->handleRequest($request);
     
             if ($form->isSubmitted() && $form->isValid()) {
                 $item = $form->getData();
+
+                if( $item->getQuantity() > $product->getQuantityInStock() || ($cart->getItemByProduct($product) && ($cart->getItemByProduct($product)->getQuantity() + $item->getQuantity()) > $product->getQuantityInStock()) ) {
+                    $this->addFlash('error', $translator->trans("available_products", ['quantity' => $product->getQuantityInStock()]));
+    
+                    return $this->redirectToRoute('product', ['id' => $product->getId()]);
+                }
                 $item->setProduct($product);
 
                 if( $product->hasDiscount() ) {
@@ -33,7 +39,6 @@ class ProductController extends AbstractController
                     $item->setPrice($product->getPrice());
                 }
     
-                $cart = $cartManager->getCurrentCart();
                 $cart->addItem($item);
     
                 $cartManager->save($cart);

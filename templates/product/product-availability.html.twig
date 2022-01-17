@@ -1,0 +1,17 @@
+{% if quantity > 10 %}
+    <div class="o-availability o-availability--high">{% trans %}Availability{% endtrans %}: 
+        <span>{% trans %}High{% endtrans %}</span>
+    </div>
+{% elseif quantity > 5 %}
+    <div class="o-availability o-availability--available">{% trans %}Availability{% endtrans %}: 
+        <span>{% trans %}Available{% endtrans %}</span>
+    </div>
+{% elseif quantity > 0 %}
+    <div class="o-availability o-availability--low">{% trans %}Availability{% endtrans %}: 
+        <span>{% trans %}Low{% endtrans %}</span>
+    </div>
+{% else %}
+    <div class="o-availability o-availability--none">{% trans %}Availability{% endtrans %}: 
+        <span>{% trans %}None{% endtrans %}</span>
+    </div>
+{% endif %}

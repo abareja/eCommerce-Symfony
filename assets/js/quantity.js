@@ -20,18 +20,25 @@ class Quantity {
         }
 
         this.el.input.addEventListener("change", event => {
-            this.updateState({
-                quantity: this.stripInputLetters(event.target.value)
-            });
+            if( this.stripInputLetters(event.target.value) < parseInt(this.el.input.min) ||
+                this.stripInputLetters(event.target.value) > parseInt(this.el.input.max) ) {
+                this.el.input.value = this.state.quantity;
+            } else {
+                this.updateState({
+                    quantity: this.stripInputLetters(event.target.value)
+                });
+            }
         });
 
         this.el.more.addEventListener("click", event => {
+            if( this.state.quantity >= parseInt(this.el.input.max) ) return;
             this.updateState({
                 quantity: this.state.quantity+1
             });
         });
 
         this.el.less.addEventListener("click", event => {
+            if( this.state.quantity <= parseInt(this.el.input.min) ) return;
             this.updateState({
                 quantity: this.state.quantity-1 || 1
             });

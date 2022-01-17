@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 use App\Manager\CartManager;
 use App\Form\CheckoutType;
@@ -17,7 +18,7 @@ use App\Entity\Order;
 class CheckoutController extends AbstractController
 {
     #[Route('/checkout', name: 'checkout')]
-    public function index(Request $request, CartManager $cartManager, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, CartManager $cartManager, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
         $orderUser = new OrderUser();
@@ -55,6 +56,23 @@ class CheckoutController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $items = $cart->getItems();
+
+            foreach( $items as $item ) {
+                if( $item->getQuantity() > $item->getProduct()->getQuantityInStock() ) {
+                    $this->addFlash('error', $translator->trans("At least one of the products in your cart is not available in this quantity!"));
+
+                    return $this->redirectToRoute('checkout');
+                }
+            }
+
+            foreach( $items as $item ) {
+                $product = $item->getProduct();
+                $product->setQuantityInStock( $product->getQuantityInStock() - $item->getQuantity() );
+
+                $entityManager->flush();  
+            }
+
             $cart->setStatus(Order::STATUS_ORDER);
             $entityManager->persist($orderUser);     
             $entityManager->persist($orderAddress);     

@@ -29,7 +29,11 @@
                         <div class="o-quantity o-quantity--small js-quantity">
                             <span class="o-quantity__less js-quantity-less">-</span>
                             {{ form_widget(item.quantity, {
-                                'attr': {'class': 'o-quantity__input js-quantity-input'}
+                                'attr': {
+                                    'class': 'o-quantity__input js-quantity-input',
+                                    'min': 0,
+                                    'max': product.quantityInStock
+                                }
                             }) }}
                             <span class="o-quantity__more js-quantity-more">+</span>
                         </div>

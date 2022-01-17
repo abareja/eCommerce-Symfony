@@ -247,4 +247,14 @@ class Order
 
         return $this;
     }
+
+    public function getItemByProduct(Product $product) {
+        foreach( $this->items as $item)  {
+            if( $item->getProduct() == $product ) {
+                return $item;
+            }
+        }
+
+        return false;
+    }
 }
