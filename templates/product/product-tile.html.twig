@@ -24,6 +24,17 @@
             <a href="{{ path('product', {id: product.id}) }}" class="name">{{ product.name }}</a>
         </div>
     {% endif %}
+    {% if displayAttributes is defined and displayAttributes and product.featuredProductAttributes()|length > 0 %}
+        <div class="c-product-tile__attributes">
+            {% for productAttribute in product.featuredProductAttributes() %}
+                {% set attribute = productAttribute.attribute %}
+                {% set attributeValue = productAttribute.attributeValue %}
+                <div class="c-product-tile___attribute" data-aos="fade-up" data-aos-delay="50">
+                    {{ attribute.name }}: {{ attributeValue.value }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     {% if product.price %}
         <div class="c-product-tile__price u-text-right" data-equalizer-watch="price">
             {% include 'product/product-price.html.twig' with {price: product.price, discountPrice: product.discountPrice} %}

@@ -57,4 +57,32 @@
             display: none;
         }
     }
+
+    &--mobile & {
+        @include mq($until: small-desktop) {
+            &__head {
+                display: none;
+            }
+
+            &__cell, &__row {
+                display: block;
+            }
+
+            &__cell {
+                text-align: center;
+                width: 100%;
+
+                img {
+                    max-width: 100px;
+                }
+            }
+
+            &__cell:before {
+                content: attr(data-title);
+                font-weight: bold;
+                display: block;
+                margin-bottom: $spacing-tiny;
+            }
+        }
+    }
 }

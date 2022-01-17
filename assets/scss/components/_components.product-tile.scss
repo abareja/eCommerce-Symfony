@@ -54,7 +54,7 @@
     }
 
     &__price {
-        margin-top: $spacing-small;
+        margin-top: $spacing-tiny;
     }
 
     &__ribbons {
@@ -69,5 +69,11 @@
         @include font-size(14px, 1.3);
         background-color: #fff;
         padding: 2px;
+    }
+
+    &__attributes {
+        margin-top: $spacing-tiny;
+        @include font-size(14px, 1.2);
+        color: theme-color(light-250);
     }
 }
