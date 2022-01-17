@@ -1,4 +1,8 @@
-<div class="c-filters" data-aos="fade-up">
+<button class="c-filters__toggle js-filters-toggle o-button o-button--primary o-button--full u-margin-bottom-small" data-aos="fade-up">{% trans %}Filters{% endtrans %}</button>
+
+<div class="c-filters js-filters-container">
+    <button class="c-filters__toggle js-filters-toggle o-button o-button--outline o-button--full o-button--small u-margin-bottom-small">{% trans %}Close filters{% endtrans %}</button>
+
     <h2 class="o-title">{{ title }}</h2>
     <hr />
     <h3 class="o-title u-margin-bottom-small" data-aos="fade-up">{% trans %}Sort{% endtrans %}</h3>

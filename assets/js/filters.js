@@ -13,14 +13,29 @@ class Filters {
 
         this.initFormSubmission();
         this.initReset();
+        this.initMobileToggle();
 
         window.addEventListener('load', (e) => {
             this.formSubmit(e);
         });
     }
 
+    initMobileToggle = () => {
+        const toggle = document.querySelectorAll('.js-filters-toggle');
+        const container = document.querySelector('.js-filters-container');
+
+        if( toggle.length === 0 || !container ) return;
+
+        toggle.forEach(item => {
+            item.addEventListener('click', () => {
+                container.classList.toggle('is-open');
+            });
+        });
+    }
+
     initReset = () => {
         const reset = document.querySelector('.js-filters-reset');
+        const container = document.querySelector('.js-filters-container');
 
         if( !reset ) return;
 
@@ -29,6 +44,10 @@ class Filters {
 
             this.form.reset();
             this.formSubmit(e);
+
+            if( container ) {
+                container.classList.remove('is-open');
+            }
         });
     }
 
@@ -147,6 +166,7 @@ class Filters {
 
     formSubmit = (e) => {
         const $root = $('html, body');
+        const container = document.querySelector('.js-filters-container');
 
         if( this.notFound ) {
             this.notFound.style.display = "none";
@@ -175,6 +195,10 @@ class Filters {
 
         if( this.notFound && products.length === 0 ) {
             this.notFound.style.display = "block";
+        }
+
+        if( container ) {
+            container.classList.remove('is-open');
         }
 
         $root.animate({
