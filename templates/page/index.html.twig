@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body_class 'header-padding' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+    <div class="c-info-page u-margin-top-large u-margin-bottom-huge">
+        <div class="o-wrapper">
+            <h1 class="o-title u-margin-bottom">{{ page.title }}</h1>
+            
+            <div class="o-mce">
+                {{ page.content|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

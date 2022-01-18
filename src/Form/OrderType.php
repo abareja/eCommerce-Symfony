@@ -20,9 +20,9 @@ class OrderType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'required' => true,
                 'choices'  => [
-                    'In progress' => 'order',
-                    'Finished' => 'finished',
-                    'Archived' => 'archived'
+                    'In progress' => Order::STATUS_ORDER,
+                    'Finished' => Order::STATUS_FINISHED,
+                    'Archived' => Order::STATUS_ARCHIVED
                 ],
             ])
         ;

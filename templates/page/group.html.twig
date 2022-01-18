@@ -1,0 +1,10 @@
+{% if pages|length > 0 %}
+
+    <div class="c-site-footer__group">
+        <div class="c-site-footer__group-title">{{ title }}</div>
+        {% for page in pages %}
+            <a href="{{ path('page', {id: page.id}) }}">{{ page.title }}</a>
+        {% endfor %}
+    </div>
+
+{% endif %}
