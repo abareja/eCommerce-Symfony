@@ -25,11 +25,7 @@ class ShopController extends AbstractController
         return $this->render('shop/index.html.twig', [
             'title' => $translator->trans('Newest products'),
             'products' => $products,
-            'productsJSON' => $serializer->serialize($products, 'json', [
-                'circular_reference_handler' => function ($object) {
-                    return $object->getId();
-                }
-            ]),
+            'productsJSON' => $serializer->serialize($products, 'json', ['groups' => ['product']]),
             'suppliers' => $suppliers,
             'attributes' => $attributes
         ]);
@@ -46,11 +42,7 @@ class ShopController extends AbstractController
         return $this->render('shop/index.html.twig', [
             'title' => $translator->trans('Sale'),
             'products' => $products,
-            'productsJSON' => $serializer->serialize($products, 'json', [
-                'circular_reference_handler' => function ($object) {
-                    return $object->getId();
-                }
-            ]),
+            'productsJSON' => $serializer->serialize($products, 'json', ['groups' => ['product']]),
             'suppliers' => $suppliers,
             'attributes' => $attributes
         ]);

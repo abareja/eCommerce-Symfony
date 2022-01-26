@@ -2,8 +2,13 @@
     padding: $spacing-small;
     border: 1px solid theme-color(light-200);
     margin-bottom: $spacing-small;
-
+    opacity: 0;
+    animation: fadeIn 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+    
     @include mq($until: desktop) {
+        animation: none;
         position: fixed;
         top: $spacing-tiny;
         left: $spacing-tiny;
@@ -73,5 +78,14 @@
         @include mq($from: desktop) {
             display: none;
         }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

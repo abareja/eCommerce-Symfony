@@ -11,21 +11,21 @@
     {% include 'components/hero.html.twig' with {'slides': [
         {
             banner: 'uploads/banner1.png', 
-            title: 'The sale just arrived', 
-            subtitle: 'Dont sleep on it', 
-            text: 'Shop your favorite wardrobe essentials now with 30% off.',
-            link: '#1'
+            title: 'Nowy Macbook Air', 
+            subtitle: 'Nie przegap', 
+            text: 'Kup najnowszą generację Apple Macbook z procesorem Apple M1',
+            link: '/search?search=Macbook Air'
         },
         {
             banner: 'uploads/banner2.png', 
-            title: 'The sale just arrived', 
-            subtitle: 'Dont sleep on it', 
-            text: 'Shop your favorite wardrobe essentials now with 30% off.',
-            link: '#2'
+            title: 'Iphone 13', 
+            subtitle: 'Nie przegap', 
+            text: 'Nowy Apple iPhone 13 Pro to smartfon, który da Ci wszystko to, co najlepsze',
+            link: '/search?search=Iphone 13'
         },
     ]} %}
 
-    {{ render(controller('App\\Controller\\ProductListComponentController::new', {limit: 10})) }}
+    {{ render(controller('App\\Controller\\ProductListComponentController::new', {limit: 8})) }}
 
     {{ render(controller('App\\Controller\\ProductSliderComponentController::bestsellers', {width: 'full', limit: 10})) }}
 

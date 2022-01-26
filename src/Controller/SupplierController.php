@@ -24,11 +24,7 @@ class SupplierController extends AbstractController
         return $this->render('shop/index.html.twig', [
             'title' => $supplier->getName(),
             'products' => $products,
-            'productsJSON' => $serializer->serialize($products, 'json', [
-                'circular_reference_handler' => function ($object) {
-                    return $object->getId();
-                }
-            ]),
+            'productsJSON' => $serializer->serialize($products, 'json', ['groups' => ['product']]),
             'suppliers' => [],
             'attributes' => $attributes
         ]);

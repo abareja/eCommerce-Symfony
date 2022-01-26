@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}404{% endblock %}
+
 {% block body_id '404' %}
-{% block body_class 'bg-3 bg-image' %}
 
 {% block body %}
-    <section class="c-404 vh-100 d-flex align-items-center text-white text-center">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-6 col-xl-4 offset-md-3 offset-xl-4">
-                    <h1 class="display-1 mb-2">404</h1>
-                    <p>The requested page couldn't be located. Checkout for any URL misspelling or <a class="text-white" href="{{ path('index') }}">return to the homepage.</a></p>
-                </div>
+     <section class="c-404 u-margin-vertical-large">
+        <div class="o-wrapper o-wrapper--full u-margin-vertical-large">
+            <div class="u-text-center u-margin-vertical-huge u-padding-vertical-huge" data-aos="fade-up">
+                <h2 class="o-title">404</h2>
+                <h4 class="o-title">
+                {% trans %}The requested page couldn't be located. Checkout for any URL misspelling{% endtrans %}</h4>
+                <a href="{{ path('index') }}" title="{% trans %}Return to homepage{% endtrans %}" class="o-button o-button--outline">
+                    {% trans %}Return to homepage{% endtrans %}
+                    <span class="o-icon o-icon--chevron-right"></span>
+                </a>
             </div>
         </div>
     </section>
