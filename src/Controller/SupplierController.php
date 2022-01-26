@@ -15,7 +15,7 @@ use App\Repository\ProductAttributeRepository;
 class SupplierController extends AbstractController
 {
     #[Route('/supplier/{id}', name: 'supplier')]
-    public function index(Supplier $supplier, ProductRepository $productRepository, ProductAttributeRepository $productAttributeRepository, SerializerInterface $serializer): Response
+    public function index(Supplier $supplier, ProductRepository $productRepository = null, ProductAttributeRepository $productAttributeRepository = null, SerializerInterface $serializer): Response
     {
         $products = $productRepository->findBy(['supplier' => $supplier]);
         $data = Product::getDataForProducts($products, $productAttributeRepository);

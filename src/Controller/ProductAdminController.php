@@ -23,7 +23,7 @@ use App\Entity\Attribute;
 class ProductAdminController extends AbstractController
 {
     #[Route('/admin/products', name: 'admin-products')]
-    public function products(ProductRepository $productRepository): Response
+    public function products(ProductRepository $productRepository = null): Response
     {
         return $this->render('admin/product/list.html.twig', [
             'products' => $productRepository->findAll()

@@ -11,7 +11,7 @@ use App\Repository\ProductRepository;
 
 class ProductListComponentController extends AbstractController
 {
-    public function new($limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function new($limit, ProductRepository $productRepository = null, TranslatorInterface $translator): Response
     {
         $newProducts = $productRepository->findBy([], ['dateAdded' => 'DESC'], $limit);
 
@@ -21,7 +21,7 @@ class ProductListComponentController extends AbstractController
         ]);
     }
 
-    public function bestsellers($limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function bestsellers($limit, ProductRepository $productRepository = null, TranslatorInterface $translator): Response
     {
         $newProducts = $productRepository->bestsellers($limit);
 

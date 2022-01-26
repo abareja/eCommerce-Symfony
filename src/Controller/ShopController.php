@@ -15,7 +15,7 @@ use App\Repository\ProductAttributeRepository;
 class ShopController extends AbstractController
 {
     #[Route('/new', name: 'new')]
-    public function new(ProductRepository $productRepository, ProductAttributeRepository $productAttributeRepository, SerializerInterface $serializer, TranslatorInterface $translator): Response
+    public function new(ProductRepository $productRepository = null, ProductAttributeRepository $productAttributeRepository = null, SerializerInterface $serializer, TranslatorInterface $translator): Response
     {
         $products = $productRepository->findBy([], ['dateAdded' => 'DESC'], 10);
         $data = Product::getDataForProducts($products, $productAttributeRepository);
@@ -36,7 +36,7 @@ class ShopController extends AbstractController
     }
 
     #[Route('/sale', name: 'sale')]
-    public function sale(ProductRepository $productRepository, ProductAttributeRepository $productAttributeRepository, SerializerInterface $serializer, TranslatorInterface $translator): Response
+    public function sale(ProductRepository $productRepository = null, ProductAttributeRepository $productAttributeRepository = null, SerializerInterface $serializer, TranslatorInterface $translator): Response
     {
         $products = $productRepository->sale();
         $data = Product::getDataForProducts($products, $productAttributeRepository);

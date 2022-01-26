@@ -11,7 +11,7 @@ use App\Repository\SupplierRepository;
 
 class SupplierSliderComponentController extends AbstractController
 {
-    public function index(SupplierRepository $supplierRepository, TranslatorInterface $translator): Response
+    public function index(SupplierRepository $supplierRepository = null, TranslatorInterface $translator): Response
     {
         $suppliers = $supplierRepository->findAll();
 

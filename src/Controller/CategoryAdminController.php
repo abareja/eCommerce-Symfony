@@ -19,7 +19,7 @@ use App\Service\CategoryFileUploader;
 class CategoryAdminController extends AbstractController
 {
     #[Route('/admin/categories', name: 'admin-categories')]
-    public function categories(CategoryRepository $CategoryRepository): Response
+    public function categories(CategoryRepository $CategoryRepository = null): Response
     {
         return $this->render('admin/category/list.html.twig', [
             'categories' => $CategoryRepository->findAll()

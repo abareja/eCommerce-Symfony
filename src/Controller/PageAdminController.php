@@ -15,7 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class PageAdminController extends AbstractController
 {
     #[Route('/admin/pages', name: 'admin-pages')]
-    public function pages(PageRepository $pageRepository): Response
+    public function pages(PageRepository $pageRepository = null): Response
     {
         return $this->render('admin/page/list.html.twig', [
             'pages' => $pageRepository->findAll()

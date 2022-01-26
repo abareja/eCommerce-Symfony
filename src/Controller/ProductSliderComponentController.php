@@ -13,7 +13,7 @@ use App\Repository\ProductRepository;
 
 class ProductSliderComponentController extends AbstractController
 {
-    public function new($width = null, $centerMode = true, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function new($width = null, $centerMode = true, $limit, ProductRepository $productRepository = null, TranslatorInterface $translator): Response
     {
         $newProducts = $productRepository->findBy([], ['dateAdded' => 'DESC'], $limit);
 
@@ -25,7 +25,7 @@ class ProductSliderComponentController extends AbstractController
         ]);
     }
 
-    public function bestsellers($width = null, $centerMode = true, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function bestsellers($width = null, $centerMode = true, $limit, ProductRepository $productRepository = null, TranslatorInterface $translator): Response
     {
         $newProducts = $productRepository->bestsellers($limit);
 
@@ -37,7 +37,7 @@ class ProductSliderComponentController extends AbstractController
         ]);
     }
 
-    public function category($width = null, $centerMode = true, Category $category, Product $product = null, $limit, ProductRepository $productRepository, TranslatorInterface $translator): Response
+    public function category($width = null, $centerMode = true, Category $category, Product $product = null, $limit, ProductRepository $productRepository = null, TranslatorInterface $translator): Response
     {
         $products = $productRepository->findBy(['category' => $category], ['dateAdded' => 'DESC'], $limit);
 

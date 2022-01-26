@@ -17,7 +17,7 @@ use App\Form\OrderType;
 class OrdersAdminController extends AbstractController
 {
     #[Route('/admin/orders', name: 'admin-orders')]
-    public function orders(OrderRepository $orderRepository): Response
+    public function orders(OrderRepository $orderRepository = null): Response
     {
         $orders = $orderRepository->findBy(['status' => [Order::STATUS_ORDER, Order::STATUS_ARCHIVED, Order::STATUS_FINISHED]]);
 
@@ -27,7 +27,7 @@ class OrdersAdminController extends AbstractController
     }
 
     #[Route('/admin/orders/new', name: 'admin-orders-new')]
-    public function ordersNew(OrderRepository $orderRepository): Response
+    public function ordersNew(OrderRepository $orderRepository = null): Response
     {
         $orders = $orderRepository->findBy(['status' => Order::STATUS_ORDER]);
 
@@ -37,7 +37,7 @@ class OrdersAdminController extends AbstractController
     }
 
     #[Route('/admin/orders/finished', name: 'admin-orders-finished')]
-    public function ordersFinished(OrderRepository $orderRepository): Response
+    public function ordersFinished(OrderRepository $orderRepository = null): Response
     {
         $orders = $orderRepository->findBy(['status' => Order::STATUS_FINISHED]);
 
@@ -47,7 +47,7 @@ class OrdersAdminController extends AbstractController
     }
 
     #[Route('/admin/orders/archive', name: 'admin-orders-archived')]
-    public function ordersArchive(OrderRepository $orderRepository): Response
+    public function ordersArchive(OrderRepository $orderRepository = null): Response
     {
         $orders = $orderRepository->findBy(['status' => Order::STATUS_ARCHIVED]);
 

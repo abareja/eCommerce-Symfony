@@ -19,7 +19,7 @@ use App\Service\SupplierFileUploader;
 class SupplierAdminController extends AbstractController
 {
     #[Route('/admin/suppliers', name: 'admin-suppliers')]
-    public function suppliers(SupplierRepository $SupplierRepository): Response
+    public function suppliers(SupplierRepository $SupplierRepository = null): Response
     {
         return $this->render('admin/supplier/list.html.twig', [
             'suppliers' => $SupplierRepository->findAll()

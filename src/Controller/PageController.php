@@ -27,7 +27,7 @@ class PageController extends AbstractController
         ]);
     }
 
-    public function getPageGroup($group, PageRepository $pageRepository, TranslatorInterface $translator): Response
+    public function getPageGroup($group, PageRepository $pageRepository = null, TranslatorInterface $translator): Response
     {
         $pages = $pageRepository->findBy(['pageGroup' => $group]);
         $title = "Pages";

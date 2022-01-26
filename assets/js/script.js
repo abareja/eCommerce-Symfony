@@ -60,7 +60,9 @@ const initAOS = () => {
     });
   });
 }
-initAOS();
+window.addEventListener('load', () => {
+    initAOS();
+});
 
 //SLIDERS
 const initSliders = () => {

@@ -114,7 +114,7 @@ class UserProfileController extends AbstractController
     }
 
     #[Route('/profile/user-orders', name: 'profile-user-orders')]
-    public function userOrders(OrderRepository $orderRepository, OrderUserRepository $orderUserRepository): Response
+    public function userOrders(OrderRepository $orderRepository = null, OrderUserRepository $orderUserRepository = null): Response
     {
         $user = $this->getUser();
         $orders = [];

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AttributeValueRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AttributeValueRepository::class)
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class AttributeValue
 {
     /**
+     * @Groups("product")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -18,6 +20,7 @@ class AttributeValue
     private $id;
 
     /**
+     * @Groups("product")
      * @ORM\Column(type="string", length=255)
      */
     private $value;

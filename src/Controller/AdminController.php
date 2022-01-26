@@ -17,7 +17,7 @@ use App\Repository\OrderRepository;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function admin(ProductRepository $productRepository, OrderRepository $orderRepository): Response
+    public function admin(ProductRepository $productRepository = null, OrderRepository $orderRepository = null): Response
     {
         $totalEarningsByMonth = [];
         $totals = $orderRepository->getTotals();
@@ -49,7 +49,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/settings', name: 'admin-settings')]
-    public function adminSettings(CountryRepository $countryRepository, ShippingRepository $shippingRepository, PaymentRepository $paymentRepository, AttributeRepository $attributeRepository): Response
+    public function adminSettings(CountryRepository $countryRepository = null, ShippingRepository $shippingRepository = null, PaymentRepository $paymentRepository = null, AttributeRepository $attributeRepository = null): Response
     {
         $countries = $countryRepository->findAll();
         $shippings = $shippingRepository->findAll();

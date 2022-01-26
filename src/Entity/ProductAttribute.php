@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductAttributeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProductAttributeRepository::class)
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ProductAttribute
 {
     /**
+     * @Groups("product")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -24,12 +26,14 @@ class ProductAttribute
     private $product;
 
     /**
+     * @Groups("product")
      * @ORM\ManyToOne(targetEntity=Attribute::class, inversedBy="productAttributes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $attribute;
 
     /**
+     * @Groups("product")
      * @ORM\OneToOne(targetEntity=AttributeValue::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */

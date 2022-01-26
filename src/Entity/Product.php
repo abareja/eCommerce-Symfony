@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
     /**
+     * @Groups("product")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,11 +22,13 @@ class Product
     private $id;
 
     /**
+     * @Groups("product")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
     /**
+     * @Groups("product")
      * @ORM\Column(type="decimal", precision=7, scale=2)
      */
     private $price;
@@ -41,6 +45,7 @@ class Product
     private $category;
 
     /**
+     * @Groups("product")
      * @ORM\ManyToOne(targetEntity=Supplier::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -62,6 +67,7 @@ class Product
     private $featuredImage;
 
     /**
+     * @Groups("product")
      * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
      */
     private $discountPrice;
@@ -72,6 +78,7 @@ class Product
     private $dateAdded;
 
     /**
+     * @Groups("product")
      * @ORM\OneToMany(targetEntity=ProductAttribute::class, mappedBy="product", orphanRemoval=true, cascade={"persist"})
      */
     private $productAttributes;

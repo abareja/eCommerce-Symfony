@@ -14,7 +14,7 @@ use App\Repository\AttributeValueRepository;
 class SearchController extends AbstractController
 {
     #[Route('/search', name: 'search')]
-    public function index(Request $request, ProductRepository $productRepository, TranslatorInterface $translator, AttributeValueRepository $attributeValueRepository, SerializerInterface $serializer): Response
+    public function index(Request $request, ProductRepository $productRepository = null, TranslatorInterface $translator, AttributeValueRepository $attributeValueRepository = null, SerializerInterface $serializer): Response
     {
         $query = $request->query->get('search');
         

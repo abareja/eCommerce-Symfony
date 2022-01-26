@@ -12,7 +12,7 @@ use App\Repository\OrderItemRepository;
 
 class SiteHeaderController extends AbstractController
 {
-    public function index(CartManager $cartManager, CategoryRepository $categoryRepository, OrderItemRepository $orderItemRepository): Response
+    public function index(CartManager $cartManager, CategoryRepository $categoryRepository = null, OrderItemRepository $orderItemRepository = null): Response
     {
         $cart = $cartManager->getCurrentCart();
         $cartItemsCount = $cartManager->getCurrentCartCount($orderItemRepository);

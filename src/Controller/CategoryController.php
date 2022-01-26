@@ -15,7 +15,7 @@ use App\Repository\ProductAttributeRepository;
 class CategoryController extends AbstractController
 {
     #[Route('/category/{id}', name: 'category')]
-    public function index(Category $category, ProductRepository $productRepository, ProductAttributeRepository $productAttributeRepository, SerializerInterface $serializer): Response
+    public function index(Category $category, ProductRepository $productRepository = null, ProductAttributeRepository $productAttributeRepository = null, SerializerInterface $serializer): Response
     {
         $products = $productRepository->findBy(['category' => $category]);
         $data = Product::getDataForProducts($products, $productAttributeRepository);
@@ -25,11 +25,7 @@ class CategoryController extends AbstractController
         return $this->render('shop/index.html.twig', [
             'title' => $category->getName(),
             'products' => $products,
-            'productsJSON' => $serializer->serialize($products, 'json', [
-                'circular_reference_handler' => function ($object) {
-                    return $object->getId();
-                }
-            ]),
+            'productsJSON' => $serializer->serialize($products, 'json', ['groups' => ['product']]),
             'suppliers' => $suppliers,
             'attributes' => $attributes
         ]);
